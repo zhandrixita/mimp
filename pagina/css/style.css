@@ -32,6 +32,7 @@
   --header-pink-1: #9c2f5c;
   --header-pink-2: #c9487a;
   --theme-tint: #eaf3ee;
+  --tab-inactive: #9c9b96;
 
   --card-radius: 12px;
 }
@@ -59,6 +60,7 @@
     --status-warning: #fab219;
     --status-serious: #ec835a;
     --theme-tint: #12241c;
+    --tab-inactive: #4b4a46;
   }
 }
 
@@ -163,10 +165,37 @@ body {
   flex-wrap: wrap;
 }
 
-/* Segunda fila de pestanas (tematica), justo debajo de la de sexo. */
+/* Segunda fila de pestanas (tematica): pestanas planas, pegadas una a la
+   otra, gris cuando no esta activa y del color del tema cuando si -- y una
+   barra solida del mismo color justo debajo, que conecta visualmente la
+   pestana activa con el marco de contenido. */
 .theme-tabs {
-  margin-top: -6px;
-  margin-bottom: 0;
+  gap: 2px;
+  margin: 14px 0 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.theme-tabs .tab-btn {
+  flex: 1 1 0;
+  background: var(--tab-inactive);
+  color: #ffffff;
+  border-radius: 6px 6px 0 0;
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+
+.theme-tabs .tab-btn[aria-selected="true"] {
+  background: var(--header-green-1);
+}
+
+.theme-bar {
+  height: 5px;
+  background: var(--header-green-1);
 }
 
 /* Marco con fondo propio para el contenido de las pestanas de tematica --
@@ -176,8 +205,8 @@ body {
 .theme-content-frame {
   background: var(--theme-tint);
   border: 1px solid var(--border);
-  border-top: 3px solid var(--header-green-1);
-  border-radius: 0 var(--card-radius) var(--card-radius) var(--card-radius);
+  border-top: none;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
   padding: 18px;
   margin-bottom: 18px;
 }
