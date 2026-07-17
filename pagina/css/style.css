@@ -1,0 +1,775 @@
+:root {
+  --surface-1: #fcfcfb;
+  --page-plane: #f9f9f7;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --gridline: #e1e0d9;
+  --baseline: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+
+  --series-blue: #2a78d6;
+  --series-blue-tint: #b7d3f6;
+  --series-aqua: #1baf7a;
+  --series-aqua-tint: #b9ecd9;
+  --series-yellow: #eda100;
+  --series-yellow-tint: #ffe9bd;
+  --series-green: #008300;
+  --series-violet: #4a3aa7;
+  --series-violet-tint: #d9d4f3;
+  --series-red: #e34948;
+  --series-pink: #e87ba4;
+
+  --status-good: #0ca30c;
+  --status-good-tint: #cdeecd;
+  --status-warning: #fab219;
+  --status-warning-tint: #ffedc2;
+  --status-serious: #ec835a;
+  --status-serious-tint: #fbd9c9;
+
+  --header-green-1: #1f6d45;
+  --header-green-2: #2e8f5c;
+  --header-pink-1: #9c2f5c;
+  --header-pink-2: #c9487a;
+  --theme-tint: #eaf3ee;
+
+  --card-radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1a1a19;
+    --page-plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+
+    --series-blue: #3987e5;
+    --series-aqua: #199e70;
+    --series-yellow: #c98500;
+    --series-green: #008300;
+    --series-violet: #9085e9;
+    --series-red: #e66767;
+    --series-pink: #d55181;
+
+    --status-good: #0ca30c;
+    --status-warning: #fab219;
+    --status-serious: #ec835a;
+    --theme-tint: #12241c;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--page-plane);
+  color: var(--text-primary);
+}
+
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+
+/* Pestana Mujeres: header, botones activos y titulos de seccion pasan de
+   verde a rosado (mismo mecanismo que el relleno del pictograma). */
+.page.tema-mujeres {
+  --header-green-1: var(--header-pink-1);
+  --header-green-2: var(--header-pink-2);
+  --theme-tint: #fbebf1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page.tema-mujeres {
+    --theme-tint: #26141c;
+  }
+}
+
+/* ---------- Header ---------- */
+
+.hero {
+  background: linear-gradient(135deg, var(--header-green-1), var(--header-green-2));
+  color: #ffffff;
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex: none;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.hero-subtitle {
+  margin: 2px 0 0;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.hero-total {
+  background: #ffffff;
+  color: var(--header-green-1);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: normal;
+}
+
+/* ---------- Tabs ---------- */
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin: 14px 0 18px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px;
+  width: fit-content;
+  flex-wrap: wrap;
+}
+
+/* Segunda fila de pestanas (tematica), justo debajo de la de sexo. */
+.theme-tabs {
+  margin-top: -6px;
+  margin-bottom: 0;
+}
+
+/* Marco con fondo propio para el contenido de las pestanas de tematica --
+   asi cambiar de pestana se siente como cambiar de contenido DENTRO de una
+   misma tarjeta, en vez de saltar entre secciones sueltas sobre el fondo
+   de la pagina. */
+.theme-content-frame {
+  background: var(--theme-tint);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--header-green-1);
+  border-radius: 0 var(--card-radius) var(--card-radius) var(--card-radius);
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.tab-btn[aria-selected="true"] {
+  background: var(--header-green-2);
+  color: #ffffff;
+}
+
+/* ---------- Section / card scaffolding ---------- */
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--header-green-1);
+  padding: 6px 14px;
+  border-radius: 6px;
+  display: inline-block;
+  margin: 22px 0 12px;
+}
+
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: 16px;
+}
+
+/* Tarjeta "ventana": barra de titulo de color a todo el ancho arriba,
+   contenido abajo -- mismo verde/rosa de tema que el resto de la pagina
+   (var(--header-green-1) ya responde a .tema-mujeres). */
+.card-window {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-window-header {
+  flex: none;
+  background: var(--header-green-1);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-window-btn {
+  flex: none;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.card-window-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.card-window-body {
+  flex: 1;
+  padding: 16px;
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+}
+
+.grid-3 {
+  /* Columnas fijas (no auto-fit): 3 anillos siempre en una sola fila, sin
+     importar si la tarjeta es angosta -- antes "Nivel de riesgo" (en una
+     tarjeta angosta) partia sus 3 anillos en 2+1, distinto a como se ve
+     esta misma fila cuando la tarjeta es ancha. */
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* stretch (default): con los anillos ya en una sola fila, el contenido de
+     cada par de tarjetas queda parecido en alto, asi que se pueden igualar
+     sin dejar un vacio grande -- los bordes quedan alineados. */
+}
+
+.grid-4 {
+  /* Idem grid-3: 4 anillos siempre en una sola fila. */
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Las 3 tarjetas de edad siempre en una sola fila -- con auto-fit, a un
+   ancho angosto podian pasar a 2 filas y la tarjeta-pictograma (mas alta
+   que el circulo+emoji) descuadraba todo el grupo. */
+#edad-tiles {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ---------- Stat tile (edad) ---------- */
+
+.stat-tile {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-tile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--series-red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  overflow: hidden;
+}
+
+.stat-tile-icon svg {
+  width: 62%;
+  height: 62%;
+  display: block;
+}
+
+.stat-tile-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.stat-tile-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.stat-tile-pct {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------- Pictograma (silueta rellena por porcentaje) ---------- */
+
+.pictogram-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.pictogram-icon {
+  width: 64px;
+  height: 134px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.pictogram-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pictogram-pct {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+}
+
+.pictogram-count {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pictogram-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* ---------- Ring (echarts gauge host) ---------- */
+
+.ring-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.ring-host {
+  width: 130px;
+  height: 130px;
+}
+
+/* Variante mas chica: para grupos de 3/4 anillos en tarjetas angostas
+   (Nivel de riesgo, Tipo de violencia), donde 130px no entrarian los 3-4
+   en una sola fila con margen decente. */
+.ring-host-sm {
+  width: 96px;
+  height: 96px;
+}
+
+.ring-label {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.ring-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------- Bar rows (HTML meters) ---------- */
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.bar-row-label {
+  color: var(--text-secondary);
+}
+
+.bar-track {
+  height: 10px;
+  background: var(--gridline);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.bar-row-value {
+  white-space: nowrap;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Map + regiones (barras/grilla) ---------- */
+
+.map-layout {
+  display: grid;
+  /* Peru es mas alto que ancho (bbox ancho/alto ~ 0.69); el alto de
+     .map-host-wrap se ajusta a la misma proporcion para que el mapa llene
+     la tarjeta sin huecos ni verse angosto. */
+  grid-template-columns: minmax(300px, 540px) 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 760px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.map-host-wrap {
+  position: relative;
+  width: 100%;
+  height: 780px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.map-host {
+  width: 100%;
+  height: 100%;
+}
+
+.map-legend {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 1;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  box-shadow: 0 1px 4px rgba(11, 11, 11, 0.15);
+}
+
+.map-legend-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.map-legend-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.map-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.map-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+
+
+.region-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--page-plane);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+  width: fit-content;
+}
+
+.view-toggle-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.view-toggle-btn[aria-selected="true"] {
+  background: var(--surface-1);
+  color: var(--text-primary);
+  box-shadow: 0 1px 2px var(--border);
+}
+
+.region-bars,
+.region-table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.region-bars {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.region-bars[hidden] {
+  display: none;
+}
+
+.region-bars .bar-row {
+  grid-template-columns: 130px 1fr auto;
+  padding: 0;
+  font-size: 12.5px;
+  gap: 8px;
+}
+
+.region-bars .bar-track {
+  height: 7px;
+}
+
+.region-table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.region-table tbody {
+  display: table-row-group;
+}
+
+.region-table th {
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--gridline);
+  position: sticky;
+  top: 0;
+  background: var(--surface-1);
+}
+
+.region-table td {
+  padding: 7px 6px;
+  border-bottom: 1px solid var(--gridline);
+  font-variant-numeric: tabular-nums;
+}
+
+.region-table td:first-child {
+  font-variant-numeric: normal;
+}
+
+.region-table tbody tr:hover {
+  background: var(--page-plane);
+}
+
+/* ---------- Historico ---------- */
+
+.historico-callout {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+}
+
+.historico-callout strong {
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.historico-host {
+  width: 100%;
+  height: 260px;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  margin-top: 28px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--text-muted);
+}
+
+/* ---------- Modal "ver mas" ---------- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 11, 11, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal-box {
+  background: var(--surface-1);
+  border-radius: var(--card-radius);
+  width: min(880px, 100%);
+  max-height: min(760px, 90vh);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(11, 11, 11, 0.35);
+}
+
+.modal-header {
+  flex: none;
+  background: var(--header-green-1);
+  color: #ffffff;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-header-title {
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.modal-close {
+  flex: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+}
+
+.modal-body h4 {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+}
+
+.modal-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Interpretacion generada a partir de los datos, debajo de cada grafico --
+   se recalcula en cada render, nunca es texto fijo. */
+.chart-insight {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin: 8px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--gridline);
+}
+
+.chart-insight strong {
+  color: var(--text-primary);
+}
+
+/* ---------- v2: nuevas secciones (perfil agresor, seguro, etc.) ---------- */
+
+.stat-inline-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--gridline);
+  font-size: 13px;
+}
+
+.stat-inline-row:last-child {
+  border-bottom: none;
+}
+
+.stat-inline-label {
+  color: var(--text-secondary);
+}
+
+.stat-inline-value {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Casos atendidos por los Centro Emergencia Mujer y Familia (v2)</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-title-group">
+      <div class="hero-icon">&#128101;</div>
+      <div>
+        <h1 class="hero-title" id="hero-title">Casos de hombres</h1>
+        <p class="hero-subtitle" id="hero-subtitle">Enero - Junio 2026 (preliminar) &middot; Casos atendidos por los Centro Emergencia Mujer y Familia a nivel nacional</p>
+      </div>
+    </div>
+    <div class="hero-total" id="hero-total">0</div>
+  </header>
+
+  <div class="tabs" id="sex-tabs" role="tablist" aria-label="Sexo de la persona usuaria">
+    <button class="tab-btn" role="tab" data-tab="hombres" aria-selected="true">Hombres</button>
+    <button class="tab-btn" role="tab" data-tab="mujeres" aria-selected="false">Mujeres</button>
+    <button class="tab-btn" role="tab" data-tab="total" aria-selected="false">Total</button>
+  </div>
+
+  <div class="tabs theme-tabs" role="tablist" aria-label="Tem&aacute;tica">
+    <button class="tab-btn" role="tab" data-theme="usuaria" aria-selected="true">Persona usuaria</button>
+    <button class="tab-btn" role="tab" data-theme="agresor" aria-selected="false">Persona agresora</button>
+    <button class="tab-btn" role="tab" data-theme="violencia" aria-selected="false">Violencia y riesgo</button>
+    <button class="tab-btn" role="tab" data-theme="geografia" aria-selected="false">Geograf&iacute;a</button>
+    <button class="tab-btn" role="tab" data-theme="atencion" aria-selected="false">Atenci&oacute;n del CEM</button>
+    <button class="tab-btn" role="tab" data-theme="historico" aria-selected="false">Hist&oacute;rico</button>
+  </div>
+
+  <div class="theme-content-frame">
+
+  <!-- ============================================================= -->
+  <!-- TEMA: Persona usuaria                                          -->
+  <!-- ============================================================= -->
+  <div class="theme-panel" data-theme-panel="usuaria">
+
+    <div class="section-title">Caracter&iacute;sticas de la persona usuaria</div>
+    <div class="grid grid-2">
+      <div class="card-window">
+        <div class="card-window-header">Grupos de edad</div>
+        <div class="card-window-body">
+          <div class="grid grid-3" id="edad-tiles"></div>
+        </div>
+      </div>
+      <div class="card-window">
+        <div class="card-window-header">Estado civil de la persona usuaria</div>
+        <div class="card-window-body">
+          <div id="estado-civil-host" style="width:100%;height:220px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:14px;">
+      <div class="card-window">
+        <div class="card-window-header">
+          <span>Discapacidad</span>
+          <button class="card-window-btn" data-modal="discapacidad">Ver m&aacute;s</button>
+        </div>
+        <div class="card-window-body ring-card">
+          <div class="ring-host" id="ring-discapacidad"></div>
+          <div class="ring-label">Personas con alg&uacute;n tipo de discapacidad</div>
+          <div class="ring-count" id="count-discapacidad"></div>
+        </div>
+      </div>
+      <div class="card-window">
+        <div class="card-window-header">Personas extranjeras</div>
+        <div class="card-window-body ring-card">
+          <div class="ring-host" id="ring-extranjero"></div>
+          <div class="ring-count" id="count-extranjero"></div>
+        </div>
+      </div>
+      <div class="card-window">
+        <div class="card-window-header">Trabajo remunerado</div>
+        <div class="card-window-body ring-card">
+          <div class="ring-host" id="ring-trabaja"></div>
+          <div class="ring-count" id="count-trabaja"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:22px;">Otros indicadores de la persona usuaria</div>
+    <div class="grid grid-2">
+      <div class="card-window">
+        <div class="card-window-header">Seguro m&eacute;dico</div>
+        <div class="card-window-body" id="seguro-medico-bars"></div>
+      </div>
+      <div class="card-window">
+        <div class="card-window-header">Nivel educativo de la persona usuaria</div>
+        <div class="card-window-body" id="educacion-victima-bars"></div>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:14px;">
+      <div class="card-window">
+        <div class="card-window-header">Autoidentificaci&oacute;n &eacute;tnica</div>
+        <div class="card-window-body" id="etnia-bars"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- TEMA: Persona agresora                                         -->
+  <!-- ============================================================= -->
+  <div class="theme-panel" data-theme-panel="agresor" hidden>
+
+    <div class="section-title">V&iacute;nculo con la presunta persona agresora</div>
+    <div class="card-window">
+      <div class="card-window-header">V&iacute;nculo relacional con la presunta persona agresora</div>
+      <div class="card-window-body">
+        <div id="vinculo-bars"></div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:22px;">Perfil de la presunta persona agresora</div>
+    <div class="grid grid-2">
+      <div class="card-window">
+        <div class="card-window-header">Sexo de la presunta persona agresora</div>
+        <div class="card-window-body">
+          <div id="agresor-sexo-host" style="width:100%;height:200px;"></div>
+        </div>
+      </div>
+      <div class="card-window">
+        <div class="card-window-header">Grupo de edad de la presunta persona agresora</div>
+        <div class="card-window-body">
+          <div id="agresor-edad-bars"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:14px;">
+      <div class="card-window">
+        <div class="card-window-header">Nivel educativo de la presunta persona agresora</div>
+        <div class="card-window-body" id="agresor-educacion-bars"></div>
+      </div>
+      <div class="card-window">
+        <div class="card-window-header">Trabajo y discapacidad de la presunta persona agresora</div>
+        <div class="card-window-body">
+          <div class="grid grid-2" id="agresor-stats-rings" style="gap:14px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- TEMA: Violencia y riesgo                                       -->
+  <!-- ============================================================= -->
+  <div class="theme-panel" data-theme-panel="violencia" hidden>
+
+    <div class="section-title">Caracter&iacute;sticas del caso</div>
+    <div class="card-window">
+      <div class="card-window-header">
+        <span>Nivel de riesgo de la persona usuaria</span>
+        <button class="card-window-btn" data-modal="riesgo">Ver m&aacute;s</button>
+      </div>
+      <div class="card-window-body">
+        <div class="grid grid-3" id="riesgo-rings"></div>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:22px;">
+      <div class="card-window">
+        <div class="card-window-header">Modalidades de violencia sexual</div>
+        <div class="card-window-body" id="modalidades-bars"></div>
+      </div>
+      <div class="card-window">
+        <div class="card-window-header">
+          <span>Tipo de violencia</span>
+          <button class="card-window-btn" data-modal="tipo-violencia">Ver m&aacute;s</button>
+        </div>
+        <div class="card-window-body">
+          <div class="grid grid-4" id="tipo-violencia-rings"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-window" style="margin-top:22px;">
+      <div class="card-window-header">Lugar y &aacute;mbito de ocurrencia</div>
+      <div class="card-window-body">
+        <div id="lugar-ocurrencia-bars"></div>
+        <div id="ambito-violencia-bars" style="margin-top:10px;border-top:1px solid var(--gridline);padding-top:10px;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- TEMA: Geografia                                                -->
+  <!-- ============================================================= -->
+  <div class="theme-panel" data-theme-panel="geografia" hidden>
+
+    <div class="section-title">Casos seg&uacute;n departamento</div>
+    <div class="card-window">
+      <div class="card-window-header">Casos seg&uacute;n departamento</div>
+      <div class="card-window-body map-layout">
+        <div class="map-host-wrap">
+          <div class="map-host" id="map-host"></div>
+          <div class="map-legend" id="map-legend">
+            <div class="map-legend-title">Casos</div>
+            <div class="map-legend-rows" id="map-legend-rows"></div>
+          </div>
+        </div>
+        <div class="region-panel">
+          <div class="view-toggle" role="tablist" aria-label="Vista de datos por regi&oacute;n">
+            <button class="view-toggle-btn" role="tab" data-view="barras" aria-selected="true">Barras</button>
+            <button class="view-toggle-btn" role="tab" data-view="grilla" aria-selected="false">Grilla</button>
+          </div>
+          <div class="region-bars" id="region-bars"></div>
+          <div class="region-table-wrap" id="region-table-wrap" hidden>
+            <table class="region-table">
+              <thead><tr><th>Regi&oacute;n / CEM</th><th>Casos</th><th>%</th></tr></thead>
+              <tbody id="region-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- TEMA: Atencion del CEM                                         -->
+  <!-- ============================================================= -->
+  <div class="theme-panel" data-theme-panel="atencion" hidden>
+
+    <div class="section-title">Atenci&oacute;n y seguimiento del CEM</div>
+    <div class="card-window">
+      <div class="card-window-header">Atenci&oacute;n y seguimiento del CEM</div>
+      <div class="card-window-body" id="atencion-seguimiento-bars"></div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================= -->
+  <!-- TEMA: Historico                                                -->
+  <!-- ============================================================= -->
+  <div class="theme-panel" data-theme-panel="historico" hidden>
+
+    <div class="section-title">Hist&oacute;rico</div>
+    <div class="card-window">
+      <div class="card-window-header">Hist&oacute;rico</div>
+      <div class="card-window-body">
+        <p class="historico-callout" id="historico-callout"></p>
+        <div class="historico-host" id="historico-host"></div>
+      </div>
+    </div>
+
+  </div>
+
+  </div><!-- /.theme-content-frame -->
+
+  <p class="footer">
+    Fuente: Registro de casos del Centro Emergencia Mujer y Familia / SGCI / UPPV / AVRMRV / MIMP.
+    Versi&oacute;n de prueba (v2) con indicadores adicionales, agrupados por tem&aacute;tica.
+  </p>
+
+</div>
+
+<!-- Modal "ver mas" -->
+<div class="modal-backdrop" id="modal-backdrop" hidden>
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-title" id="modal-title">Detalle</div>
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="lib/echarts.min.js" charset="utf-8"></script>
+<script src="data/geodata.js" charset="utf-8"></script>
+<script src="data/casos_data.js" charset="utf-8"></script>
+<script src="assets/icons/icons.js" charset="utf-8"></script>
+<script src="js/main_v2.js" charset="utf-8"></script>
+</body>
+</html>

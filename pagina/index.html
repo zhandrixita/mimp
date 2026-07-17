@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Casos atendidos por los Centro Emergencia Mujer y Familia</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="hero-title-group">
+      <div class="hero-icon">&#128101;</div>
+      <div>
+        <h1 class="hero-title" id="hero-title">Casos de hombres</h1>
+        <p class="hero-subtitle" id="hero-subtitle">Enero - Junio 2026 (preliminar) &middot; Casos atendidos por los Centro Emergencia Mujer y Familia a nivel nacional</p>
+      </div>
+    </div>
+    <div class="hero-total" id="hero-total">0</div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Sexo de la persona usuaria">
+    <button class="tab-btn" role="tab" data-tab="hombres" aria-selected="true">Hombres</button>
+    <button class="tab-btn" role="tab" data-tab="mujeres" aria-selected="false">Mujeres</button>
+    <button class="tab-btn" role="tab" data-tab="total" aria-selected="false">Total</button>
+  </div>
+
+  <!-- Caracteristicas de la persona usuaria -->
+  <div class="section-title">Caracter&iacute;sticas de la persona usuaria</div>
+  <div class="grid grid-2">
+    <div class="card-window">
+      <div class="card-window-header">Grupos de edad</div>
+      <div class="card-window-body">
+        <div class="grid grid-3" id="edad-tiles"></div>
+      </div>
+    </div>
+    <div class="card-window">
+      <div class="card-window-header">Estado civil de la persona usuaria</div>
+      <div class="card-window-body">
+        <div id="estado-civil-host" style="width:100%;height:220px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-3" style="margin-top:14px;">
+    <div class="card-window">
+      <div class="card-window-header">Discapacidad</div>
+      <div class="card-window-body ring-card">
+        <div class="ring-host" id="ring-discapacidad"></div>
+        <div class="ring-label">Personas con alg&uacute;n tipo de discapacidad</div>
+        <div class="ring-count" id="count-discapacidad"></div>
+      </div>
+    </div>
+    <div class="card-window">
+      <div class="card-window-header">Personas extranjeras</div>
+      <div class="card-window-body ring-card">
+        <div class="ring-host" id="ring-extranjero"></div>
+        <div class="ring-count" id="count-extranjero"></div>
+      </div>
+    </div>
+    <div class="card-window">
+      <div class="card-window-header">Trabajo remunerado</div>
+      <div class="card-window-body ring-card">
+        <div class="ring-host" id="ring-trabaja"></div>
+        <div class="ring-count" id="count-trabaja"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Caracteristicas del caso -->
+  <div class="section-title">Caracter&iacute;sticas del caso</div>
+  <div class="grid grid-2">
+    <div class="card-window">
+      <div class="card-window-header">Nivel de riesgo de la persona usuaria</div>
+      <div class="card-window-body">
+        <div class="grid grid-3" id="riesgo-rings"></div>
+      </div>
+    </div>
+    <div class="card-window">
+      <div class="card-window-header">V&iacute;nculo relacional con la presunta persona agresora</div>
+      <div class="card-window-body">
+        <div id="vinculo-bars"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mapa -->
+  <div class="card-window" style="margin-top:22px;">
+    <div class="card-window-header">Casos seg&uacute;n departamento</div>
+    <div class="card-window-body map-layout">
+      <div class="map-host-wrap">
+        <div class="map-host" id="map-host"></div>
+        <div class="map-legend" id="map-legend">
+          <div class="map-legend-title">Casos</div>
+          <div class="map-legend-rows" id="map-legend-rows"></div>
+        </div>
+      </div>
+      <div class="region-panel">
+        <div class="view-toggle" role="tablist" aria-label="Vista de datos por regi&oacute;n">
+          <button class="view-toggle-btn" role="tab" data-view="barras" aria-selected="true">Barras</button>
+          <button class="view-toggle-btn" role="tab" data-view="grilla" aria-selected="false">Grilla</button>
+        </div>
+        <div class="region-bars" id="region-bars"></div>
+        <div class="region-table-wrap" id="region-table-wrap" hidden>
+          <table class="region-table">
+            <thead><tr><th>Regi&oacute;n / CEM</th><th>Casos</th><th>%</th></tr></thead>
+            <tbody id="region-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modalidades y tipo de violencia -->
+  <div class="grid grid-2" style="margin-top:22px;">
+    <div class="card-window">
+      <div class="card-window-header">Modalidades de violencia sexual</div>
+      <div class="card-window-body" id="modalidades-bars"></div>
+    </div>
+    <div class="card-window">
+      <div class="card-window-header">Tipo de violencia</div>
+      <div class="card-window-body">
+        <div class="grid grid-4" id="tipo-violencia-rings"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Historico -->
+  <div class="card-window" style="margin-top:22px;">
+    <div class="card-window-header">Hist&oacute;rico</div>
+    <div class="card-window-body">
+      <p class="historico-callout" id="historico-callout"></p>
+      <div class="historico-host" id="historico-host"></div>
+    </div>
+  </div>
+
+  <p class="footer">
+    Fuente: Registro de casos del Centro Emergencia Mujer y Familia / SGCI / UPPV / AVRMRV / MIMP.
+  </p>
+
+</div>
+
+<script src="lib/echarts.min.js" charset="utf-8"></script>
+<script src="data/geodata.js" charset="utf-8"></script>
+<script src="data/casos_data.js" charset="utf-8"></script>
+<script src="assets/icons/icons.js" charset="utf-8"></script>
+<script src="js/main.js" charset="utf-8"></script>
+</body>
+</html>

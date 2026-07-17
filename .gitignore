@@ -1,0 +1,12 @@
+﻿# Archivos grandes de SPSS
+*.sav
+
+# Configuración local
+.claude/
+
+# Entornos y archivos temporales
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
