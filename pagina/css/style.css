@@ -31,8 +31,6 @@
   --header-green-2: #2e8f5c;
   --header-pink-1: #9c2f5c;
   --header-pink-2: #c9487a;
-  --theme-tint: #eaf3ee;
-  --tab-inactive: #9c9b96;
 
   --card-radius: 12px;
 }
@@ -59,8 +57,6 @@
     --status-good: #0ca30c;
     --status-warning: #fab219;
     --status-serious: #ec835a;
-    --theme-tint: #12241c;
-    --tab-inactive: #4b4a46;
   }
 }
 
@@ -86,13 +82,6 @@ body {
 .page.tema-mujeres {
   --header-green-1: var(--header-pink-1);
   --header-green-2: var(--header-pink-2);
-  --theme-tint: #fbebf1;
-}
-
-@media (prefers-color-scheme: dark) {
-  .page.tema-mujeres {
-    --theme-tint: #26141c;
-  }
 }
 
 /* ---------- Header ---------- */
@@ -163,52 +152,6 @@ body {
   padding: 4px;
   width: fit-content;
   flex-wrap: wrap;
-}
-
-/* Segunda fila de pestanas (tematica): pestanas planas, pegadas una a la
-   otra, gris cuando no esta activa y del color del tema cuando si -- y una
-   barra solida del mismo color justo debajo, que conecta visualmente la
-   pestana activa con el marco de contenido. */
-.theme-tabs {
-  gap: 2px;
-  margin: 14px 0 0;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  width: 100%;
-  flex-wrap: nowrap;
-}
-
-.theme-tabs .tab-btn {
-  flex: 1 1 0;
-  background: var(--tab-inactive);
-  color: #ffffff;
-  border-radius: 6px 6px 0 0;
-  padding: 10px 14px;
-  white-space: nowrap;
-}
-
-.theme-tabs .tab-btn[aria-selected="true"] {
-  background: var(--header-green-1);
-}
-
-.theme-bar {
-  height: 5px;
-  background: var(--header-green-1);
-}
-
-/* Marco con fondo propio para el contenido de las pestanas de tematica --
-   asi cambiar de pestana se siente como cambiar de contenido DENTRO de una
-   misma tarjeta, en vez de saltar entre secciones sueltas sobre el fondo
-   de la pagina. */
-.theme-content-frame {
-  background: var(--theme-tint);
-  border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 var(--card-radius) var(--card-radius);
-  padding: 18px;
-  margin-bottom: 18px;
 }
 
 .tab-btn {
@@ -483,15 +426,12 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Map + regiones (barras/grilla) ---------- */
+/* ---------- Mapa + regiones (barras/grilla) ---------- */
 
 .map-layout {
   display: grid;
-  /* Peru es mas alto que ancho (bbox ancho/alto ~ 0.69); el alto de
-     .map-host-wrap se ajusta a la misma proporcion para que el mapa llene
-     la tarjeta sin huecos ni verse angosto. */
-  grid-template-columns: minmax(300px, 540px) 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr 400px;
+  gap: 20px;
 }
 
 @media (max-width: 760px) {
@@ -552,7 +492,6 @@ body {
   border-radius: 3px;
   flex: none;
 }
-
 
 .region-panel {
   display: flex;
@@ -615,6 +554,10 @@ body {
 
 .region-bars .bar-track {
   height: 7px;
+}
+
+.region-table-wrap[hidden] {
+  display: none;
 }
 
 .region-table {
@@ -681,124 +624,4 @@ body {
 
 .footer a {
   color: var(--text-muted);
-}
-
-/* ---------- Modal "ver mas" ---------- */
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(11, 11, 11, 0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 100;
-}
-
-.modal-backdrop[hidden] {
-  display: none;
-}
-
-.modal-box {
-  background: var(--surface-1);
-  border-radius: var(--card-radius);
-  width: min(880px, 100%);
-  max-height: min(760px, 90vh);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(11, 11, 11, 0.35);
-}
-
-.modal-header {
-  flex: none;
-  background: var(--header-green-1);
-  color: #ffffff;
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.modal-header-title {
-  font-size: 14.5px;
-  font-weight: 700;
-}
-
-.modal-close {
-  flex: none;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 15px;
-  line-height: 1;
-}
-
-.modal-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.modal-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 18px;
-}
-
-.modal-body h4 {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  margin: 0 0 8px;
-}
-
-.modal-cols {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-/* Interpretacion generada a partir de los datos, debajo de cada grafico --
-   se recalcula en cada render, nunca es texto fijo. */
-.chart-insight {
-  font-size: 11.5px;
-  line-height: 1.4;
-  color: var(--text-secondary);
-  margin: 8px 0 0;
-  padding-top: 8px;
-  border-top: 1px solid var(--gridline);
-}
-
-.chart-insight strong {
-  color: var(--text-primary);
-}
-
-/* ---------- v2: nuevas secciones (perfil agresor, seguro, etc.) ---------- */
-
-.stat-inline-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 5px 0;
-  border-bottom: 1px solid var(--gridline);
-  font-size: 13px;
-}
-
-.stat-inline-row:last-child {
-  border-bottom: none;
-}
-
-.stat-inline-label {
-  color: var(--text-secondary);
-}
-
-.stat-inline-value {
-  font-weight: 700;
-  color: var(--text-primary);
-  font-variant-numeric: tabular-nums;
 }

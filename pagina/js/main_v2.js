@@ -4,7 +4,11 @@
   var fmt = new Intl.NumberFormat("es-PE");
 
   function cssVar(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    // Se lee desde .page (no document.documentElement): .tema-mujeres,
+    // que sobreescribe --header-green-1 con el rosa, esta en .page, asi
+    // que leer desde <html> nunca veia ese cambio de tema.
+    var host = document.querySelector(".page") || document.documentElement;
+    return getComputedStyle(host).getPropertyValue(name).trim();
   }
 
   function el(id) {
@@ -43,7 +47,10 @@
     Object.keys(charts).forEach(function (id) {
       charts[id].resize();
     });
-    if (charts["map-host"]) actualizarEtiquetasMapa();
+    if (charts["map-host"]) {
+      ajustarZoomMapa();
+      actualizarEtiquetasMapa();
+    }
   });
 
   // ---------------------------------------------------------------------
@@ -160,7 +167,7 @@
   // Color de relleno del pictograma por pesta\u00f1a -- azul para hombres,
   // rosado para mujeres (total usa rojo por defecto).
   var COLOR_PICTOGRAMA = {
-    hombres: "var(--series-blue)",
+    hombres: "var(--header-green-1)",
     mujeres: "var(--series-pink)",
     total: "var(--series-red)",
   };
@@ -267,7 +274,7 @@
           left: "center",
           itemWidth: 10,
           itemHeight: 10,
-          textStyle: { color: cssVar("--text-secondary"), fontSize: 11.5 },
+          textStyle: { color: cssVar("--text-secondary"), fontSize: 13 },
         },
         series: [
           {
@@ -278,7 +285,7 @@
             label: {
               formatter: "{d}%",
               color: cssVar("--text-secondary"),
-              fontSize: 11,
+              fontSize: 13,
             },
             labelLine: { length: 8, length2: 6 },
             data: pieData,
@@ -413,12 +420,12 @@
         tooltip: { trigger: "item", valueFormatter: function (v) { return fmt.format(v); } },
         legend: {
           bottom: 0, left: "center", itemWidth: 10, itemHeight: 10,
-          textStyle: { color: cssVar("--text-secondary"), fontSize: 11.5 },
+          textStyle: { color: cssVar("--text-secondary"), fontSize: 13 },
         },
         series: [
           {
             type: "pie", radius: ["42%", "68%"], center: ["50%", "46%"], avoidLabelOverlap: true,
-            label: { formatter: "{d}%", color: cssVar("--text-secondary"), fontSize: 11 },
+            label: { formatter: "{d}%", color: cssVar("--text-secondary"), fontSize: 13 },
             labelLine: { length: 8, length2: 6 },
             data: pieData,
           },
@@ -434,7 +441,7 @@
       var d = data.agresor_edad[k];
       return { label: k, casos: d.casos, pct: d.pct };
     });
-    barListaHost(el("agresor-edad-bars"), items, cssVar("--series-blue"));
+    barListaHost(el("agresor-edad-bars"), items, cssVar("--header-green-1"));
   }
 
   var ORDEN_EDUCACION = ["Sin nivel / Inicial", "Primaria", "Secundaria", "Superior", "B\u00e1sica especial", "Posgrado"];
@@ -614,13 +621,14 @@
     mostrarModal("Tipo de violencia \u2014 sub-actos registrados");
   }
 
-  function statInlineRow(label, d) {
-    var row = document.createElement("div");
-    row.className = "stat-inline-row";
-    row.innerHTML =
-      '<span class="stat-inline-label">' + label + "</span>" +
-      '<span class="stat-inline-value">' + fmt.format(d.casos) + " (" + d.pct.toFixed(1) + "%)</span>";
-    return row;
+  function kpiTile(label, d) {
+    var tile = document.createElement("div");
+    tile.className = "kpi-tile";
+    tile.innerHTML =
+      '<div class="kpi-tile-value">' + d.pct.toFixed(1) + "%</div>" +
+      '<div class="kpi-tile-label">' + label + "</div>" +
+      '<div class="kpi-tile-count">' + fmt.format(d.casos) + " casos</div>";
+    return tile;
   }
 
   function dictABarItems(dict) {
@@ -668,12 +676,12 @@
         tooltip: { trigger: "item", valueFormatter: function (v) { return fmt.format(v); } },
         legend: {
           bottom: 0, left: "center", itemWidth: 9, itemHeight: 9,
-          textStyle: { color: cssVar("--text-secondary"), fontSize: 10 },
+          textStyle: { color: cssVar("--text-secondary"), fontSize: 12 },
         },
         series: [
           {
             type: "pie", radius: ["38%", "62%"], center: ["50%", "40%"], avoidLabelOverlap: true,
-            label: { formatter: "{d}%", color: cssVar("--text-secondary"), fontSize: 10 },
+            label: { formatter: "{d}%", color: cssVar("--text-secondary"), fontSize: 12 },
             labelLine: { length: 6, length2: 4 },
             data: pieData,
           },
@@ -692,7 +700,7 @@
           type: "category",
           data: items.map(function (it) { return it.label; }),
           axisLabel: {
-            color: cssVar("--text-secondary"), fontSize: 9.5, interval: 0,
+            color: cssVar("--text-secondary"), fontSize: 11.5, interval: 0,
             rotate: items.length > 3 ? 32 : 0,
             width: items.length > 3 ? 70 : undefined,
             overflow: items.length > 3 ? "truncate" : undefined,
@@ -703,7 +711,7 @@
         yAxis: {
           type: "value",
           splitLine: { lineStyle: { color: cssVar("--gridline") } },
-          axisLabel: { color: cssVar("--text-muted"), fontSize: 9.5, formatter: function (v) { return fmt.format(v); } },
+          axisLabel: { color: cssVar("--text-muted"), fontSize: 11.5, formatter: function (v) { return fmt.format(v); } },
         },
         series: [
           {
@@ -714,7 +722,7 @@
             barMaxWidth: 30,
             itemStyle: { borderRadius: [3, 3, 0, 0] },
             label: {
-              show: true, position: "top", fontSize: 9,
+              show: true, position: "top", fontSize: 11,
               color: cssVar("--text-secondary"),
               formatter: function (p) { return fmt.format(p.value); },
             },
@@ -769,13 +777,13 @@
     }
 
     var stats = document.createElement("div");
-    stats.style.marginBottom = "14px";
-    stats.appendChild(statInlineRow("Con alg\u00fan tipo de discapacidad", det.discapacidad));
-    stats.appendChild(statInlineRow("Personas extranjeras", det.extranjero));
-    stats.appendChild(statInlineRow("Trabajo remunerado", det.trabaja));
-    stats.appendChild(statInlineRow("Denuncia interpuesta", det.atencion_seguimiento.denuncia_interpuesta));
-    stats.appendChild(statInlineRow("Cuenta con medidas de protecci\u00f3n", det.atencion_seguimiento.medidas_proteccion));
-    stats.appendChild(statInlineRow("Atenci\u00f3n integral del CEM", det.atencion_seguimiento.atencion_integral));
+    stats.className = "kpi-tiles";
+    stats.appendChild(kpiTile("Con alg\u00fan tipo de discapacidad", det.discapacidad));
+    stats.appendChild(kpiTile("Personas extranjeras", det.extranjero));
+    stats.appendChild(kpiTile("Trabajo remunerado", det.trabaja));
+    stats.appendChild(kpiTile("Denuncia interpuesta", det.atencion_seguimiento.denuncia_interpuesta));
+    stats.appendChild(kpiTile("Cuenta con medidas de protecci\u00f3n", det.atencion_seguimiento.medidas_proteccion));
+    stats.appendChild(kpiTile("Atenci\u00f3n integral del CEM", det.atencion_seguimiento.atencion_integral));
     body.appendChild(stats);
 
     var itemsEdad = dictABarItems(det.edad);
@@ -863,7 +871,41 @@
     mapRegistered = true;
   }
 
-  var COLORES_QUINTIL = ["#cde2fb", "#86b6ef", "#3987e5", "#1c5cab", "#0d366b"];
+  // Mapa de calor: 5 tonos del mismo color de tema (verde/rosa, segun
+  // .tema-mujeres), de claro a oscuro -- antes era una escala de azules
+  // fija, ajena al tema del resto del dashboard.
+  function _hexARgb(hex) {
+    hex = hex.replace("#", "");
+    return [
+      parseInt(hex.substr(0, 2), 16),
+      parseInt(hex.substr(2, 2), 16),
+      parseInt(hex.substr(4, 2), 16),
+    ];
+  }
+
+  function _rgbAHex(r, g, b) {
+    function h(v) {
+      v = Math.max(0, Math.min(255, Math.round(v)));
+      var s = v.toString(16);
+      return s.length < 2 ? "0" + s : s;
+    }
+    return "#" + h(r) + h(g) + h(b);
+  }
+
+  function _mezclarColor(hexA, hexB, t) {
+    var a = _hexARgb(hexA), b = _hexARgb(hexB);
+    return _rgbAHex(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t);
+  }
+
+  function _paletaQuintiles(colorBase) {
+    return [
+      _mezclarColor(colorBase, "#ffffff", 0.82),
+      _mezclarColor(colorBase, "#ffffff", 0.55),
+      colorBase,
+      _mezclarColor(colorBase, "#000000", 0.22),
+      _mezclarColor(colorBase, "#000000", 0.45),
+    ];
+  }
 
   // Quintiles (percentiles 20/40/60/80) de la distribucion real de casos por
   // departamento -- no un degradado lineal 0..max, que con Lima como maximo
@@ -879,14 +921,14 @@
     return [percentil(0.2), percentil(0.4), percentil(0.6), percentil(0.8)].map(Math.round);
   }
 
-  function _colorPorQuintil(valor, quintiles) {
+  function _colorPorQuintil(valor, quintiles, paleta) {
     for (var i = 0; i < quintiles.length; i++) {
-      if (valor < quintiles[i]) return COLORES_QUINTIL[i];
+      if (valor < quintiles[i]) return paleta[i];
     }
-    return COLORES_QUINTIL[COLORES_QUINTIL.length - 1];
+    return paleta[paleta.length - 1];
   }
 
-  function _renderLeyendaQuintiles(quintiles, maxVal) {
+  function _renderLeyendaQuintiles(quintiles, maxVal, paleta) {
     var cortes = [0, quintiles[0], quintiles[1], quintiles[2], quintiles[3], maxVal];
     var host = el("map-legend-rows");
     host.innerHTML = "";
@@ -896,7 +938,7 @@
       var texto = i < 4
         ? fmt.format(cortes[i]) + " a " + fmt.format(cortes[i + 1]) + " casos"
         : fmt.format(cortes[i]) + " a m\u00e1s casos";
-      row.innerHTML = '<span class="map-legend-swatch" style="background:' + COLORES_QUINTIL[i] + '"></span>' + texto;
+      row.innerHTML = '<span class="map-legend-swatch" style="background:' + paleta[i] + '"></span>' + texto;
       host.appendChild(row);
     }
   }
@@ -1040,6 +1082,22 @@
 
   var eventosMapaListos = false;
 
+  // El ajuste "contain" por defecto de echarts deja franjas vacias arriba
+  // y abajo del mapa (el alto de la ventana varia segun la pestana de
+  // tematica activa). Se mide el encaje natural (zoom 1) y se calcula el
+  // zoom minimo para que el mapa llegue de canto a canto en el alto.
+  function ajustarZoomMapa() {
+    var chart = chartFor("map-host");
+    chart.setOption({ series: [{ zoom: 1 }] });
+    var cs = chart.getModel().getSeriesByIndex(0).coordinateSystem;
+    var altoNatural = cs && cs._viewRect && cs._viewRect.height;
+    if (!altoNatural) return;
+    var zoomNecesario = chart.getHeight() / altoNatural;
+    if (zoomNecesario > 1) {
+      chart.setOption({ series: [{ zoom: zoomNecesario }] });
+    }
+  }
+
   function pintarMapa(data) {
     ensureMapRegistered();
     ultimaDataMapa = data;
@@ -1049,13 +1107,14 @@
     });
     var maxVal = Math.max.apply(null, valores);
     var quintiles = _calcularQuintiles(valores);
+    var paleta = _paletaQuintiles(cssVar("--header-green-1"));
 
     var entries = Object.keys(data.por_departamento).map(function (name) {
       var casos = data.por_departamento[name].casos;
       return {
         name: name,
         value: casos,
-        itemStyle: { areaColor: _colorPorQuintil(casos, quintiles) },
+        itemStyle: { areaColor: _colorPorQuintil(casos, quintiles, paleta) },
       };
     });
 
@@ -1080,6 +1139,13 @@
               label: { show: false },
               itemStyle: { areaColor: cssVar("--series-violet") },
             },
+            // Sin esto, el departamento clickeado se queda resaltado con el
+            // amarillo por defecto de echarts (no combina con el tema) --
+            // se usa el mismo verde/rosa que ya responde a .tema-mujeres.
+            select: {
+              label: { show: false },
+              itemStyle: { areaColor: cssVar("--header-green-1") },
+            },
             itemStyle: {
               borderColor: cssVar("--surface-1"),
               borderWidth: 1,
@@ -1091,7 +1157,8 @@
       true
     );
 
-    _renderLeyendaQuintiles(quintiles, maxVal);
+    _renderLeyendaQuintiles(quintiles, maxVal, paleta);
+    ajustarZoomMapa();
     actualizarEtiquetasMapa();
 
     if (!eventosMapaListos) {
@@ -1112,29 +1179,14 @@
       .map(function (name) { return { name: name, data: data.por_region[name] }; })
       .sort(function (a, b) { return b.data.casos - a.data.casos; });
 
-    var tbody = el("region-table-body");
-    tbody.innerHTML = "";
-    regiones.forEach(function (r) {
-      var tr = document.createElement("tr");
-      var tdName = document.createElement("td");
-      tdName.textContent = r.name;
-      var tdCasos = document.createElement("td");
-      tdCasos.textContent = fmt.format(r.data.casos);
-      var tdPct = document.createElement("td");
-      tdPct.textContent = r.data.pct.toFixed(1) + "%";
-      tr.appendChild(tdName);
-      tr.appendChild(tdCasos);
-      tr.appendChild(tdPct);
-      tbody.appendChild(tr);
-    });
-
     var barsHost = el("region-bars");
     barsHost.innerHTML = "";
     var maxRegion = regiones.length ? regiones[0].data.casos : 0;
+    var colorTema = cssVar("--header-green-1");
     regiones.forEach(function (r) {
       var width = maxRegion > 0 ? (r.data.casos / maxRegion) * 100 : 0;
       barsHost.appendChild(
-        barRow(r.name, r.data.casos, r.data.pct, cssVar("--series-blue"), width)
+        barRow(r.name, r.data.casos, r.data.pct, colorTema, width)
       );
     });
   }
@@ -1181,7 +1233,7 @@
               show: true,
               position: "top",
               color: cssVar("--text-secondary"),
-              fontSize: 11,
+              fontSize: 13,
               formatter: function (p) { return fmt.format(p.value); },
             },
           },
@@ -1252,12 +1304,18 @@
       btn.setAttribute("aria-selected", "true");
 
       var tema = btn.getAttribute("data-theme");
-      document.querySelectorAll("[data-theme-panel]").forEach(function (panel) {
-        panel.hidden = panel.getAttribute("data-theme-panel") !== tema;
+      document.querySelectorAll("[data-theme-panel-top]").forEach(function (panel) {
+        panel.hidden = panel.getAttribute("data-theme-panel-top") !== tema;
+      });
+      document.querySelectorAll("[data-theme-panel-rest]").forEach(function (panel) {
+        panel.hidden = panel.getAttribute("data-theme-panel-rest") !== tema;
       });
 
       Object.keys(charts).forEach(function (id) { charts[id].resize(); });
-      if (charts["map-host"]) actualizarEtiquetasMapa();
+      if (charts["map-host"]) {
+        ajustarZoomMapa();
+        actualizarEtiquetasMapa();
+      }
     });
   });
 
@@ -1267,8 +1325,16 @@
       document.querySelectorAll(".view-toggle-btn").forEach(function (b) {
         b.setAttribute("aria-selected", String(b === btn));
       });
+      el("map-view").hidden = vista !== "mapa";
       el("region-bars").hidden = vista !== "barras";
-      el("region-table-wrap").hidden = vista !== "grilla";
+
+      // El mapa se inicializa a tamano 0x0 si estaba oculto (display:none)
+      // mientras se mostraba "barras" -- hay que forzar resize() al volver.
+      if (vista === "mapa" && charts["map-host"]) {
+        charts["map-host"].resize();
+        ajustarZoomMapa();
+        actualizarEtiquetasMapa();
+      }
     });
   });
 
