@@ -5,26 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Casos atendidos por los Centro Emergencia Mujer y Familia</title>
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/alcohol.css" />
+<link rel="stylesheet" href="css/lgtbi.css" />
+<link rel="stylesheet" href="css/extranjeras.css" />
+<link rel="stylesheet" href="css/gestantes.css" />
 </head>
 <body>
-<div class="page">
+<div class="page version-v1">
 
   <header class="hero">
     <div class="hero-title-group">
       <div class="hero-icon">&#128101;</div>
       <div>
         <h1 class="hero-title" id="hero-title">Casos de hombres</h1>
-        <p class="hero-subtitle" id="hero-subtitle">Enero - Junio 2026 (preliminar) &middot; Casos atendidos por los Centro Emergencia Mujer y Familia a nivel nacional</p>
+        <p class="hero-subtitle" id="hero-subtitle">Enero - Julio 2026 (preliminar) &middot; Casos atendidos por los Centro Emergencia Mujer y Familia a nivel nacional</p>
       </div>
     </div>
     <div class="hero-total" id="hero-total">0</div>
   </header>
 
-  <div class="tabs" role="tablist" aria-label="Sexo de la persona usuaria">
+  <div class="tabs" role="tablist" aria-label="Grupo de análisis">
     <button class="tab-btn" role="tab" data-tab="hombres" aria-selected="true">Hombres</button>
     <button class="tab-btn" role="tab" data-tab="mujeres" aria-selected="false">Mujeres</button>
-    <button class="tab-btn" role="tab" data-tab="total" aria-selected="false">Total</button>
+    <button class="tab-btn" role="tab" data-tab="alcohol_drogas" aria-selected="false">Alcohol y drogas</button>
+    <button class="tab-btn" role="tab" data-tab="lgtbi" aria-selected="false">LGTBI</button>
+    <button class="tab-btn" role="tab" data-tab="extranjeras" aria-selected="false">Personas extranjeras</button>
+    <button class="tab-btn" role="tab" data-tab="gestantes" aria-selected="false">Mujeres en gestaci&oacute;n</button>
   </div>
+
+  <div id="standard-dashboard">
 
   <!-- Caracteristicas de la persona usuaria -->
   <div class="section-title">Caracter&iacute;sticas de la persona usuaria</div>
@@ -135,6 +144,16 @@
     </div>
   </div>
 
+  </div><!-- /#standard-dashboard -->
+
+  <section id="alcohol-dashboard" class="alcohol-dashboard" hidden aria-label="Agresor bajo los efectos del alcohol y drogas"></section>
+
+  <section id="lgtbi-dashboard" class="lgtbi-dashboard" hidden aria-label="Casos de personas LGBTI"></section>
+
+  <section id="extranjeras-dashboard" class="extranjeras-dashboard" hidden aria-label="Casos de personas extranjeras"></section>
+
+  <section id="gestantes-dashboard" class="gestantes-dashboard" hidden aria-label="Casos de mujeres en estado de gestacion"></section>
+
   <p class="footer">
     Fuente: Registro de casos del Centro Emergencia Mujer y Familia / SGCI / UPPV / AVRMRV / MIMP.
   </p>
@@ -145,6 +164,12 @@
 <script src="data/geodata.js" charset="utf-8"></script>
 <script src="data/casos_data.js" charset="utf-8"></script>
 <script src="assets/icons/icons.js" charset="utf-8"></script>
+<script src="js/historico_mensual.js" charset="utf-8"></script>
+<script src="js/map_labels.js" charset="utf-8"></script>
+<script src="js/alcohol.js" charset="utf-8"></script>
+<script src="js/lgtbi.js" charset="utf-8"></script>
+<script src="js/extranjeras.js" charset="utf-8"></script>
+<script src="js/gestantes.js" charset="utf-8"></script>
 <script src="js/main.js" charset="utf-8"></script>
 </body>
 </html>

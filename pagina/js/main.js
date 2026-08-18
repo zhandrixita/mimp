@@ -729,12 +729,37 @@
   // ---------------------------------------------------------------------
   // Orquestador
   // ---------------------------------------------------------------------
-  var SEXO_LABEL = { hombres: "hombres", mujeres: "mujeres", total: "personas" };
-  var SEXO_TITULO = { hombres: "Casos de hombres", mujeres: "Casos de mujeres", total: "Casos totales" };
+  var SEXO_LABEL = { hombres: "hombres", mujeres: "mujeres" };
+  var SEXO_TITULO = { hombres: "Casos de hombres", mujeres: "Casos de mujeres" };
+
+  // Pestanas "tematicas" (no hombres/mujeres): cada una tiene su propio
+  // dashboard dedicado (#<id>-dashboard) + tema de color (.tema-<clase>) +
+  // renderer propio, en vez de compartir #standard-dashboard.
+  var TABS_TEMATICOS = {
+    alcohol_drogas: { dashboardId: "alcohol-dashboard", temaClass: "tema-alcohol", titulo: "Agresor bajo los efectos del alcohol y drogas", render: function (d) { window.renderAlcohol(d); } },
+    lgtbi: { dashboardId: "lgtbi-dashboard", temaClass: "tema-lgtbi", titulo: "Casos de personas LGBTI", render: function (d) { window.renderLgtbi(d); } },
+    extranjeras: { dashboardId: "extranjeras-dashboard", temaClass: "tema-extranjeras", titulo: "Casos de personas extranjeras", render: function (d) { window.renderExtranjeras(d); } },
+    gestantes: { dashboardId: "gestantes-dashboard", temaClass: "tema-gestantes", titulo: "Casos de mujeres en estado de gestación", render: function (d) { window.renderGestantes(d); } }
+  };
 
   function render(tab) {
     var data = window.CASOS_DATA[tab];
     if (!data) return;
+
+    var tematico = TABS_TEMATICOS[tab];
+    el("standard-dashboard").hidden = !!tematico;
+    Object.keys(TABS_TEMATICOS).forEach(function (key) {
+      var t = TABS_TEMATICOS[key];
+      el(t.dashboardId).hidden = key !== tab;
+      document.querySelector(".page").classList.toggle(t.temaClass, key === tab);
+    });
+    if (tematico) {
+      document.querySelector(".page").classList.remove("tema-mujeres");
+      setText(el("hero-title"), tematico.titulo);
+      setText(el("hero-total"), fmt.format(data.total));
+      tematico.render(data);
+      return;
+    }
 
     document.querySelector(".page").classList.toggle("tema-mujeres", tab === "mujeres");
 

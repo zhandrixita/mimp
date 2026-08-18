@@ -1,0 +1,31 @@
+.lgtbi-dashboard[hidden] { display: none; }
+.page.tema-lgtbi {
+  --header-green-1: #6a3fa0;
+  --header-green-2: #8a5cc4;
+  --theme-tint: #f3edfb;
+}
+@media (prefers-color-scheme: dark) {
+  .page.tema-lgtbi { --theme-tint: #241a34; }
+}
+.lgtbi-dashboard { margin-top: 22px; }
+.version-v2 .lgtbi-dashboard { background: var(--theme-tint); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 18px; }
+.lgtbi-intro { margin: 0 0 16px; color: var(--text-secondary); font-size: 14px; }
+.lgtbi-download { display: inline-block; margin: 0 0 16px; padding: 8px 14px; border-radius: 999px; background: var(--header-green-2); color: #fff; text-decoration: none; font-size: 12px; font-weight: 700; }
+.lgtbi-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.lgtbi-stat { text-align: center; padding: 18px 12px; }
+.lgtbi-stat strong { display: block; font-size: clamp(24px, 4vw, 38px); color: var(--header-green-1); }
+.lgtbi-stat span { display: block; margin-top: 4px; color: var(--text-secondary); font-size: 13px; }
+.lgtbi-sexo-resumen { display: flex; gap: 12px; }
+.lgtbi-sexo-resumen .lgtbi-stat { flex: 1; }
+.lgtbi-chart { width: 100%; height: 300px; }
+.lgtbi-bars { display: flex; flex-direction: column; gap: 9px; }
+.lgtbi-bar { display: grid; grid-template-columns: minmax(120px, 1fr) 2fr auto; gap: 9px; align-items: center; font-size: 12px; }
+.lgtbi-bar-track { height: 9px; border-radius: 9px; background: var(--page-plane); overflow: hidden; }
+.lgtbi-bar-fill { height: 100%; border-radius: inherit; background: var(--header-green-2); }
+.lgtbi-note { color: var(--text-muted); font-size: 11px; margin: 8px 0 0; }
+.lgtbi-dashboard .section-title { background: var(--header-green-1); }
+.lgtbi-dashboard .section-title small { font-weight: 500; opacity: 0.85; }
+@media (max-width: 800px) {
+  .lgtbi-grid { grid-template-columns: 1fr; }
+  .lgtbi-bar { grid-template-columns: minmax(100px, 1fr) 1.4fr auto; }
+}
