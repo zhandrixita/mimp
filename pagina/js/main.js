@@ -746,6 +746,10 @@
     var data = window.CASOS_DATA[tab];
     if (!data) return;
 
+    // Un solo enlace de descarga para las 6 pestanas -- el nombre de
+    // archivo (informe_<tab>.xlsx) coincide siempre con la clave del tab.
+    el("download-informe").href = "data/informe_" + tab + ".xlsx";
+
     var tematico = TABS_TEMATICOS[tab];
     el("standard-dashboard").hidden = !!tematico;
     Object.keys(TABS_TEMATICOS).forEach(function (key) {

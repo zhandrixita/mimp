@@ -304,7 +304,6 @@
     ];
     host.innerHTML = '<p class="alcohol-intro"><strong>' + fmt.format(data.total) +
       '</strong> casos equivalentes al <strong>' + data.pct_base + '%</strong> de la base, con la presunta persona agresora bajo efectos de alcohol y/o drogas.</p>' +
-      '<a class="alcohol-download" href="data/casos_tablas.xlsx" download>Descargar tablas en Excel</a>' +
       // El mapa fijo arriba-izquierda + la primera tarjeta a su costado
       // (mismo mecanismo de grid que usan las pestanas Hombres/Mujeres --
       // .theme-body-layout/.map-window/.theme-panel-top ya existen en

@@ -171,6 +171,22 @@ body {
   color: #ffffff;
 }
 
+/* Descarga del informe -- un solo enlace para las 6 pestanas (antes las 4
+   tematicas tenian cada una el suyo, y hombres/mujeres no tenian ninguno);
+   el color sigue al tema activo (--header-green-2 ya responde a
+   .tema-mujeres/.tema-alcohol/etc). */
+.download-informe {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--header-green-2);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 /* ---------- Section / card scaffolding ---------- */
 
 .section-title {

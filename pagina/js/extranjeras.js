@@ -286,7 +286,6 @@
 
     host.innerHTML = '<p class="extranjeras-intro"><strong>' + fmt.format(data.total) +
       '</strong> casos equivalentes al <strong>' + data.pct_base + '%</strong> de la base, de personas extranjeras atendidas.</p>' +
-      '<a class="extranjeras-download" href="data/casos_tablas.xlsx" download>Descargar tablas en Excel</a>' +
       // El mapa fijo arriba-izquierda + la primera tarjeta a su costado
       // (mismo mecanismo de grid que usan las pestanas Hombres/Mujeres) --
       // asi el mapa queda en la misma ubicaci&oacute;n en todas las pestanas.

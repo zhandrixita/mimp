@@ -10,7 +10,6 @@
 .extranjeras-dashboard { margin-top: 22px; }
 .version-v2 .extranjeras-dashboard { background: var(--theme-tint); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 18px; }
 .extranjeras-intro { margin: 0 0 16px; color: var(--text-secondary); font-size: 14px; }
-.extranjeras-download { display: inline-block; margin: 0 0 16px; padding: 8px 14px; border-radius: 999px; background: var(--header-green-2); color: #fff; text-decoration: none; font-size: 12px; font-weight: 700; }
 .extranjeras-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
 .extranjeras-stat { text-align: center; padding: 18px 12px; }
 .extranjeras-stat strong { display: block; font-size: clamp(24px, 4vw, 38px); color: var(--header-green-1); }
