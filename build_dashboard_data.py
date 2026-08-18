@@ -16,8 +16,9 @@ import json
 import pandas as pd
 import pyreadstat
 
-RUTA_SAV = "data/BD_Registro_casos_junio_2026_SDP.sav"
+RUTA_SAV = "data/BD_Registro_casos_julio_2026_SDP.sav"
 SALIDA_JS = "pagina/data/casos_data.js"
+SALIDA_EXCEL = "pagina/data/casos_tablas.xlsx"
 
 # Historico 2021-2025: no esta en el .sav actual (que solo trae el corte
 # preliminar de 2026), son cifras fijas proporcionadas directamente.
@@ -513,6 +514,113 @@ def construir_detalle_departamentos(df, meta):
     return detalle
 
 
+def exportar_excel(data, ruta=SALIDA_EXCEL):
+    """Exporta los agregados del dashboard a tablas reutilizables en Excel."""
+    perfiles = ("total", "hombres", "mujeres")
+    categorias = (
+        "edad", "estado_civil", "nivel_riesgo", "vinculo_agresor",
+        "tipo_violencia", "agresor_sexo", "agresor_edad",
+        "agresor_educacion", "educacion_victima", "etnia",
+        "lugar_ocurrencia", "ambito_violencia",
+    )
+    banderas_simples = (
+        "discapacidad", "extranjero", "trabaja", "agresor_trabaja",
+        "agresor_discapacidad",
+    )
+    grupos_banderas = (
+        "modalidades_sexuales", "discapacidad_detalle", "seguro_medico",
+        "atencion_seguimiento",
+    )
+
+    resumen_filas = []
+    categorias_filas = []
+    banderas_filas = []
+    historico_filas = []
+    departamentos_filas = []
+    rankings_filas = []
+    detalle_filas = []
+
+    for perfil in perfiles:
+        bloque = data[perfil]
+        resumen_filas.append({"perfil": perfil, "casos_totales": bloque["total"]})
+
+        for indicador in categorias:
+            for categoria, valor in bloque.get(indicador, {}).items():
+                categorias_filas.append({
+                    "perfil": perfil, "indicador": indicador,
+                    "categoria": categoria, "casos": valor["casos"],
+                    "porcentaje": valor["pct"],
+                })
+
+        for indicador in banderas_simples:
+            valor = bloque.get(indicador, {})
+            banderas_filas.append({
+                "perfil": perfil, "grupo": "general", "indicador": indicador,
+                "casos": valor.get("casos", 0), "porcentaje": valor.get("pct", 0),
+            })
+        for grupo in grupos_banderas:
+            for indicador, valor in bloque.get(grupo, {}).items():
+                banderas_filas.append({
+                    "perfil": perfil, "grupo": grupo, "indicador": indicador,
+                    "casos": valor["casos"], "porcentaje": valor["pct"],
+                })
+
+        for anio, casos in bloque.get("historico_anual", {}).items():
+            historico_filas.append({"perfil": perfil, "anio": anio, "casos": casos})
+        for departamento, valor in bloque.get("por_departamento", {}).items():
+            departamentos_filas.append({
+                "perfil": perfil, "nivel": "departamento", "ubicacion": departamento,
+                "casos": valor["casos"], "porcentaje": valor["pct"],
+            })
+        for region, valor in bloque.get("por_region", {}).items():
+            departamentos_filas.append({
+                "perfil": perfil, "nivel": "region", "ubicacion": region,
+                "casos": valor["casos"], "porcentaje": valor["pct"],
+            })
+
+        for grupo in ("factores_riesgo_victima", "factores_riesgo_agresor"):
+            for posicion, valor in enumerate(bloque.get(grupo, []), start=1):
+                rankings_filas.append({
+                    "perfil": perfil, "grupo": grupo, "tipo_violencia": "",
+                    "posicion": posicion, **valor,
+                })
+        for tipo, filas in bloque.get("subactos_violencia", {}).items():
+            for posicion, valor in enumerate(filas, start=1):
+                rankings_filas.append({
+                    "perfil": perfil, "grupo": "subactos_violencia",
+                    "tipo_violencia": tipo, "posicion": posicion, **valor,
+                })
+
+        for departamento, valores in bloque.get("por_departamento_detalle", {}).items():
+            for indicador in ("edad", "estado_civil", "nivel_riesgo", "vinculo_agresor", "tipo_violencia"):
+                for categoria, valor in valores.get(indicador, {}).items():
+                    detalle_filas.append({
+                        "perfil": perfil, "departamento": departamento,
+                        "indicador": indicador, "categoria": categoria,
+                        "casos": valor["casos"], "porcentaje": valor["pct"],
+                    })
+
+    hojas = {
+        "Resumen": resumen_filas,
+        "Categorias": categorias_filas,
+        "Indicadores_si": banderas_filas,
+        "Historico": historico_filas,
+        "Ubicaciones": departamentos_filas,
+        "Rankings": rankings_filas,
+        "Detalle_departamento": detalle_filas,
+    }
+    with pd.ExcelWriter(ruta, engine="openpyxl") as writer:
+        for nombre, filas in hojas.items():
+            tabla = pd.DataFrame(filas)
+            tabla.to_excel(writer, sheet_name=nombre, index=False)
+            hoja = writer.sheets[nombre]
+            hoja.freeze_panes = "A2"
+            hoja.auto_filter.ref = hoja.dimensions
+            for columna in hoja.columns:
+                ancho = min(max(len(str(celda.value or "")) for celda in columna) + 2, 45)
+                hoja.column_dimensions[columna[0].column_letter].width = ancho
+
+
 def main():
     df, meta = cargar()
 
@@ -538,7 +646,10 @@ def main():
         json.dump(data, f, ensure_ascii=True, indent=2)
         f.write(";\n")
 
+    exportar_excel(data)
+
     print(f"OK -> {SALIDA_JS}")
+    print(f"OK -> {SALIDA_EXCEL}")
     print(f"Filas totales: {data['generado']['filas_totales']:,}")
     print(f"Hombres: {data['hombres']['total']:,} | Mujeres: {data['mujeres']['total']:,}")
 

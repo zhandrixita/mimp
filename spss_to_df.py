@@ -6,7 +6,7 @@ Convierte un archivo SPSS (.sav) a un DataFrame de pandas incorporando:
 
 import pyreadstat
 
-RUTA_SAV = "data/BD_Registro_casos_junio_2026_SDP.sav"
+RUTA_SAV = "data/BD_Registro_casos_julio_2026_SDP.sav"
 
 
 def _des_mojibake(texto):
