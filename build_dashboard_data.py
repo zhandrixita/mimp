@@ -19,7 +19,7 @@ import pyreadstat
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-RUTA_SAV = "data/BD_Registro_casos_julio_2026_SDP.sav"
+RUTA_SAV = "data/BD_Registro_casos_agosto_2026_SDP.sav"
 SALIDA_JS = "pagina/data/casos_data.js"
 CARPETA_INFORMES = "pagina/data"
 
@@ -961,7 +961,7 @@ def _portada(writer, clave, total, extra_filas=None):
 
     hoja.merge_cells("A2:C2")
     subtitulo = hoja["A2"]
-    subtitulo.value = "Centro Emergencia Mujer y Familia · Enero - Julio 2026 (preliminar)"
+    subtitulo.value = "Centro Emergencia Mujer y Familia · Enero - Agosto 2026 (preliminar)"
     subtitulo.font = Font(italic=True, color="595959")
     subtitulo.alignment = Alignment(indent=1)
 

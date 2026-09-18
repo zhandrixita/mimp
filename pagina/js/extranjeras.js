@@ -62,7 +62,7 @@
     return match ? match.data : { casos: 0, pct: 0 };
   }
 
-  // Pictograma "relleno por porcentaje" (misma tecnica que main.js/alcohol.js/lgtbi.js):
+  // Pictograma "relleno por porcentaje" (misma tecnica que main_v2.js/alcohol.js/lgtbi.js):
   // silueta en gris de fondo + copia recortada (clip-path) en color de acento
   // que sube desde los pies segun el pct.
   function buildPictogramSvg(rawSvg, colorVar, uid) {

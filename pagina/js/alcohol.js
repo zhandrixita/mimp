@@ -71,7 +71,7 @@
     var match = entries(dict).filter(function (item) { return item.label.toLowerCase() === "si" || item.label.toLowerCase() === "sí"; })[0];
     return match ? match.data : { casos: 0, pct: 0 };
   }
-  // Pictograma "relleno por porcentaje" (misma tecnica que main.js para las
+  // Pictograma "relleno por porcentaje" (misma tecnica que main_v2.js para las
   // pestanas hombres/mujeres): silueta en gris de fondo + copia recortada
   // (clip-path) en color de acento que sube desde los pies segun el pct.
   function buildPictogramSvg(rawSvg, colorVar, uid) {
@@ -123,7 +123,7 @@
       if (filaIdx === -1) return;
       var valores = matrix.valores[filaIdx];
       // Denominador = suma de los 3 grupos etarios conocidos (excluye "Sin
-      // informacion"), igual que data.edad en main.js -- asi el pct de cada
+      // informacion"), igual que data.edad en main_v2.js -- asi el pct de cada
       // pictograma refleja la distribucion por edad dentro del sexo.
       var totalSexo = ORDEN_EDAD.reduce(function (acc, key) {
         return acc + valores[matrix.columnas.indexOf(key)];

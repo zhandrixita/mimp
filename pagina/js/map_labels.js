@@ -1,6 +1,6 @@
 // Etiquetas de departamento (nombre + %) superpuestas al mapa, con linea
 // guia cuando 2 quedarian superpuestas -- mismo sistema que usan las
-// pestanas Hombres/Mujeres (ver _construirLayoutEtiquetas en main.js),
+// pestanas Hombres/Mujeres (ver _construirLayoutEtiquetas en main_v2.js),
 // factorizado aca para que las pestanas tematicas (alcohol, lgtbi,
 // extranjeras, gestantes) lo compartan en vez de duplicarlo 4 veces.
 (function () {

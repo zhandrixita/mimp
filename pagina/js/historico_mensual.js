@@ -99,7 +99,7 @@
   // El host (chartId) se recrea via innerHTML en cada cambio de pestana --
   // si ya existia una instancia de echarts para ese id (de la pestana
   // anterior), su nodo quedo huerfano y hay que liberarla antes de crear
-  // una nueva (mismo patron que ring-riesgo/ring-tv en main.js).
+  // una nueva (mismo patron que ring-riesgo/ring-tv en main_v2.js).
   window.renderHistoricoMensual = function (config) {
     var historico = config.historico;
     if (!historico || !historico.meses || !historico.meses.length) return;
