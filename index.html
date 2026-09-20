@@ -1,95 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-    <meta http-equiv="refresh" content="0; url=./pagina/index_v2.html">
-
-    <script>
-        window.location.replace("./pagina/index_v2.html");
-    </script>
-
-    <title>Dashboard MIMP</title>
-
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-        }
-
-        .contenedor {
-            width: 90%;
-            max-width: 600px;
-            padding: 40px;
-            text-align: center;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 30px;
-            color: #555;
-        }
-
-        .enlaces {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .boton {
-            min-width: 180px;
-            padding: 14px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            color: white;
-            background: #7b1e48;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .boton:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#133f43">
+  <title>Dashboards CEM · MIMP</title>
+  <style>
+    :root{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#193a40;background:#f2f6f6}*{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 85% 10%,#dcefe9 0,transparent 32%),#f2f6f6}
+    main{width:min(920px,100%)}header{text-align:center;margin-bottom:30px}.brand{display:inline-flex;align-items:center;gap:13px;margin-bottom:18px;font-size:13px;font-weight:700;letter-spacing:1.7px}.brand-mark{font-size:35px;letter-spacing:-4px;color:#133f43}.brand-mark span{color:#147d77}.brand-mark i{color:#b24c73;font-style:normal}
+    h1{margin:0;font-size:clamp(28px,4vw,42px);letter-spacing:-1.2px}header p{max-width:630px;margin:12px auto 0;color:#667d82;line-height:1.7}.dashboards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    article{display:flex;flex-direction:column;min-height:275px;padding:25px;background:#fff;border:1px solid #dce7e7;border-radius:14px;box-shadow:0 8px 28px #173f430b}.tag{align-self:flex-start;padding:5px 8px;border-radius:5px;background:#edf6f3;color:#147d77;font-size:10px;font-weight:700;letter-spacing:.5px}
+    h2{margin:18px 0 8px;font-size:21px}article p{margin:0;color:#6e8287;font-size:13px;line-height:1.7;flex:1}a{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding:13px 16px;border-radius:8px;background:#133f43;color:#fff;text-decoration:none;font-size:13px;font-weight:700;transition:transform .2s,background .2s}article:last-child a{background:#147d77}a:hover{transform:translateY(-2px);background:#0e6863}a:focus-visible{outline:3px solid #44b7ad;outline-offset:3px}
+    footer{text-align:center;margin-top:24px;color:#87989b;font-size:11px}@media(max-width:650px){body{padding:20px}.dashboards{grid-template-columns:1fr}article{min-height:235px}}@media(prefers-reduced-motion:reduce){a{transition:none}}
+  </style>
 </head>
-
 <body>
-
-    <main class="contenedor">
-
-        <h1>Dashboard MIMP</h1>
-
-        <p>Acceda al tablero de casos atendidos por los Centros Emergencia Mujer y Familia.</p>
-
-        <div class="enlaces">
-
-            <a
-                class="boton"
-                href="./pagina/index_v2.html"
-            >
-                Abrir dashboard
-            </a>
-
-        </div>
-
-    </main>
-
+  <main>
+    <header><div class="brand"><span class="brand-mark">c<span>e</span>m<i>.</i></span><span>OBSERVATORIO DE CASOS</span></div><h1>Dashboards CEM</h1><p>Selecciona la versión que deseas consultar sobre los casos atendidos por los Centros Emergencia Mujer y Familia.</p></header>
+    <section class="dashboards" aria-label="Versiones disponibles">
+      <article><span class="tag">VERSIÓN ORIGINAL</span><h2>Dashboard general</h2><p>Consulta la presentación inicial de los principales resultados e indicadores de atención.</p><a href="./pagina/index_v2.html">Abrir dashboard general <span aria-hidden="true">→</span></a></article>
+      <article><span class="tag">VERSIÓN AMPLIADA</span><h2>Observatorio interactivo</h2><p>Explora todos los rubros disponibles, filtros por población, mes y departamento, y descarga reportes en PDF.</p><a href="./pagina2/index.html">Abrir observatorio <span aria-hidden="true">→</span></a></article>
+    </section>
+    <footer>Registro de casos CEM · Información preliminar</footer>
+  </main>
 </body>
 </html>
