@@ -1,0 +1,509 @@
+{
+  "source": "BD_Registro_casos_agosto_2026_SDP.sav",
+  "totals": {
+    "total": 120168,
+    "mujeres": 99882,
+    "hombres": 20286,
+    "alcohol_drogas": 33381,
+    "lgtbi": 108,
+    "extranjeras": 2040,
+    "gestantes": 2878
+  },
+  "indicators": 390,
+  "source_variables": 577,
+  "excluded": 187,
+  "conditional_checks": [
+    {
+      "field": "FRECUENCIA_AGREDE",
+      "condition": "PRIMERA_VEZ_AGREDE = 0",
+      "registered": 88907,
+      "eligible": 88907,
+      "registered_outside_condition": 0,
+      "eligible_without_registration": 0
+    },
+    {
+      "field": "DENUNCIA_ANTERIORES_HECHOS",
+      "condition": "PRIMERA_VEZ_AGREDE = 0",
+      "registered": 88907,
+      "eligible": 88907,
+      "registered_outside_condition": 0,
+      "eligible_without_registration": 0
+    },
+    {
+      "field": "LUGAR_ESTUDIA",
+      "condition": "ESTUDIA = 1",
+      "registered": 43419,
+      "eligible": 43419,
+      "registered_outside_condition": 0,
+      "eligible_without_registration": 0
+    },
+    {
+      "field": "OCUPACION_VICTIMA",
+      "condition": "TRABAJA_VICTIMA = 1",
+      "registered": 42384,
+      "eligible": 42384,
+      "registered_outside_condition": 0,
+      "eligible_without_registration": 0
+    },
+    {
+      "field": "VICTIMA_TIEMPO_GESTACION",
+      "condition": "VICTIMA_GESTANDO = 1",
+      "registered": 2878,
+      "eligible": 2878,
+      "registered_outside_condition": 0,
+      "eligible_without_registration": 0
+    }
+  ],
+  "filter_checks": [
+    {
+      "population": "total",
+      "months": [
+        1,
+        6,
+        7
+      ],
+      "departments": [
+        13,
+        14,
+        16,
+        18
+      ],
+      "total": 14311,
+      "all_indicators_match": true
+    },
+    {
+      "population": "total",
+      "months": [
+        0,
+        1,
+        7
+      ],
+      "departments": [
+        1,
+        8,
+        9,
+        21
+      ],
+      "total": 5560,
+      "all_indicators_match": true
+    },
+    {
+      "population": "total",
+      "months": [
+        0,
+        2,
+        6
+      ],
+      "departments": [
+        0,
+        10,
+        17,
+        22
+      ],
+      "total": 3644,
+      "all_indicators_match": true
+    },
+    {
+      "population": "total",
+      "months": [
+        4,
+        5,
+        6
+      ],
+      "departments": [
+        6,
+        13,
+        16,
+        23
+      ],
+      "total": 3582,
+      "all_indicators_match": true
+    },
+    {
+      "population": "mujeres",
+      "months": [
+        0,
+        2,
+        5
+      ],
+      "departments": [
+        0,
+        4,
+        7,
+        20
+      ],
+      "total": 5307,
+      "all_indicators_match": true
+    },
+    {
+      "population": "mujeres",
+      "months": [
+        0,
+        2,
+        6
+      ],
+      "departments": [
+        5,
+        14,
+        15,
+        18
+      ],
+      "total": 12123,
+      "all_indicators_match": true
+    },
+    {
+      "population": "mujeres",
+      "months": [
+        2,
+        3,
+        4
+      ],
+      "departments": [
+        15,
+        17,
+        18,
+        24
+      ],
+      "total": 1973,
+      "all_indicators_match": true
+    },
+    {
+      "population": "mujeres",
+      "months": [
+        0,
+        1,
+        7
+      ],
+      "departments": [
+        8,
+        16,
+        18,
+        20
+      ],
+      "total": 2025,
+      "all_indicators_match": true
+    },
+    {
+      "population": "hombres",
+      "months": [
+        3,
+        5,
+        6
+      ],
+      "departments": [
+        2,
+        4,
+        19,
+        22
+      ],
+      "total": 768,
+      "all_indicators_match": true
+    },
+    {
+      "population": "hombres",
+      "months": [
+        0,
+        4,
+        5
+      ],
+      "departments": [
+        1,
+        5,
+        12,
+        16
+      ],
+      "total": 1026,
+      "all_indicators_match": true
+    },
+    {
+      "population": "hombres",
+      "months": [
+        4,
+        6,
+        7
+      ],
+      "departments": [
+        12,
+        17,
+        20,
+        23
+      ],
+      "total": 809,
+      "all_indicators_match": true
+    },
+    {
+      "population": "hombres",
+      "months": [
+        2,
+        5,
+        6
+      ],
+      "departments": [
+        6,
+        8,
+        16,
+        22
+      ],
+      "total": 637,
+      "all_indicators_match": true
+    },
+    {
+      "population": "alcohol_drogas",
+      "months": [
+        3,
+        5,
+        6
+      ],
+      "departments": [
+        0,
+        7,
+        17,
+        20
+      ],
+      "total": 1705,
+      "all_indicators_match": true
+    },
+    {
+      "population": "alcohol_drogas",
+      "months": [
+        0,
+        1,
+        3
+      ],
+      "departments": [
+        1,
+        6,
+        12,
+        18
+      ],
+      "total": 1483,
+      "all_indicators_match": true
+    },
+    {
+      "population": "alcohol_drogas",
+      "months": [
+        0,
+        3,
+        4
+      ],
+      "departments": [
+        2,
+        5,
+        7,
+        20
+      ],
+      "total": 1956,
+      "all_indicators_match": true
+    },
+    {
+      "population": "alcohol_drogas",
+      "months": [
+        2,
+        4,
+        7
+      ],
+      "departments": [
+        15,
+        18,
+        19,
+        23
+      ],
+      "total": 1320,
+      "all_indicators_match": true
+    },
+    {
+      "population": "lgtbi",
+      "months": [
+        1,
+        2,
+        3
+      ],
+      "departments": [
+        4,
+        5,
+        21,
+        22
+      ],
+      "total": 5,
+      "all_indicators_match": true
+    },
+    {
+      "population": "lgtbi",
+      "months": [
+        0,
+        4,
+        7
+      ],
+      "departments": [
+        0,
+        5,
+        7,
+        18
+      ],
+      "total": 0,
+      "all_indicators_match": true
+    },
+    {
+      "population": "lgtbi",
+      "months": [
+        0,
+        3,
+        4
+      ],
+      "departments": [
+        1,
+        3,
+        4,
+        14
+      ],
+      "total": 29,
+      "all_indicators_match": true
+    },
+    {
+      "population": "lgtbi",
+      "months": [
+        4,
+        5,
+        6
+      ],
+      "departments": [
+        9,
+        17,
+        19,
+        21
+      ],
+      "total": 7,
+      "all_indicators_match": true
+    },
+    {
+      "population": "extranjeras",
+      "months": [
+        4,
+        5,
+        6
+      ],
+      "departments": [
+        5,
+        8,
+        14,
+        17
+      ],
+      "total": 405,
+      "all_indicators_match": true
+    },
+    {
+      "population": "extranjeras",
+      "months": [
+        0,
+        2,
+        5
+      ],
+      "departments": [
+        0,
+        1,
+        10,
+        23
+      ],
+      "total": 114,
+      "all_indicators_match": true
+    },
+    {
+      "population": "extranjeras",
+      "months": [
+        1,
+        3,
+        7
+      ],
+      "departments": [
+        7,
+        8,
+        12,
+        24
+      ],
+      "total": 67,
+      "all_indicators_match": true
+    },
+    {
+      "population": "extranjeras",
+      "months": [
+        0,
+        3,
+        6
+      ],
+      "departments": [
+        4,
+        9,
+        16,
+        17
+      ],
+      "total": 18,
+      "all_indicators_match": true
+    },
+    {
+      "population": "gestantes",
+      "months": [
+        2,
+        4,
+        7
+      ],
+      "departments": [
+        9,
+        14,
+        17,
+        21
+      ],
+      "total": 340,
+      "all_indicators_match": true
+    },
+    {
+      "population": "gestantes",
+      "months": [
+        0,
+        4,
+        5
+      ],
+      "departments": [
+        5,
+        11,
+        16,
+        21
+      ],
+      "total": 163,
+      "all_indicators_match": true
+    },
+    {
+      "population": "gestantes",
+      "months": [
+        0,
+        4,
+        7
+      ],
+      "departments": [
+        0,
+        7,
+        10,
+        15
+      ],
+      "total": 157,
+      "all_indicators_match": true
+    },
+    {
+      "population": "gestantes",
+      "months": [
+        2,
+        3,
+        6
+      ],
+      "departments": [
+        0,
+        13,
+        15,
+        23
+      ],
+      "total": 118,
+      "all_indicators_match": true
+    }
+  ],
+  "no_record_rows_exported": true,
+  "payload_bytes": 8101958
+}

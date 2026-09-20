@@ -1,0 +1,578 @@
+﻿variable,label,decision,registered,missing,section
+CEM,Nombre del CEM,Indicador agregado,120168,0,ingreso
+N_FICHA_N,Número de ficha numérico,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_A,Número de ficha alfabético,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CONDICION,Condición del caso,Indicador agregado,120168,0,ingreso
+FECHA_INGRESO,Fecha de ingreso del caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TURNO_INGRESO,Turno del profesional que labora en el CEM,Indicador agregado,120168,0,ingreso
+HORA_INGRESO,Hora de ingreso del caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CEM_USUARIA,¿La persona está registrada como usuaria en algún CEM?,Indicador agregado,120168,0,ingreso
+NOMBRE_CEM_USUARIA,Nombre del CEM donde la persona usuaria se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_N_CEM_USUARIA,Número de ficha numérico del CEM donde la persona usuaria se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_A_CEM_USUARIA,Número de ficha alfabético del CEM donde la persona usuaria se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_CEM_USUARIA,Año de la ficha del CEM donde la persona usuaria se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CEM_AGRESOR,¿La persona está registrada como presunta agresora en algún CEM?,Indicador agregado,120168,0,agresor
+NOMBRE_CEM_AGRESOR,Nombre del CEM donde la presunta persona agresora se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_N_CEM_AGRESOR,Número de ficha numérico del CEM donde la presunta persona agresora se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_A_CEM_AGRESOR,Número de ficha alfabético del CEM donde la presunta persona agresora se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_CEM_AGRESOR,Año de la ficha del CEM donde la presunta persona agresora se encuentra registrada,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DPTO_OCURRENCIA,Código UBIGEO del departamento de ocurrencia del hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PROV_OCURRENCIA,Código UBIGEO de la provincia de ocurrencia del hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIST_OCURRENCIA,Código UBIGEO del distrito de ocurrencia del hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CCPP_OCURRENCIA,Código UBIGEO del centro poblado de ocurrencia del hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CEM_DERIVADO,¿El caso es derivado a otro CEM?,Indicador agregado,120168,0,ingreso
+NOMBRE_CEM_DERIVADO,Nombre del CEM a derivar el caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_N_CEM_DERIVADO,Número de ficha numérico del CEM receptor,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_A_CEM_DERIVADO,Número de ficha alfabético del CEM receptor,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_CEM_DERIVADO,Año de la ficha del CEM receptor,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ACUDE_SOLA,La persona usuaria en el momento de la apertura de la ficha ¿Acude sola al CEM?,Indicador agregado,120168,0,ingreso
+INFORMANTE,¿La persona informante es la misma persona usuaria?,Indicador agregado,120168,0,ingreso
+INFORMANTE_SEXO,Sexo de la persona informante,Indicador agregado,41145,79023,ingreso
+INFORMANTE_EDAD,Edad de la persona informante (En años cumplidos),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INFORMANTE_VINCULO,Vinculo relacional que tiene la persona informante con la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INFORMANTE_TIPO_VIA_DOMICILIO,Tipo de vía del domicilio de la persona informante,Indicador agregado,39194,80974,ingreso
+INFORMANTE_AREA_RESIDENCIA,Área de residencia de la persona informante,Indicador agregado,38631,81537,ingreso
+FORMA_INGRESO,Formas de Ingreso al Servicio,Indicador agregado,120168,0,ingreso
+INTERPUSO_DENUNCIA,"¿La persona usuaria ha interpuesto denuncia por el último hecho de violencia, antes de la intervención del CEM?",Indicador agregado,120168,0,justicia
+N_FICHA_NOTIFICACION,Número de ficha de notificación del caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_NOTIFICACION,Año de la ficha de notificación del caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_LINEA100,Número de ficha de Línea 100,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_LINEA100,Año de la ficha de Línea 100,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_CHAT100,Número de ficha del Chat 100,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_CHAT100,Año de la ficha del Chat 100,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+SEDE_SAU,Nombre de la sede del SAU,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_N_SAU,Número de ficha numérico de la sede del SAU,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_A_SAU,Número de ficha alfabético de la sede del SAU,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_SAU,Año de la ficha de la sede del SAU,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_CAI,Nombre del CAI,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_CAI,Número de ficha del CAI,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_CAI,Año de la ficha del CAI,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_SAR,Nombre del SAR,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_N_SAR,Número de ficha numérico de la SAR,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_A_SAR,Número de ficha alfabético de la SAR,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_SAR,Año de la ficha de la SAR,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_HRT,Nombre del HRT,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_HRT,Número de ficha del HRT,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_HRT,Año de la ficha del HRT,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_CEM_INGRESO,Nombre del CEM que derivó el caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_N_CEM_INGRESO,Número de ficha numérico del CEM que derivó el caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_A_CEM_INGRESO,Número de ficha alfabético del CEM que derivó el caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_CEM_INGRESO,Año de la ficha del CEM que derivó el caso,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+REGION_EIU_INGRESO,Equipo Itinerante de Urgencia (EIU),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_EIU_INGRESO,Número de ficha numérico del Equipo Itinerante de Urgencia (EIU),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MEDIO,Medio por el cual se toma conocimiento del servicio que brinda el CEM,Indicador agregado,120168,0,ingreso
+MEDIO_OTRO_CEM,Escribir el nombre del otro CEM,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ESP_OTRA_INSTITUCION,Especificar otra institución,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ESP_OTRO_MEDIO,Especificar otro medio,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+VICTIMA_PERUANA,¿La persona usuaria es peruano/a?,Indicador agregado,120168,0,poblaciones
+VICTIMA_CUENTA_DNI,¿La persona usuaria cuenta con DNI?,Indicador agregado,118128,2040,poblaciones
+VICTIMA_RECUERDA_N_DNI,¿La persona usuaria recuerda número de DNI?,Indicador agregado,117853,2315,poblaciones
+VICTIMA_EXTRANJERA,¿La persona usuaria es extranjero/a?,Indicador agregado,120168,0,poblaciones
+VICTIMA_PAIS_EXTRANJERO,Escribir el código del país de la nacionalidad extranjera de la persona usuaria,Indicador agregado,2239,117929,poblaciones
+VICTIMA_CARNE_EXTRANJERIA,¿La persona usuaria cuenta con carné de extranjería?,Indicador agregado,2230,117938,poblaciones
+VICTIMA_SOLICITANTE_REFUGIO,Situación migratoria de la persona usuaria: Solicitante de refugio,Indicador agregado,47,120121,poblaciones
+VICTIMA_REFUGIADO,Situación migratoria de la persona usuaria: Refugiado,Indicador agregado,32,120136,poblaciones
+VICTIMA_SOLICITANTE_ASILO,Situación migratoria de la persona usuaria: Solicitante de asilo,Indicador agregado,2,120166,poblaciones
+VICTIMA_ASILADO,Situación migratoria de la persona usuaria: Asilado,Indicador agregado,0,120168,poblaciones
+VICTIMA_APATRIDA,Situación migratoria de la persona usuaria: Apátrida,Indicador agregado,0,120168,poblaciones
+VICTIMA_OTRA_SIT_MIGR,Situación migratoria de la persona usuaria: Otra situación migratoria,Indicador agregado,62,120106,poblaciones
+VICTIMA_ESP_OTRA_SIT_MIGR,Situación migratoria de la persona usuaria: Especificar otra situación migratoria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+VICTIMA_NINGUNA_SIT_MIGR,Situación migratoria de la persona usuaria: Ninguna situación migratoria,Indicador agregado,521,119647,poblaciones
+EDAD_VICTIMA,Edad de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+SEXO_VICTIMA,Sexo de la persona usuaria,Indicador agregado,120168,0,perfil
+VICTIMA_GESTANDO,¿Está gestando la persona usuaria?,Indicador agregado,99882,20286,poblaciones
+VICTIMA_TIEMPO_GESTACION,Especificar tiempo de gestación,Indicador agregado,2878,117290,poblaciones
+HIJAS_VIVAS_0_17,Número de hijas de 0 a 17 años (Actualmente vivas),Indicador agregado,120168,0,perfil
+HIJOS_VIVOS_0_17,Número de hijos de 0 a 17 años (Actualmente vivos),Indicador agregado,120168,0,perfil
+HIJAS_VIVAS_18_MAS,Número de hijas de 18 a más años (Actualmente vivas),Indicador agregado,120168,0,perfil
+HIJOS_VIVOS_18_MAS,Número de hijos de 18 a más años (Actualmente vivos),Indicador agregado,120168,0,perfil
+DPTO_NACIMIENTO,Código UBIGEO del departamento de nacimiento de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PROV_NACIMIENTO,Código UBIGEO de la provincia de nacimiento de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIST_NACIMIENTO,Código UBIGEO del distrito de nacimiento de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FECHA_NACIMIENTO_VICTIMA,Fecha de nacimiento de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+LENGUA_MATERNA_VICTIMA,¿Cuál es el idioma o lengua materna con el que aprendió a hablar en su niñez?,Indicador agregado,117593,2575,territorio
+OTRA_LENGUA_NATIVA_VICTIMA,Escribir el código de otra lengua nativa u originaria,Indicador agregado,121,120047,territorio
+OTRA_LENGUA_EXTRANJERA_VICTIMA,Especificar otra lengua extranjera,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ETNIA_VICTIMA,"Por sus costumbres y sus antepasados, la persona usuaria se siente o considera",Indicador agregado,97816,22352,territorio
+PUEBLO_INDIGENA_AMAZONIA,Escribir el código del pueblo indígena de la amazonía,Indicador agregado,605,119563,territorio
+PUEBLO_INDIGENA_ANDES,Escribir el código del pueblo indígena de los Andes,Indicador agregado,2,120166,territorio
+ESP_OTRA_ETNIA_VICTIMA,Especificar otra etnia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_VIA_DOMICILIO,Tipo de vía del domicilio de la persona usuaria,Indicador agregado,120168,0,perfil
+DPTO_DOMICILIO,Código UBIGEO del departamento de lugar de residencia de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PROV_DOMICILIO,Código UBIGEO de la provincia de lugar de residencia de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIST_DOMICILIO,Código UBIGEO del distrito de lugar de residencia de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CENTRO_POBLADO_DOMICILIO,Código UBIGEO del centro poblado de lugar de residencia de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AREA_RESIDENCIA_DOMICILIO,Área de residencia del domicilio de la persona usuaria,Indicador agregado,120168,0,territorio
+ESTADO_CIVIL_VICTIMA,Estado civil de la persona usuaria,Indicador agregado,120168,0,perfil
+NIVEL_EDUCATIVO_VICTIMA,Nivel educativo de la persona usuaria,Indicador agregado,120168,0,perfil
+ESTUDIA,"¿Actualmente la persona usuaria estudia en una I.E./Colegio, Instituto Superior, Universidad u otro?",Indicador agregado,120168,0,perfil
+LUGAR_ESTUDIA,Situación académica de la persona usuaria: ¿En dónde estudia?,Indicador agregado,43419,76749,perfil
+DPTO_ESTUDIA,Situación académica de la persona usuaria: Código UBIGEO del departamento del lugar donde estudia la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PROV_ESTUDIA,Situación académica de la persona usuaria: Código UBIGEO de la provincia del lugar donde estudia la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIST_ESTUDIA,Situación académica de la persona usuaria: Código UBIGEO del distrito del lugar donde estudia la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_GESTION_ESTUDIA,Situación académica de la persona usuaria: Tipo de gestión del lugar donde estudia la persona usuaria,Indicador agregado,43419,76749,perfil
+TRABAJA_VICTIMA,¿La persona usuaria cuenta con un trabajo remunerado u ocupación para generar ingresos propios?,Indicador agregado,120168,0,perfil
+OCUPACION_VICTIMA,Ocupación de la persona usuaria,Indicador agregado,42384,77784,perfil
+ESP_OTRA_OCUPACION_VICTIMA,Especificar otra ocupación de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+SIS_SEGURO,Tipo de seguro médico de la persona usuaria: Seguro Integral de Salud (SIS),Indicador agregado,91971,28197,perfil
+ESSALUD_SEGURO,Tipo de seguro médico de la persona usuaria: ESSALUD,Indicador agregado,21351,98817,perfil
+PRIVADO_SEGURO,Tipo de seguro médico de la persona usuaria: Seguro privado,Indicador agregado,1651,118517,perfil
+PNP_SEGURO,Tipo de seguro médico de la persona usuaria: PNP/FFAA,Indicador agregado,1172,118996,perfil
+OTRO_SEGURO,Tipo de seguro médico de la persona usuaria: Otro seguro médico,Indicador agregado,250,119918,perfil
+ESP_OTRO_SEGURO,Tipo de seguro médico de la persona usuaria: Especificar otro seguro médico,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NINGUN_SEGURO,Tipo de seguro médico de la persona usuaria: Ningún seguro médico,Indicador agregado,3934,116234,perfil
+DISCAPACIDAD_VICTIMA,¿La persona usuaria presenta algún tipo de discapacidad?,Indicador agregado,120168,0,poblaciones
+VICTIMA_DISCAPACIDAD_FISICA,Tipo de discapacidad que presenta la persona usuaria: Física,Indicador agregado,1520,118648,poblaciones
+VICTIMA_DISCAPACIDAD_VISUAL,Tipo de discapacidad que presenta la persona usuaria: Visual,Indicador agregado,533,119635,poblaciones
+VICTIMA_DISCAPACIDAD_AUDITIVA,Tipo de discapacidad que presenta la persona usuaria: Auditiva,Indicador agregado,445,119723,poblaciones
+VICTIMA_DISCAPACIDAD_PSICOSOCIAL,Tipo de discapacidad que presenta la persona usuaria: Psicosocial,Indicador agregado,458,119710,poblaciones
+VICTIMA_DISCAPACIDAD_INTELECTUAL,Tipo de discapacidad que presenta la persona usuaria: Intelectual,Indicador agregado,1175,118993,poblaciones
+OTRO_DISCAPACIDAD,Tipo de discapacidad que presenta la persona usuaria: Otro tipo de discapacidad,Indicador agregado,543,119625,poblaciones
+ESP_OTRO_DISCAPACIDAD,Tipo de discapacidad que presenta la persona usuaria: Especificar otro tipo de discapacidad,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AGRESOR_PERUANO,¿La presunta persona agresora es peruano/a?,Indicador agregado,118744,1424,agresor
+AGRESOR_CUENTA_DNI,¿La presunta persona agresora cuenta con DNI?,Indicador agregado,116647,3521,agresor
+VICTIMA_RECUERDA_N_DNI_AGRESOR,¿La persona usuaria recuerda número de DNI de la presunta persona agresora?,Indicador agregado,111825,8343,agresor
+AGRESOR_EXTRANJERO,¿La presunta persona agresora es extranjero/a?,Indicador agregado,118349,1819,agresor
+AGRESOR_PAIS_EXTRANJERO,¿Escribir el código del país de la nacionalidad extranjera de la presunta persona agresora?,Indicador agregado,2090,118078,agresor
+AGRESOR_CARNE_EXTRANJERIA,¿La presunta persona agresora cuenta con carné de extranjería?,Indicador agregado,2090,118078,agresor
+AGRESOR_SOLICITANTE_REFUGIO,Situación migratoria de la presunta persona agresora: Solicitante de refugio,Indicador agregado,33,120135,agresor
+AGRESOR_REFUGIADO,Situación migratoria de la presunta persona agresora: Refugiado,Indicador agregado,40,120128,agresor
+AGRESOR_SOLICITANTE_ASILO,Situación migratoria de la presunta persona agresora: Solicitante de asilo,Indicador agregado,2,120166,agresor
+AGRESOR_ASILADO,Situación migratoria de la presunta persona agresora: Asilado,Indicador agregado,0,120168,agresor
+AGRESOR_APATRIDA,Situación migratoria de la presunta persona agresora: Apátrida,Indicador agregado,1,120167,agresor
+AGRESOR_OTRA_SIT_MIGR,Situación migratoria de la presunta persona agresora: Otra situación migratoria,Indicador agregado,48,120120,agresor
+AGRESOR_ESP_OTRA_SIT_MIGR,Situación migratoria de la presunta persona agresora: Especificar otra situación migratoria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AGRESOR_NINGUNA_SIT_MIGR,Situación migratoria de la presunta persona agresora: Ninguna situación migratoria,Indicador agregado,539,119629,agresor
+VINCULO_AGRESOR_VICTIMA,Vínculo que tiene la presunta persona agresora con la persona usuaria,Indicador agregado,120168,0,agresor
+VINCULO_PAREJA,Vínculo relacional de pareja,Indicador agregado,54573,65595,agresor
+OTRO_VINCULO_PAREJA,Especificar otra relación sexo-afectiva,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+VINCULO_FAMILIAR,Vínculo relacional familiar,Indicador agregado,51813,68355,agresor
+OTRO_VINCULO_FAMILIAR,Especificar otro familiar,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+SIN_VINCULO,Sin vínculo relacional de pareja ni familiar,Indicador agregado,13782,106386,agresor
+OTRO_SIN_VINCULO,Especificar otro,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AGRESOR_VIVE_CASA_VICTIMA,Actualmente la presunta persona agresora vive en la casa de la persona usuaria,Indicador agregado,120168,0,agresor
+AGRESOR_TIPO_VIA_DOMICILIO,Tipo de vía del domicilio de la presunta persona agresora,Indicador agregado,41791,78377,agresor
+AGRESOR_DPTO_DOMICILIO,Código UBIGEO del departamento de lugar de residencia de la presunta persona agresora,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AGRESOR_PROV_DOMICILIO,Código UBIGEO de la provincia de lugar de residencia de la presunta persona agresora,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AGRESOR_DIST_DOMICILIO,Código UBIGEO del distrito de lugar de residencia de la presunta persona agresora,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AGRESOR_CENTRO_POBLADO_DOMICILIO,Código UBIGEO del centro poblado de lugar de residencia de la presunta persona agresora,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AGRESOR_AREA_RESIDENCIA_DOMICILIO,Área de residencia del domicilio de la presunta persona agresora,Indicador agregado,44981,75187,agresor
+EDAD_AGRESOR,Edad de la presunta persona agresora,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+SEXO_AGRESOR,Sexo de la presunta persona agresora,Indicador agregado,120168,0,agresor
+NIVEL_EDUCATIVO_AGRESOR,Nivel educativo de la presunta persona agresora,Indicador agregado,110365,9803,agresor
+TRABAJA_AGRESOR,¿La presunta persona agresora cuenta con un trabajo remunerado u ocupación para generar ingresos propios?,Indicador agregado,111953,8215,agresor
+OCUPACION_AGRESOR,Ocupación de la presunta persona agresora,Indicador agregado,85085,35083,agresor
+ESP_OTRA_OCUPACION_AGRESOR,Especificar otra ocupación de la presunta persona agresora,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DISCAPACIDAD_AGRESOR,¿La presunta persona agresora presenta algún tipo de discapacidad?,Indicador agregado,116499,3669,agresor
+AGRESOR_DISCAPACIDAD_FISICA,Tipo de discapacidad que presenta la presunta persona agresora: Física,Indicador agregado,456,119712,agresor
+AGRESOR_DISCAPACIDAD_VISUAL,Tipo de discapacidad que presenta la presunta persona agresora: Visual,Indicador agregado,151,120017,agresor
+AGRESOR_DISCAPACIDAD_AUDITIVA,Tipo de discapacidad que presenta la presunta persona agresora: Auditiva,Indicador agregado,85,120083,agresor
+AGRESOR_DISCAPACIDAD_PSICOSOCIAL,Tipo de discapacidad que presenta la presunta persona agresora: Psicosocial,Indicador agregado,119,120049,agresor
+AGRESOR_DISCAPACIDAD_INTELECTUAL,Tipo de discapacidad que presenta la presunta persona agresora: Intelectual,Indicador agregado,161,120007,agresor
+AGRESOR_OTRO_DISCAPACIDAD,Tipo de discapacidad que presenta la presunta persona agresora: Otro tipo de discapacidad,Indicador agregado,107,120061,agresor
+AGRESOR_ESP_OTRO_DISCAPACIDAD,Tipo de discapacidad que presenta la presunta persona agresora: Especificar otro tipo de discapacidad,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DERIVA_SGT_SERVICIO_SECCION_B,Derivación del caso al/ a la siguiente profesional (para el registro en la Sección B),Indicador agregado,120168,0,atencion
+NOMBRE_REGISTRA_SECCION_A,Nombres y apellidos del/a profesional que llena la Sección A de la Ficha de Registro de Casos del CEM,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MOTIVO_CONSULTA,Motivo de consulta (relato del último hecho de violencia),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DEPENDE_VICTIMA_FEMINICIDIO,¿La persona usuaria ha dependido de una víctima de feminicidio?,Indicador agregado,120168,0,violencia
+CUENTA_FICHA_FEMINICIDIO,¿La víctima de feminicidio cuenta con una,Indicador agregado,32,120136,violencia
+NOMBRE_CEM_FICHA_FEMINICIDIO,Nombre del CEM donde se encuentra registrada la víctima de feminicidio,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_FICHA_FEMINICIDIO_CEM,Número de ficha de feminicidio con la que cuenta en el CEM,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FICHA_FEMINICIDIO_CEM,Año de la ficha de feminicidio con la que cuenta en el CEM,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+BRINDA_INFORMACION_OS_IG,¿La persona usuaria está de acuerdo en brindar información sobre su orientación sexual e identidad de género?,Indicador agregado,120158,10,poblaciones
+ORIENTACION_SEXUAL,La persona usuaria por su orientación sexual se siente o considera,Indicador agregado,13491,106677,poblaciones
+ESP_OTRO_ORIENTACION_SEXUAL,Especificar otro tipo de orientación sexual,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+IDENTIDAD_GENERO,La persona usuaria por su identidad de género se siente o considera,Indicador agregado,10787,109381,poblaciones
+ESP_OTRO_IDENTIDAD_GENERO,Especificar otro tipo de identidad de género,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INTERSEXUAL,La persona usuaria por sus características sexuales se siente o considera,Indicador agregado,9968,110200,poblaciones
+TIPO_VIOLENCIA,Tipo de violencia,Indicador agregado,120168,0,violencia
+PERTURBACION_POSESION,Perturbación de la posesión,Indicador agregado,610,119558,violencia
+MENOSCABO_TENENCIA_BIENES,Menoscabo de la tenencia o propiedad de sus bienes,Indicador agregado,341,119827,violencia
+PERDIDA_DERECHOS_PATRIMONIALES,"Pérdida de instrumento de trabajo, documentos personales, bienes y derechos patrimoniales",Indicador agregado,946,119222,violencia
+LIMITACION_RECURSOS_ECONOMICOS,Limitación de los recursos económicos destinados a satisfacer sus necesidades,Indicador agregado,1670,118498,violencia
+PRIVACION_MEDIOS_INDISPENSABLES,Privación de los medios indispensables para vivir una vida digna,Indicador agregado,708,119460,violencia
+INCUMPLIMIENTO_OBLIGACION_ALIMENTARIA,Evasión del cumplimiento de sus obligaciones alimentarias,Indicador agregado,1371,118797,violencia
+CONTROL_DE_INGRESOS,Limitación o control de sus ingresos,Indicador agregado,173,119995,violencia
+PERCEPCION_SALARIO_MENOR,Percepción de un salario menor por igual tarea dentro de un mismo lugar de trabajo,Indicador agregado,7,120161,violencia
+PROHIBIR_DES_LABORAL,"Prohibir, limitar o condicionar el desarrollo profesional o laboral",Indicador agregado,73,120095,violencia
+SUSTRAER_INGRESOS,Sustraer los ingresos,Indicador agregado,140,120028,violencia
+FRACCION_RECURSOS_NEC,Proveer en forma diminuta o fraccionada los recursos necesarios,Indicador agregado,260,119908,violencia
+OBLIGACION_ALIMENTOS,Condicionar el cumplimiento de la obligación de alimentos,Indicador agregado,125,120043,violencia
+DESTRUIR_INST_TRABAJO,"Dañar, sustraer, destruir bienes destinados al alquiler, venta o instrumentos de trabajo",Indicador agregado,242,119926,violencia
+DESTRUIR_BIEN_PERSONAL,"Dañar, sustraer, destruir los bienes personales",Indicador agregado,726,119442,violencia
+OTRA_VECON_PATRIM,Otro tipo de violencia económica o patrimonial,Indicador agregado,380,119788,violencia
+DETALLE_OTRA_VECON_PATRIM,Especificar Otra violencia económica o patrimonial,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+GRITOS_INSULTOS,Gritos e insultos,Indicador agregado,73177,46991,violencia
+VIOLENCIA_RACIAL,Violencia racial o insulto étnico-racial,Indicador agregado,361,119807,violencia
+INDIFERENCIA,Indiferencia,Indicador agregado,9037,111131,violencia
+DISCR_ORIENTACION_SEXUAL,Discriminación por orientación sexual,Indicador agregado,107,120061,violencia
+DISCR_GENERO,Discriminación por género,Indicador agregado,1462,118706,violencia
+DISCR_IDENTIDAD_GENERO,Discriminación por identidad de género,Indicador agregado,81,120087,violencia
+RECHAZO,Rechazo,Indicador agregado,8654,111514,violencia
+DESVALORIZACION_HUMILLACION,Desvalorización y humillación,Indicador agregado,41905,78263,violencia
+AMENAZA_QUITAR_HIJOS,Amenaza de quitar a los hijos/as,Indicador agregado,4109,116059,violencia
+OTRAS_AMENAZAS,Otras amenazas diversas,Indicador agregado,12563,107605,violencia
+PROHIBE_RECIBIR_VISITAS,Impide / prohíbe recibir visitas,Indicador agregado,887,119281,violencia
+PROHIBE_ESTUDIAR_TRABAJAR_SALIR,"Impide / prohíbe estudiar, trabajar o salir",Indicador agregado,1091,119077,violencia
+ROMPE_DESTRUYE_COSAS,Rompe o destruye cosas en la casa,Indicador agregado,2723,117445,violencia
+VIGILANCIA_CONTINUA_PERSECUCION,Vigilancia continua / persecución,Indicador agregado,4154,116014,violencia
+BOTAR_CASA,Botar de la casa,Indicador agregado,6709,113459,violencia
+AMENAZA_DE_MUERTE,Amenazas de daño o muerte de la víctima,Indicador agregado,8544,111624,violencia
+ABANDONO,Abandono,Indicador agregado,1547,118621,violencia
+OTRA_VPSI,Otro tipo de violencia psicológica,Indicador agregado,17263,102905,violencia
+DETALLE_OTRA_VPSI,Especificar otra violencia psicológica,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PUNTAPIES_PATADAS,Puntapiés o patadas,Indicador agregado,7082,113086,violencia
+PUNETAZOS,Puñetazos,Indicador agregado,14791,105377,violencia
+BOFETADAS,Bofetadas,Indicador agregado,9228,110940,violencia
+JALONES_CABELLO,Jalones de cabello,Indicador agregado,9324,110844,violencia
+MORDEDURA,Mordeduras,Indicador agregado,632,119536,violencia
+OTRAS_AGRESIONES,"Otras agresiones (arañazos, rodillazos, cabezazos, pisotones, etc.)",Indicador agregado,3678,116490,violencia
+EMPUJONES,"Empujones, tirar al suelo",Indicador agregado,15267,104901,violencia
+GOLPES_CON_PALOS,Golpes con palos,Indicador agregado,1676,118492,violencia
+LATIGAZO,"Latigazo, correazo, pegar con sogas",Indicador agregado,2288,117880,violencia
+AHORCAMIENTO,"Ahorcamiento, estrangulamiento o intento de asfixia",Indicador agregado,3648,116520,violencia
+HERIDAS_CON_ARMAS,Heridas con arma punzo cortante o arma de fuego,Indicador agregado,520,119648,violencia
+GOLPES_CON_OBJETOS_CONTUNDENTES,"Golpes con otros objetos contundentes (piedras, fierros, botellas, herramientas, etc.)",Indicador agregado,1708,118460,violencia
+NEGLIGENCIA,Negligencia,Indicador agregado,4521,115647,violencia
+QUEMADURA,Quemaduras,Indicador agregado,83,120085,violencia
+OTRA_VFIS,Otro tipo de violencia física,Indicador agregado,8524,111644,violencia
+DETALLE_OTRA_VFIS,Especificar otra violencia física,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+HOSTIGAMIENTO_SEXUAL,Hostigamiento sexual,Indicador agregado,288,119880,violencia
+ACOSO_SEX_ESP_PUB,Acoso sexual en espacios públicos,Indicador agregado,422,119746,violencia
+VIOLACION,Violación sexual,Indicador agregado,8761,111407,violencia
+TRATA_CON_FINES_EXPLOTACION_SEXUAL,Trata de personas con fines de explotación sexual,Indicador agregado,124,120044,violencia
+EXPLOTACION_SEXUAL,Explotación Sexual,Indicador agregado,27,120141,violencia
+PORNOGRAFIA,Pornografía,Indicador agregado,37,120131,violencia
+VIOLACION_SEXUAL_ENGANO,Violación sexual mediante engaño,Indicador agregado,121,120047,violencia
+EXHIBICION_OBSCENIDAD,Exhibiciones y publicaciones obscenas,Indicador agregado,201,119967,violencia
+PROP_NNA_MED_TEC,Proposiciones a NNA con fines sexuales por medios tecnológicos,Indicador agregado,148,120020,violencia
+ACOSO_SEXUAL,Acoso sexual,Indicador agregado,1443,118725,violencia
+CHANTAJE_SEXUAL,Chantaje sexual,Indicador agregado,326,119842,violencia
+DIF_IMAGEN_CONT_SEX,"Difusión de imágenes, materiales audiovisuales o audios con contenido sexual",Indicador agregado,548,119620,violencia
+TOCAMIENTO_SIN_CONSENTIMIENTO,"Tocamientos, actos de connotación sexual o actos libidinosos sin consentimiento",Indicador agregado,3603,116565,violencia
+TOCAMIENTO_AGRAVIO_MENORES,"Tocamientos, actos de connotación sexual o actos libidinosos en agravio de menores",Indicador agregado,5806,114362,violencia
+OTRA_VSEX,Otro tipo de violencia sexual,Indicador agregado,1144,119024,violencia
+DETALLE_OTRA_VSEX,Especificar otra violencia sexual,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MODALIDADES_VCM,Otras modalidades de violencia contra las mujeres,Indicador agregado,99860,20308,violencia
+LUGAR_OCURRENCIA,Lugar de ocurrencia del hecho de violencia,Indicador agregado,120168,0,violencia
+ESP_OTRO_LUGAR_OCURRENCIA,Especificar otro lugar del hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AMBITO_VIOLENCIA,Ámbito donde se produjo la violencia,Indicador agregado,120168,0,violencia
+TIPO_AMBITO_PUBLICO,Tipo de ámbito público,Indicador agregado,22817,97351,violencia
+ESP_OTRO_TIPO_AMBITO_PUBLICO,Especificar Otro tipo de ámbito público,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIA_OCURRENCIA_VIOLENCIA,Día de ocurrencia del último hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MES_OCURRENCIA_VIOLENCIA,Mes de ocurrencia del último hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_OCURRENCIA_VIOLENCIA,Año de ocurrencia del último hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PRIMERA_VEZ_AGREDE,¿Es la primera vez que la persona usuaria es agredida por la presunta persona agresora?,Indicador agregado,120168,0,violencia
+N_ANOS,Número de años de la agresión,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_MESES,Número de meses de la agresión,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_SEMANAS,Número de semanas de la agresión,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+N_DIAS,Número de días de la agresión,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FRECUENCIA_AGREDE,Frecuencia que es agredido/a la persona usuaria,Indicador agregado,88907,31261,violencia
+DENUNCIA_ANTERIORES_HECHOS,¿Efectuó denuncia de los anteriores hechos de violencia?,Indicador agregado,88907,31261,violencia
+DEPENDENCIA_DENUNCIA_ULTIMO_HECHO,Dependencia donde interpuso la última denuncia de los anteriores hechos de violencia,Indicador agregado,24589,95579,violencia
+ESTADO_AGRESOR_U_A,Estado de la presunta persona agresora en la última agresión,Indicador agregado,120168,0,agresor
+ESTADO_AGRESOR_G,Estado de la presunta persona agresora generalmente,Indicador agregado,88907,31261,agresor
+ESTADO_VICTIMA_U_A,Estado de la persona usuaria en la última agresión,Indicador agregado,120168,0,violencia
+ESTADO_VICTIMA_G,Estado de la persona usuaria generalmente,Indicador agregado,88907,31261,violencia
+TRATAMIENTO_PSICOLOGICO,Tratamiento recibidos a consecuencia de los hechos de violencia: Tratamiento psicológico,Indicador agregado,5466,114702,atencion
+TRATAMIENTO_PSIQUIATRICO,Tratamiento recibidos a consecuencia de los hechos de violencia: Tratamiento psiquiátrico,Indicador agregado,774,119394,atencion
+ATENCION_MEDICA,Tratamiento recibidos a consecuencia de los hechos de violencia: Atención médica,Indicador agregado,2718,117450,atencion
+OTRO_TRATAMIENTO,Tratamiento recibidos a consecuencia de los hechos de violencia: Otro tratamiento recibido,Indicador agregado,328,119840,atencion
+ESP_OTRO_TRATAMIENTO,Tratamiento recibidos a consecuencia de los hechos de violencia: Especificar otro tratamiento recibido,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NINGUN_TRATAMIENTO,Tratamiento recibidos a consecuencia de los hechos de violencia: No ha recibido ningún tratamiento,Indicador agregado,111534,8634,atencion
+CONTINUA_RECIBIENDO_TRATAMIENTO,¿Recibe actualmente algún tipo de tratamiento la persona usuaria?,Indicador agregado,120168,0,atencion
+ESP_TIPO_TRATAMIENTO,Especificar el tipo de tratamiento que recibe la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANTECEDENTE_DESAPARICION,"¿La persona usuaria presenta antecedentes de desaparición, cometida por la misma presunta persona agresora?",Indicador agregado,120168,0,violencia
+DIA_DESAPARICION,Día de la desaparición,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MES_DESAPARICION,Mes de la desaparición,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_DESAPARICION,Año de la desaparición,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DENUNCIA_DESAPARICION,¿Se realizó denuncia policial por la desaparición de la persona usuaria?,Indicador agregado,308,119860,violencia
+UNIDAD_DENUNCIA_DESAPARICION,¿En qué unidad de la PNP se interpuso la denuncia?,Indicador agregado,231,119937,violencia
+DIA_DENUNCIA_DESAPARICION,Día en que se interpuso la denuncia por la desaparición,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MES_DENUNCIA_DESAPARICION,Mes en que se interpuso la denuncia por la desaparición,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_DENUNCIA_DESAPARICION,Año en que se interpuso la denuncia por la desaparición,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DESAPARICION_ANOS,Tiempo que estuvo desaparecida en años,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DESAPARICION_MESES,Tiempo que estuvo desaparecida en meses,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DESAPARICION_SEMANAS,Tiempo que estuvo desaparecida en semanas,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DESAPARICION_DIAS,Tiempo que estuvo desaparecida en días,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FORMA_LIBERTAD_DESAPARICION,¿Cómo recuperó su libertad la persona usuaria?,Indicador agregado,307,119861,violencia
+ESP_FORMA_LIBERTAD_DESAPARICION,Especificar Otra forma como recuperó su libertad la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DESAPARICION_LIBERTAD_SEXUAL,¿Fue víctima de delito contra la Libertad Sexual?,Indicador agregado,308,119860,violencia
+DESAPARICION_TRATA_PERSONAS,¿Fue víctima de delito de Trata de Personas?,Indicador agregado,308,119860,violencia
+FACTOR_AGRESOR_VFIS_CAUSA_LESION,Factor de riesgo de la presunta persona agresora: Realiza actos de violencia física que puedan causar lesiones,Indicador agregado,33057,87111,riesgo
+FACTOR_AGRESOR_VFIS_PRESENCIA_HIJOS_FAMILIARES,Factor de riesgo de la presunta persona agresora: Realiza actos de violencia física en presencia de hijos/as o familiares,Indicador agregado,19807,100361,riesgo
+FACTOR_AGRESOR_AMENAZA_CON_OBJETO_PELIGROSO,Factor de riesgo de la presunta persona agresora: Amenaza con objetos peligrosos o con armas de cualquier tipo,Indicador agregado,3526,116642,riesgo
+FACTOR_AGRESOR_ACCESO_ARMA_DE_FUEGO,Factor de riesgo de la presunta persona agresora: Posee o tiene acceso a armas de fuego,Indicador agregado,3374,116794,riesgo
+FACTOR_AGRESOR_AMENAZA_DE_MUERTE,Factor de riesgo de la presunta persona agresora: Ha realizado amenazas graves o de muerte,Indicador agregado,10265,109903,riesgo
+FACTOR_AGRESOR_TIENE_ACCESO_A_VICTIMA,Factor de riesgo de la presunta persona agresora: Tiene acceso a la persona usuaria,Indicador agregado,79752,40416,riesgo
+FACTOR_AGRESOR_AUMENTA_EPISODIO_VIOLENTO,Factor de riesgo de la presunta persona agresora: Aumenta frecuencia y gravedad de episodios violentos,Indicador agregado,13669,106499,riesgo
+FACTOR_AGRESOR_INTENCION_DE_CAUSAR_LESION,Factor de riesgo de la presunta persona agresora: Intención de causar lesiones graves o muy graves,Indicador agregado,6696,113472,riesgo
+FACTOR_AGRESOR_TENTATIVA_DE_FEMINICIDIO,Factor de riesgo de la presunta persona agresora: Ha perpetrado tentativa de feminicidio,Indicador agregado,348,119820,riesgo
+FACTOR_AGRESOR_AGRESION_SEXUAL_DE_PAREJA,Factor de riesgo de la presunta persona agresora: Ha perpetrado agresiones sexuales en la relación de pareja,Indicador agregado,1473,118695,riesgo
+FACTOR_AGRESOR_VIOLENTA_HIJOS_FAMILIARES,Factor de riesgo de la presunta persona agresora: Violenta a hijos/as u otro familiar,Indicador agregado,14055,106113,riesgo
+FACTOR_AGRESOR_INCUMPLE_MEDIDA_PROTECCION,Factor de riesgo de la presunta persona agresora: Incumple medidas de protección,Indicador agregado,9126,111042,riesgo
+FACTOR_AGRESOR_CELOS_PATOLOGICOS,Factor de riesgo de la presunta persona agresora: Tiene conducta vigilante y/o celos patológicos,Indicador agregado,20689,99479,riesgo
+FACTOR_AGRESOR_HISTORIAL_VIOLENCIA_PAREJA,Factor de riesgo de la presunta persona agresora: Tiene historial de conductas violentas con la pareja anterior,Indicador agregado,3314,116854,riesgo
+FACTOR_AGRESOR_HISTORIAL_VIOLENCIA_OTRA_PERSONA,Factor de riesgo de la presunta persona agresora: Tiene historial de conductas violentas con otras personas,Indicador agregado,11538,108630,riesgo
+FACTOR_AGRESOR_CONSUMO_ALCOHOL,Factor de riesgo de la presunta persona agresora: Abuso en el consumo de alcohol,Indicador agregado,21331,98837,riesgo
+FACTOR_AGRESOR_CONSUME_DROGA,Factor de riesgo de la presunta persona agresora: Consume drogas,Indicador agregado,6181,113987,riesgo
+FACTOR_AGRESOR_ENFERMEDAD_MENTAL,Factor de riesgo de la presunta persona agresora: Tiene antecedentes de enfermedad mental,Indicador agregado,614,119554,riesgo
+FACTOR_AGRESOR_CONDUCTAS_DE_CRUELDAD,"Factor de riesgo de la presunta persona agresora: Presenta conductas de crueldad, desprecio a la víctima y falta de arrepentimiento",Indicador agregado,17695,102473,riesgo
+FACTOR_AGRESOR_NEGATIVA_A_SEPARACION,Factor de riesgo de la presunta persona agresora: Negativa rotunda a la separación,Indicador agregado,10284,109884,riesgo
+FACTOR_AGRESOR_ANTECEDENTE_LEGAL,Factor de riesgo de la presunta persona agresora: Tiene antecedente policial / judicial / penal,Indicador agregado,14462,105706,riesgo
+FACTOR_AGRESOR_NEGLIGENTE,Factor de riesgo de la presunta persona agresora: Es madre / padre negligente,Indicador agregado,16975,103193,riesgo
+FACTOR_AGRESOR_LIMITACION_FISICA,"Factor de riesgo de la presunta persona agresora: Presenta limitación física, intelectual o emocional, como persona cuidadora",Indicador agregado,148,120020,riesgo
+FACTOR_AGRESOR_AMENAZA_DANAR,Factor de riesgo de la presunta persona agresora: Amenaza con dañar a los/as hijos/as o a alguien más,Indicador agregado,1009,119159,riesgo
+FACTOR_AGRESOR_SIN_RED_DE_APOYO,Factor de riesgo de la presunta persona agresora: Madre / padre adolescente que no cuenta con redes de apoyo idóneas,Indicador agregado,32,120136,riesgo
+FACTOR_AGRESOR_HISTORIAL_DE_MALTRATO,Factor de riesgo de la presunta persona agresora: Tiene historia personal de maltrato / abandono,Indicador agregado,506,119662,riesgo
+FACTOR_AGRESOR_RESPUESTA_NEGATIVA,Factor de riesgo de la presunta persona agresora: Presenta respuesta negativa como persona cuidadora,Indicador agregado,717,119451,riesgo
+FACTOR_AGRESOR_OTRO,Factor de riesgo de la presunta persona agresora: Otro factor de riesgo de la presunta persona agresora,Indicador agregado,26227,93941,riesgo
+ESP_FACTOR_AGRESOR_OTRO,Factor de riesgo de la presunta persona agresora: Especificar otro factor,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FACTOR_VICTIMA_CARENCIA_RED_FAMILIAR,Factor de riesgo de la persona usuaria: Carencia de red familiar y social,Indicador agregado,7265,112903,riesgo
+FACTOR_VICTIMA_DEPENDE_ECONOMICAMENTE_AGRESOR,Factor de riesgo de la persona usuaria: Depende económicamente de la presunta persona agresora,Indicador agregado,24945,95223,riesgo
+FACTOR_VICTIMA_JUSTIFICA_AGRESIONES,Factor de riesgo de la persona usuaria: Justifica o resta importancia a las agresiones sufridas,Indicador agregado,12633,107535,riesgo
+FACTOR_VICTIMA_INTENTA_RETIRAR_DENUNCIA,Factor de riesgo de la persona usuaria: Ha presentado intento de retirar denuncia,Indicador agregado,7930,112238,riesgo
+FACTOR_VICTIMA_INICIA_NUEVA_RELACION,Factor de riesgo de la persona usuaria: Ha iniciado una nueva relación de pareja,Indicador agregado,1387,118781,riesgo
+FACTOR_VICTIMA_AISLAMIENTO,Factor de riesgo de la persona usuaria: Presenta aislamiento,Indicador agregado,4331,115837,riesgo
+FACTOR_VICTIMA_VULNERABILIDAD,Factor de riesgo de la persona usuaria: Presenta vulnerabilidad,Indicador agregado,60435,59733,riesgo
+FACTOR_VICTIMA_DISCAPACIDAD,Factor de riesgo de la persona usuaria: Es una persona con discapacidad,Indicador agregado,1730,118438,riesgo
+FACTOR_VICTIMA_DEPENDE_EMOCIONALMENTE_AGRESOR,Factor de riesgo de la persona usuaria: Depende emocionalmente de la presunta persona agresora,Indicador agregado,24538,95630,riesgo
+FACTOR_VICTIMA_PERCIBE_PELIGRO_DE_MUERTE,Factor de riesgo de la persona usuaria: Tiene la percepción de peligro de muerte,Indicador agregado,6049,114119,riesgo
+FACTOR_VICTIMA_ABUSO_CONSUMO_ALCOHOL,Factor de riesgo de la persona usuaria: Abuso en el consumo de alcohol,Indicador agregado,386,119782,riesgo
+FACTOR_VICTIMA_CONSUME_DROGAS,Factor de riesgo de la persona usuaria: Consume drogas,Indicador agregado,174,119994,riesgo
+FACTOR_VICTIMA_HISTORIAL_VIOLENCIA_OTRA_PAREJA,Factor de riesgo de la persona usuaria: Tiene historia de conductas violentas con su pareja anterior,Indicador agregado,951,119217,riesgo
+FACTOR_VICTIMA_AMENAZA_DANAR_HIJOS,Factor de riesgo de la persona usuaria: Amenaza con dañar a los/as hijos/as o a alguien más,Indicador agregado,118,120050,riesgo
+FACTOR_VICTIMA_INDEFENSION,Factor de riesgo de la persona usuaria: Presenta síndrome de indefensión,Indicador agregado,13149,107019,riesgo
+FACTOR_VICTIMA_TENTATIVA_DE_FEMINICIDIO,"Factor de riesgo de la persona usuaria: Ha presentado lesiones graves, tentativa de feminicidio o parricidio",Indicador agregado,150,120018,riesgo
+FACTOR_VICTIMA_PROBLEMA_COMPORTAMENTAL,"Factor de riesgo de la persona usuaria: Tiene problemas comportamentales si es niña, niño o adolescente",Indicador agregado,4414,115754,riesgo
+FACTOR_VICTIMA_INTENTO_DE_SUICIDIO,"Factor de riesgo de la persona usuaria: Presenta fantasías, ideas, intento o amenaza de suicidio",Indicador agregado,1544,118624,riesgo
+FACTOR_VICTIMA_INSEGURIDAD_EN_VIVIENDA,Factor de riesgo de la persona usuaria: Se evidencia inseguridad en la vivienda en la que habita la persona usuaria,Indicador agregado,27912,92256,riesgo
+FACTOR_VICTIMA_AUSENCIA_DE_CUIDADOR,Factor de riesgo de la persona usuaria: Ausencia de las personas cuidadoras en la vivienda,Indicador agregado,1244,118924,riesgo
+FACTOR_VICTIMA_OTRO,Factor de riesgo de la persona usuaria: Otro factor de riesgo de la persona usuaria,Indicador agregado,26726,93442,riesgo
+ESP_FACTOR_VICTIMA_OTRO,Factor de riesgo de la persona usuaria: Especificar otro factor,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+VULNERABILIDAD_VICTIMA_LGBTI,Forma de vulneración de la persona usuaria: Vulneración por orientación sexual e identidad de género (Población LGBTI),Indicador agregado,66,120102,riesgo
+VULNERABILIDAD_VICTIMA_VIH,Forma de vulneración de la persona usuaria: Es una persona infectada con el Virus de la Inmunodeficiencia Humana (VIH),Indicador agregado,55,120113,riesgo
+VULNERABILIDAD_VICTIMA_EMBARAZO_VIOLACION,Forma de vulneración de la persona usuaria: Mujer en estado de gestación producto de la violación sexual,Indicador agregado,151,120017,riesgo
+VULNERABILIDAD_VICTIMA_INDIGENA,"Forma de vulneración de la persona usuaria: Pertenencia a comunidades campesinas,nativas y pueblos indígenas u originarios o población afroperuana",Indicador agregado,22,120146,riesgo
+VULNERABILIDAD_VICTIMA_MIGRANTE,Forma de vulneración de la persona usuaria: Persona migrante o refugiada,Indicador agregado,138,120030,riesgo
+VULNERABILIDAD_VICTIMA_ENF_CRONICA,Forma de vulneración de la persona usuaria: Enfermedades crónicas,Indicador agregado,572,119596,riesgo
+VULNERABILIDAD_VICTIMA_OTRO,Forma de vulneración de la persona usuaria: Otra forma de vulneración,Indicador agregado,59649,60519,riesgo
+VINCULO_AFECTIVO_FAMILIA,Vínculos afectivos positivos de la persona usuaria: La familia,Indicador agregado,111389,8779,riesgo
+VINCULO_AFECTIVO_AMIGOS,Vínculos afectivos positivos de la persona usuaria: Los/as amigos/as,Indicador agregado,6839,113329,riesgo
+VINCULO_AFECTIVO_VECINOS,Vínculos afectivos positivos de la persona usuaria: Los/as vecinos/as,Indicador agregado,2994,117174,riesgo
+VINCULO_AFECTIVO_ASOCIACIONES,Vínculos afectivos positivos de la persona usuaria: Las asociaciones a las que pertenece,Indicador agregado,257,119911,riesgo
+VINCULO_AFECTIVO_ORGANIZACIONES_CIVICAS,Vínculos afectivos positivos de la persona usuaria: Las organizaciones cívicas,Indicador agregado,705,119463,riesgo
+VINCULO_AFECTIVO_COMPANEROS_TRABAJO,Vínculos afectivos positivos de la persona usuaria: Los/as compañeros/as de trabajo,Indicador agregado,315,119853,riesgo
+VINCULO_AFECTIVO_OTRO,Vínculos afectivos positivos de la persona usuaria: Otro vínculo afectivo positivo,Indicador agregado,1706,118462,riesgo
+ESP_VINCULO_AFECTIVO_OTRO,Vínculos afectivos positivos de la persona usuaria: Especificar otro vínculo afectivo,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+VINCULO_AFECTIVO_NINGUNO,Vínculos afectivos positivos de la persona usuaria: Ningún vínculo afectivo positivo,Indicador agregado,3303,116865,riesgo
+COMP_DESTR_PROT,¿La persona usuaria cuenta con competencias y destrezas de protección?,Indicador agregado,120168,0,riesgo
+DETALLE_COMP_DESTR_PROT,"Indicar la principal capacidad y destreza que tiene la persona usuaria para reconocer el riesgo, manejarlo, evitarlo, manejar el conflicto y la tensión","No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+RECURSOS_INST,¿La persona usuaria cuenta con recursos institucionales?,Indicador agregado,120168,0,riesgo
+DETALLE_RECURSOS_INST,Indicar la principal herramienta externa de tipo institucional que protege o ayuda a la persona usuaria a satisfacer sus necesidades materiales o no materiales,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PROBABILIDAD_VIOLENCIA,Probabilidad de ocurrencia de la violencia en la persona usuaria,Indicador agregado,120168,0,riesgo
+IMPACTO_VIOLENCIA,Impacto del hecho de violencia en la persona usuaria,Indicador agregado,120168,0,riesgo
+TIEMPO_VIOLENCIA,Tiempo de ocurrencia del hecho de violencia en la persona usuaria,Indicador agregado,120168,0,riesgo
+NIVEL_DE_RIESGO_VICTIMA,Valoración del nivel de riesgo que presenta la persona usuaria,Indicador agregado,120168,0,riesgo
+DONDE_INTERPUSO_DENUNCIA,¿Dónde interpuso la denuncia la persona usuaria?,Indicador agregado,105410,14758,justicia
+NOMBRE_DEPENDENCIA_DENUNCIA,Nombre de la dependencia donde se interpuso la denuncia la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIA_DENUNCIA,Día en que se interpuso la denuncia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MES_DENUNCIA,Mes en que se interpuso la denuncia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_DENUNCIA,Año en que se interpuso la denuncia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DESEA_DENUNCIAR,¿Desea formular denuncia la persona usuaria?,Indicador agregado,14755,105413,justicia
+MOTIVO_NO_DESEA_DENUNCIAR,Motivo por lo que la persona usuaria no desea formular denuncia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CUENTA_MEDIDAS_PROTECCION,"¿La persona usuaria cuenta con las medidas de protección por el último hecho de violencia, antes de la intervención del CEM?",Indicador agregado,105414,14754,justicia
+CUENTA_MEDIDAS_CAUTELARES,"¿La persona usuaria cuenta con las medidas cautelares por el último hecho de violencia, antes de la intervención del CEM?",Indicador agregado,105409,14759,justicia
+DOCUMENTO_MEDICO_LEGAL,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Reconocimiento médico legal",Indicador agregado,18613,101555,justicia
+DOCUMENTO_INF_PSI,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Informe psicológico",Indicador agregado,3323,116845,justicia
+DOCUMENTO_RETIRO_HOGAR,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Constancia de retiro del hogar",Indicador agregado,96,120072,justicia
+DOCUMENTO_GARANTIAS,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Garantías",Indicador agregado,503,119665,justicia
+DOCUMENTO_PERICIA_PSI,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Pericia Psicológica/Cámara Gessel",Indicador agregado,4850,115318,justicia
+DOCUMENTO_INF_SOC,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Informe social",Indicador agregado,2518,117650,justicia
+DOCUMENTO_INSP_POLICIAL,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Inspección policial",Indicador agregado,886,119282,justicia
+DOCUMENTO_OTRO,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Otro documento",Indicador agregado,43049,77119,justicia
+ESP_DOCUMENTO_OTRO,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Especificar otro documento","No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DOCUMENTO_NINGUNO,"Documentos que la persona usuaria cuenta, antes de la intervención del CEM: Ningún documento",Indicador agregado,57244,62924,justicia
+SITUACION_AGRESOR,Situación de la presunta persona agresora luego de ocurrido el hecho de violencia,Indicador agregado,120168,0,agresor
+OTRA_SITUACION_AGRESOR,Especificar otra situación de la presunta persona agresora luego de ocurrido el hecho de violencia,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DESEA_PATROCINIO_LEGAL,¿La persona usuaria está interesada en recibir patrocinio legal del CEM por el último hecho de violencia?,Indicador agregado,120168,0,justicia
+MOTIVO_NO_PATROCINIO_LEGAL,Motivos por lo el cual la persona usuaria no está interesado/a en recibir patrocinio legal del CEM,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+APRECIACION_PROF_PSICOLOGIA,Apreciación profesional del servicio de psicología y acciones inmediatas (solo si se cuenta con el servicio de psicología),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DERIVA_SERV_ACOMPANAMIENTO,Derivación del caso al servicio de “Acompañamiento a víctimas de violencia,Indicador agregado,120168,0,atencion
+DERIVA_SGT_SERVICIO_SECCION_C,Derivación del caso al/ a la siguiente profesional (para registro de la Sección C),Indicador agregado,120168,0,atencion
+REDES_FAM_SOC,¿Cuenta con redes familiares o sociales?,Indicador agregado,120168,0,riesgo
+PARENTESCO_RED_1,Red familiar o social idónea 1: Parentesco / Tipo de institución,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_SOPORTE_RED_1,Red familiar o social idónea 1: Tipo de soporte,Indicador agregado,111519,8649,riesgo
+PARENTESCO_RED_2,Red familiar o social idónea 2: Parentesco / Tipo de institución,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_SOPORTE_RED_2,Red familiar o social idónea 2: Tipo de soporte,Indicador agregado,70713,49455,riesgo
+PARENTESCO_RED_3,Red familiar o social idónea 3: Parentesco / Tipo de institución,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_SOPORTE_RED_3,Red familiar o social idónea 3: Tipo de soporte,Indicador agregado,38086,82082,riesgo
+PARENTESCO_RED_4,Red familiar o social idónea 4: Parentesco / Tipo de institución,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_SOPORTE_RED_4,Red familiar o social idónea 4: Tipo de soporte,Indicador agregado,24454,95714,riesgo
+PARENTESCO_RED_5,Red familiar o social idónea 5: Parentesco / Tipo de institución,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_SOPORTE_RED_5,Red familiar o social idónea 5: Tipo de soporte,Indicador agregado,10693,109475,riesgo
+INSERCION_REDES,La persona usuaria ¿requiere ser insertada en redes familiares o sociales?,Indicador agregado,120168,0,riesgo
+INSERCION_RED_FAM_SOC,La persona usuaria acepta ser insertada en redes familiares o sociales,Indicador agregado,11636,108532,riesgo
+INSERCION_RED_FAMILIA_AMISTAD,La persona usuaria será insertada con familiares / amistades,Indicador agregado,4480,115688,riesgo
+PARENTESCO_RED_FAMILIA_AMISTAD_1,La persona usuaria será insertada con familiares / amistades 1: Parentesco / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+EDAD_RED_FAMILIA_AMISTAD_1,La persona usuaria será insertada con familiares / amistades 1: Edad del familiar / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PARENTESCO_RED_FAMILIA_AMISTAD_2,La persona usuaria será insertada con familiares / amistades 2: Parentesco / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+EDAD_RED_FAMILIA_AMISTAD_2,La persona usuaria será insertada con familiares / amistades 2: Edad del familiar / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PARENTESCO_RED_FAMILIA_AMISTAD_3,La persona usuaria será insertada con familiares / amistades 3: Parentesco / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+EDAD_RED_FAMILIA_AMISTAD_3,La persona usuaria será insertada con familiares / amistades 3: Edad del familiar / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PARENTESCO_RED_FAMILIA_AMISTAD_4,La persona usuaria será insertada con familiares / amistades 4: Parentesco / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+EDAD_RED_FAMILIA_AMISTAD_4,La persona usuaria será insertada con familiares / amistades 4: Edad del familiar / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PARENTESCO_RED_FAMILIA_AMISTAD_5,La persona usuaria será insertada con familiares / amistades 5: Parentesco / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+EDAD_RED_FAMILIA_AMISTAD_5,La persona usuaria será insertada con familiares / amistades 5: Edad del familiar / amigo/a,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INSERCION_RED_HRT,La persona usuaria será insertada en un Hogar de Refugio Temporal (HRT),Indicador agregado,4479,115689,riesgo
+NOMBRE_HRT_1,La persona usuaria será insertada en un HRT 1: Nombre del HRT,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_HRT_2,La persona usuaria será insertada en un HRT 2: Nombre del HRT,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_HRT_3,La persona usuaria será insertada en un HRT 3: Nombre del HRT,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_HRT_4,La persona usuaria será insertada en un HRT 4: Nombre del HRT,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MOTIVO_NO_INSERCION_RED,Indicar los motivos que tiene la persona usuaria para no aceptar ser insertada en redes familiares o sociales:,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+IMPL_PLAN_REINTEGRACION,Implementación del Plan de Reintegración,Indicador agregado,120168,0,riesgo
+REALIZA_VISITA_DOM,¿Se realiza visita domiciliaria?,Indicador agregado,77716,42452,riesgo
+MOTIVO_NO_VISITA_DOM,Motivo por el cual no realiza la visita domiciliaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+RESULTADO_VISITA_DOM,Resultado de la visita domiciliaria: Estimación del riesgo,Indicador agregado,38003,82165,riesgo
+ACCIONES_VISITA_INCIDENTE,Acciones a realizar,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+APRECIACION_PROF_SOCIAL,Apreciación profesional del servicio de social y acciones inmediatas (solo si se cuenta con el servicio de social),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INSTANCIA_POLICIAL,"Instancia en la que se encuentra el proceso de investigación, antes de la intervención del CEM: Dependencia Policial",Indicador agregado,76185,43983,justicia
+NOMBRE_INSTANCIA_POLICIAL,Nombre de la dependencia policial en la que se encuentra el proceso de investigación,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FECHA_INSTANCIA_POLICIAL,Fecha que inicia el proceso de investigación en la dependencia policial,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INSTANCIA_FISCAL,"Instancia en la que se encuentra el proceso de investigación, antes de la intervención del CEM: Dependencia Fiscal",Indicador agregado,9705,110463,justicia
+NOMBRE_INSTANCIA_FISCAL,Nombre de la dependencia fiscal en la que se encuentra el proceso de investigación,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FECHA_INSTANCIA_FISCAL,Fecha que inicia el proceso de investigación en la dependencia fiscal,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INSTANCIA_JUZGADO_PAZ_LETRADO,"Instancia en la que se encuentra el proceso de investigación, antes de la intervención del CEM: Juzgado de Paz Letrado",Indicador agregado,1170,118998,justicia
+NOMBRE_INSTANCIA_JUZGADO_PAZ_LETRADO,Nombre del Juzgado de Paz Letrado en la que se encuentra el proceso de investigación,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FECHA_INSTANCIA_JUZGADO_PAZ_LETRADO,Fecha que inicia el proceso de investigación en el Juzgado de Paz Letrado,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INSTANCIA_JUZGADO_ESPECIALIZADO,"Instancia en la que se encuentra el proceso de investigación, antes de la intervención del CEM: Juzgado Especializado",Indicador agregado,11387,108781,justicia
+NOMBRE_INSTANCIA_JUZGADO_ESPECIALIZADO,Nombre del Juzgado Especializado en la que se encuentra el proceso de investigación,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FECHA_INSTANCIA_JUZGADO_ESPECIALIZADO,Fecha que inicia el proceso de investigación en el Juzgado Especializado,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INSTANCIA_SALA_SUPERIOR,"Instancia en la que se encuentra el proceso de investigación, antes de la intervención del CEM: Sala Superior",Indicador agregado,25,120143,justicia
+NOMBRE_INSTANCIA_SALA_SUPERIOR,Nombre de la Sala Superior en la que se encuentra el proceso de investigación,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FECHA_INSTANCIA_SALA_SUPERIOR,Fecha que inicia el proceso de investigación en la Sala Superior,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INSTANCIA_SALA_SUPREMA,"Instancia en la que se encuentra el proceso de investigación, antes de la intervención del CEM: Sala Suprema",Indicador agregado,1,120167,justicia
+NOMBRE_INSTANCIA_SALA_SUPREMA,Nombre de la Sala Suprema en la que se encuentra el proceso de investigación,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+FECHA_INSTANCIA_SALA_SUPREMA,Fecha que inicia el proceso de investigación en la Sala Suprema,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MEDIDA_SALIDA_CIUDAD,"Medidas que optó la persona usuaria para su protección, antes de apersonarse al CEM: Se fue a vivir a otra ciudad",Indicador agregado,1156,119012,justicia
+MEDIDA_SEPARACION,"Medidas que optó la persona usuaria para su protección, antes de apersonarse al CEM: Se separó de la presunta persona agresora",Indicador agregado,10541,109627,justicia
+MEDIDA_CASA_REFUGIO,"Medidas que optó la persona usuaria para su protección, antes de apersonarse al CEM: Se fue a una casa refugio",Indicador agregado,293,119875,justicia
+MEDIDA_NINGUNA,"Medidas que optó la persona usuaria para su protección, antes de apersonarse al CEM: No optó por ninguna medida",Indicador agregado,44635,75533,justicia
+MEDIDA_OTRA,"Medidas que optó la persona usuaria para su protección, antes de apersonarse al CEM: Otra medida que optó la persona usuaria",Indicador agregado,59037,61131,justicia
+ESP_MEDIDA_OTRA,"Medidas que optó la persona usuaria para su protección, antes de apersonarse al CEM: Especificar otra medida","No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CASO_TENTATIVA_DE_FEMINICIDIO,¿El último hecho de violencia se califica como un caso de tentativa de feminicidio?,Indicador agregado,114604,5564,violencia
+MOVIL_TENTATIVA_DE_FEMINICIDIO,Presuntos móviles del hecho de la tentativa de feminicidio,Indicador agregado,181,119987,violencia
+ESP_OTRO_MOVIL,Especificar Otro presunto móvil de la tentativa de feminicidio,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MODALIDAD_TENTATIVA_DE_FEMINICIDIO,Modalidad del hecho de la tentativa de feminicidio,Indicador agregado,181,119987,violencia
+ESP_OTRA_MODALIDAD,Especificar Otra modalidad de la tentativa de feminicidio,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+APRECIACION_PROF_LEGAL,Apreciación profesional del servicio de legal y acciones inmediatas,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+INFORMAR_VIOLENCIA,Plan de Atención Integral: Informar sobre la situación de violencia,Indicador agregado,95890,24278,atencion
+INFORMAR_DERECHOS,Plan de Atención Integral: Informar sobre sus derechos,Indicador agregado,91720,28448,atencion
+IDENTIFICAR_REPERCUSION,Plan de Atención Integral: Identificar y valorar la repercusión de la situación de la violencia,Indicador agregado,38049,82119,atencion
+INFORMAR_SISTEMA_JUSTICIA,Plan de Atención Integral: Informar sobre el sistema de protección y de justicia,Indicador agregado,84877,35291,atencion
+ELABORAR_PLAN_SEGURIDAD,Plan de Atención Integral: Elaborar el plan de seguridad,Indicador agregado,93762,26406,atencion
+INSERTAR_RED_FAMILIAR,Plan de Atención Integral: Insertar en redes de soporte familiar,Indicador agregado,7356,112812,atencion
+INSERTAR_EESS,Plan de Atención Integral: Insertar en establecimiento de salud,Indicador agregado,48252,71916,atencion
+DERIVAR_EESS_KIT_EMERGENCIA,Plan de Atención Integral: Derivar a la persona usuaria al EE.SS. Para que acceda al Kit de Emergencia,Indicador agregado,2141,118027,atencion
+DERIVAR_SERV_COMPL,Plan de Atención Integral: Articular y derivar a servicios complementarios públicos o privados,Indicador agregado,19409,100759,atencion
+COMUNICA_DESPROTECCION,Plan de Atención Integral: Comunicar a la autoridad competente por riesgo de desprotección,Indicador agregado,2159,118009,atencion
+PROMUEVE_DENUNCIA,Plan de Atención Integral: Promover la denuncia ante la autoridad competente o presentar escrito de apersonamiento,Indicador agregado,8261,111907,atencion
+ACOMPANAR_DENUNCIA,Plan de Atención Integral: Acompañar a la persona usuaria a interponer la denuncia verbal o hacerla por escrito,Indicador agregado,8736,111432,atencion
+PRESENTA_APERSONAMIENTO,Plan de Atención Integral: Presentar escrito de apersonamiento,Indicador agregado,54295,65873,atencion
+SOLICITAR_MED_PROT_CAUT,Plan de Atención Integral: Solicitar las medidas de protección y cautelares,Indicador agregado,59560,60608,atencion
+VERIFICAR_DENUNCIA,Plan de Atención Integral: Verificar que la denuncia legal sea remitida dentro del plazo legal,Indicador agregado,37695,82473,atencion
+COMUNICAR_VIOLENCIA,Plan de Atención Integral: Comunicar a la autoridad competente los hechos de violencia cuando la persona usuaria no decide denunciar,Indicador agregado,2713,117455,atencion
+CASO_FLAGRANCIA,Plan de Atención Integral: Caso en situación de flagrancia delictiva que se prioriza atención inmediata y conjunta,Indicador agregado,1614,118554,atencion
+PROMOVER_ENTREVISTA_UNICA,Plan de Atención Integral: Promover la realización inmediata de la Entrevista Única ante la autoridad competente,Indicador agregado,4413,115755,atencion
+SOLICITA_INTERV_POLICIAL,Plan de Atención Integral: Solicitar la intervención policial y detención de la presunta persona agresora,Indicador agregado,1446,118722,atencion
+PROMOVER_MED_PROT,Plan de Atención Integral: Promover el cumplimiento de las medidas de protección,Indicador agregado,943,119225,atencion
+ELABORA_ACTA_POLICIAL,Plan de Atención Integral: Solicitar la elaboración de acta de intervención policial,Indicador agregado,1521,118647,atencion
+OTRA_ACCION,Plan de Atención Integral: Otra acción a realizar,Indicador agregado,15153,105015,atencion
+ESP_OTRA_ACCION,Plan de Atención Integral: Especificar Otra acción a realizar,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+OBSERVACIONES_SECCION_E,Observaciones (Sección E),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CASO_VIOLENCIA_SEXUAL,¿El caso atendido en el CEM son por hechos de violencia sexual?,Indicador agregado,120168,0,atencion
+CASO_DERIVADO_EESS,En la Sección E ¿Se ha registrado la acción 13 “Derivación al establecimiento de salud para acceso al Kit de Emergencia en casos de violencia sexual”?,Indicador agregado,21696,98472,atencion
+NOMBRE_EESS,Nombre del establecimiento de salud,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+PROFESIONAL_EESS,Profesional del establecimiento de salud que brindó la información,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+MOTIVO_NO_DERIVA_EESS,¿Por qué motivo el CEM no derivo el caso a un establecimiento de salud?,Indicador agregado,18562,101606,atencion
+ESP_OTRO_MOTIVO_NO_DERIVA_EESS,"Especificar otros motivos, por qué motivo el CEM no derivó el caso a un establecimiento de salud","No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+TIPO_DE_VIOLENCIA_ATENCION_LEGAL,Tipo de violencia en la atención legal del caso,Indicador agregado,105826,14342,justicia
+TIPO_DE_PROCESO_ATENCION_LEGAL,Tipo de proceso (Código aplicado al proceso),Indicador agregado,105048,15120,justicia
+INSTANCIA_PROCESO,Instancia del proceso,Indicador agregado,104386,15782,justicia
+MES,Mes del caso,Filtro derivado de fecha,,,
+DPTO_UBI_CEM,DEPARTAMENTO DE UBICACIÓN DEL CEM,Indicador agregado,120168,0,territorio
+REGION_UBI_CEM,REGION DE UBICACIÓN DEL CEM,Indicador agregado,120168,0,territorio
+PROV_UBI_CEM,PROVINCIA DE UBICACIÓN DEL CEM,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIST_UBI_CEM,DISTRITO DE UBICACIÓN DEL CEM,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CODIGO_CEM,CODIGO DE ATENCIÓN,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CUI,Código Único de Identificación del Servicio (CUI),"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+UBIGEO,UBIGEO - NUEVO FORMATO,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+UBIGEO_INEI,UBIGEO INEI,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+CATEGORIA,Categoría del CEM,Indicador agregado,120168,0,ingreso
+MODALIDAD_REGISTRO,Modalidad del Registro de Casos del CEM,Indicador agregado,120168,0,ingreso
+VRAEM,Distritos oficiales del ámbito de intervención del VRAEM,Indicador agregado,120168,0,territorio
+TIPO_VRAEM,Tipos de ámbitos de intervención del VRAEM,Indicador agregado,2452,117716,territorio
+PORCENTAJE_RURAL,Porcentaje de población rural censada 2017 - INEI,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+AREA_DISTRITO,Área del distrito (Perfil Rural >= 25%),Indicador agregado,119946,222,territorio
+CEM_VIGENTE,CEM vigente a la fecha,Indicador agregado,120168,0,ingreso
+FECHA_FUNCIONAMIENTO,"Fecha de funcionamiento del último CEM, por traslado o creado","No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ANO_FUNCIONAMIENTO,"Año de funcionamiento del último CEM, por traslado o creado","No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOMBRE_CUI,Nombre del servicio,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+ZONA_LIMA,ZONA_LIMA,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+DIST_POBRE,Se considera pobre al Distrito que tiene una pobreza monetaria de 40% a más,Indicador agregado,6767,113401,territorio
+RANKIN_POBREZA,RANKIN_POBREZA,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOM_DPTO,Departamento de residencia de la persona usuaria,Indicador agregado,120168,0,territorio
+NOM_PROV,Provincia de residencia de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOM_DIST,Distrito de residencia de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+NOM_CCPP,Centro Poblado de residencia de la persona usuaria,"No publicado: texto libre, identificador, fecha exacta o campo sin categorías verificadas",,,
+EDAD_GRANDE,Grupo grande de edad,Indicador agregado,120168,0,perfil
+EDAD_PEQUENO,Grupo pequeño de edad,Indicador agregado,120168,0,perfil
+EDAD_PEQUENO_REPORTE,Grupo pequeño de edad reporte estadístico,Indicador agregado,120168,0,perfil
+EDAD_ESPECIAL,Grupo especial de edad,Indicador agregado,120168,0,perfil
+EDAD_05_GRUPOS_R_REGIONAL,05 grupos de edad (Reporte Regional),Indicador agregado,120168,0,perfil
+EDAD_06_GRUPO_R_DIARIO,06 grupos de edad (Reporte Diario),Indicador agregado,120168,0,perfil
+EDAD_06_GRUPO_R_BOLETIN,06 grupos de edad (Reporte Boletín),Indicador agregado,120168,0,perfil
+EDAD_05_GRUPO_R_SGIC_1,05 grupos de edad (Reporte Condorcanqui),Indicador agregado,120168,0,perfil
+EDAD_04_GRUPO_R_SGIC_2,04 grupos de edad (Reporte Condorcanqui),Indicador agregado,120168,0,perfil
+EDAD_PIRAMIDE_POBLACIONAL,Grupo de edad en pirámide poblacional,Indicador agregado,120168,0,perfil
+EDAD_PEQUENO_AGRESOR,Grupo pequeño de edad de la presunta persona agresora,Indicador agregado,120168,0,agresor
+EDAD_GRANDE_AGRESOR,Grupo de edad grande de la presunta persona agresora,Indicador agregado,120168,0,agresor
+VINCULO_GRUPAL,Vínculo general agresor - usuaria,Indicador agregado,120168,0,agresor
+CASOS_PERSONAS_LGBTI,Casos de personas LGBTI,Indicador agregado,120168,0,poblaciones
+CASOS_PERSONAS_EXTRANJERAS,Casos de personas extranjeras,Indicador agregado,120168,0,poblaciones
+CEM_DERIVA_SALUD,Casos derivados a los servicios de salud del MINSA u otro servicio de establecimiento de salud,Indicador agregado,120168,0,atencion
+CEM_DERIVA_SALUD_KIT_EMERG,Casos derivados al establecimiento de salud para acceso al Kit de Emergencia,Indicador agregado,120168,0,atencion
+CEM_HOGAR_REFUGIO,Casos insertados a un hogar de refugio temporal / casa de acogida,Indicador agregado,120168,0,atencion
+SEGURO_MEDICO,Casos donde el CEM gestiona la inscripción en el SIS u otro seguro médico,Indicador agregado,120168,0,atencion
+CEM_SOL_MED_PROTECCION,Casos donde el CEM solicita medidas de protección,Indicador agregado,120168,0,justicia
+CEM_SOL_MED_CAUTELARES,Casos donde el CEM solicita medidas cautelares,Indicador agregado,120168,0,justicia
+CASOS_MEDIDAS_PROTEC_CONCEDIDAS,Casos con medidas de protección concedidas,Indicador agregado,120168,0,justicia
+CASOS_MEDIDAS_PROTEC_EJECUTADAS,Casos con medidas de protección ejecutadas,Indicador agregado,120168,0,justicia
+CASOS_KIT_EMERG_ENTREG,Casos que cuentan con el Kit de Emergencia Entregado,Indicador agregado,120168,0,atencion
+CASOS_DERIV_SERVICIOS_MINJUSDH,Casos derivados a los servicios de Defensa Pública del MINJUSDH,Indicador agregado,120168,0,atencion
+CASOS_DERIV_UPE,Casos derivados a la UPE,Indicador agregado,120168,0,atencion
+CASOS_INFORME_PSICO,Casos con informe psicológico,Indicador agregado,120168,0,atencion
+CASOS_INFORME_SOCIAL,Casos con informe social,Indicador agregado,120168,0,atencion
+CASOS_DERIV_SERV_COMPLEMENT,Casos derivados a otros servicios complementarios,Indicador agregado,120168,0,atencion
+CASOS_EVOLUCION_RIESGO,Casos con evolución de riesgo,Indicador agregado,120168,0,atencion
+CEM_ATENC_PSICOLOG,Casos que cuentan con atención psicológica: Acción 32 (acompañamiento psicojurídico) o Acción 34 (informe psicológico),Indicador agregado,120168,0,atencion
+CEM_ATENC_SOCIAL,"Casos que cuentan con atención social: Acción 27 (gestión social), Acción 36 (fortalecimiento de redes familiares o sociales) o Acción 40 (informe social)",Indicador agregado,120168,0,atencion
+CEM_DENUNCIA,Casos con denuncia interpuesta por el CEM,Indicador agregado,120168,0,justicia
+CEM_ATENC_LEGAL,Casos que cuentan con atención legal: Cualquier acción comprendida en la sección H,Indicador agregado,120168,0,justicia
+PATROC_POLICIAL,Casos con patrocinio policial del CEM,Indicador agregado,120168,0,justicia
+PATROC_FISCAL,Casos con patrocinio fiscal del CEM,Indicador agregado,120168,0,justicia
+PATROC_JUDICIAL,Casos con patrocinio judicial del CEM,Indicador agregado,120168,0,justicia
+PATROCINIO_LEGAL,Casos con patrocinio legal del CEM,Indicador agregado,120168,0,justicia
+ATENCION_INTEGRAL,"Casos con atención integral por parte del CEM (atención psicológica, atención social y patrocinio legal)",Indicador agregado,120168,0,atencion
+ATENCION_INTERDISCIPLINARIA,Casos con atención interdisciplinaria por parte del CEM (Mínimo se haya brindado dos servicios),Indicador agregado,120168,0,atencion
+SENT_FAV_JUZG_PAZ_LET,Casos con sentencia favorable en el Juzgado de Paz Letrado,Indicador agregado,120168,0,justicia
+SENT_FAV_JUZG_ESPECIAL,Casos con sentencia favorable en el Juzgado Especializado,Indicador agregado,120168,0,justicia
+SENT_FAV_SALA_SUPERIOR,Casos con sentencia de vista favorable en la Sala Superior,Indicador agregado,120168,0,justicia
+RES_FIN_FAV_SALA_SUPREMA,Casos con resolución final favorable en la Sala Suprema,Indicador agregado,120168,0,justicia
+SENTENCIA_FAVORABLE,Casos con alguna sentencia favorable en la Etapa Judicial,Indicador agregado,120168,0,justicia
+CASOS_APERSONAMIENTO,Casos que cuentan con apersonamiento legal del CEM,Indicador agregado,120168,0,justicia
+CASOS_CONSTITUCION_PARTE_CIVIL,Casos con constitución de parte / actor civil,Indicador agregado,120168,0,justicia
+CASOS_CAMARA_GESELL,Casos con participación en cámara Gesell / Entrevista única en la etapa policial o fiscal,Indicador agregado,120168,0,justicia
+CASOS_QUEJA_DERECHO_FISCAL,Casos con queja de derecho en la etapa fiscal,Indicador agregado,120168,0,justicia
+CASOS_REQUERIMIENTO_ACUSACION_FISCAL,Casos con requerimiento de acusación en la etapa fiscal,Indicador agregado,120168,0,justicia
+CASOS_RECURSO_IMPUG_JUDICIAL,Casos con algún recurso impugnatorio en la etapa judicial,Indicador agregado,120168,0,justicia

@@ -10,3 +10,6 @@
 venv/
 __pycache__/
 *.pyc
+
+# Evidencias locales de las pruebas del nuevo dashboard
+/tmp/pagina2/

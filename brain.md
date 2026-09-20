@@ -3,7 +3,7 @@
 > Documento de contexto para agentes de IA.
 > Debe mantenerse actualizado conforme evoluciona el proyecto.
 >
-> Última verificación contra el repositorio: 2026-09-18.
+> Última verificación contra el repositorio: 2026-09-19.
 
 ## 1. Resumen del proyecto
 
@@ -11,11 +11,11 @@
 
 El proyecto transforma un archivo local de IBM SPSS Statistics (`.sav`) con registros de casos en indicadores agregados, dashboards web estáticos y reportes Excel descargables. Facilita la consulta visual de las atenciones del CEM sin publicar filas originales ni depender de una API o backend.
 
-Presenta perfiles de hombres y mujeres, además de tableros sobre alcohol/drogas, personas LGBTI, personas extranjeras y mujeres gestantes. La única versión vigente es `pagina/index_v2.html`, con indicadores y navegación ampliados.
+Presenta perfiles de hombres y mujeres, además de tableros sobre alcohol/drogas, personas LGBTI, personas extranjeras y mujeres gestantes. La versión anterior permanece en `pagina/index_v2.html`; la nueva versión independiente, solicitada por el responsable, está en `pagina2/index.html`.
 
 **Usuarios principales:** pendiente de verificar; el repositorio no define formalmente audiencias o roles.
 
-**Estado:** dashboard único implementado en `pagina/index_v2.html`. El corte publicado es enero-agosto de 2026, preliminar. El artefacto actual declara 120 168 filas: 20 286 hombres y 99 882 mujeres.
+**Estado:** dos versiones locales: `pagina/index_v2.html` y `pagina2/index.html`. El corte generado es enero-agosto de 2026, preliminar, con 120 168 registros: 20 286 hombres y 99 882 mujeres. `pagina2` ofrece 390 indicadores a partir de la revisión de 577 variables, filtros combinados y reportes PDF. No se ha desplegado esta nueva versión.
 
 ## 2. Objetivos
 
@@ -96,6 +96,9 @@ pictochart/
 ├── vectorize_icons.py                 genera SVG e icons.js
 ├── .gitignore                         excluye SPSS, secretos y archivos locales
 ├── brain.md                           esta memoria central
+├── docs/
+│   └── Informe_tecnico_dashboard_CEM.docx
+│                                        informe de ventajas y publicación
 ├── data/                              fuentes SPSS locales, ignoradas por Git
 │   ├── BD_Registro_casos_junio_2026_SDP.sav
 │   ├── BD_Registro_casos_julio_2026_SDP.sav
@@ -295,7 +298,7 @@ Rama principal: main
 **Decisión:** retirar la versión v1 y mantener `pagina/index_v2.html` como único dashboard.
 **Motivo:** decisión explícita del responsable del proyecto para evitar mantener dos versiones.
 **Archivos afectados:** `index.html`, `pagina/index_v2.html`, `pagina/index.html`, `pagina/js/main.js`, `pagina/css/style.css` y documentación.
-**Estado:** vigente.
+**Estado:** reemplazada por DEC-009, por solicitud explícita del responsable el 2026-09-19.
 
 ### DEC-008 — Abrir el dashboard desde la raíz
 
@@ -305,6 +308,28 @@ Rama principal: main
 **Estado:** vigente.
 
 ## 11. Funcionalidades implementadas
+
+### Nueva versión pagina2 (DEC-009)
+
+- 390 indicadores agregados en nueve rubros, más panorama, evolución temporal y catálogo con búsqueda.
+- Revisión documentada de las 577 variables; 187 campos tratados como filtros derivados o no publicados (texto libre, identificadores, fechas exactas o campos sin categorías verificadas).
+- Filtros combinables de mes de ingreso y departamento de atención; una población por vez para evitar sumar grupos solapados.
+- Siluetas originales, mapa, gráficos, tablas completas y descarga CSV por indicador.
+- PDF con filtros, cifras, siluetas, gráfico mensual e interpretaciones descriptivas: resumen, sección/búsqueda o todos los indicadores.
+- Generador independiente `build_pagina2_data.py`; motor compartido `pagina2/js/engine.js`; PDF local con jsPDF 4.2.1.
+- Comprobaciones de 28 selecciones contra SPSS, cinco relaciones entre preguntas condicionadas y seis totales de poblaciones contra la versión anterior.
+- Pruebas de navegador en cinco tamaños, sin solicitudes externas ni errores JavaScript; PDF filtrado, sin casos y completo, más CSV.
+- Diccionario y resultados del ETL en `pagina2/data/`; evidencias temporales de navegador/PDF en `tmp/pagina2/`, excluidas de Git.
+
+### DEC-009 — Versión independiente pagina2
+
+**Decisión:** crear `pagina2/index.html` con `data/data.js`, CSS, JS y dependencias locales, conservando las siluetas. La raíz continúa abriendo la versión anterior.
+**Motivo:** solicitud expresa de otro dashboard inspirado en `K:\_OMAR\PY\dashboard_ftp_def`, con más rubros y descarga de reportes según filtros.
+**Datos:** cubos de frecuencias por población, mes de ingreso y departamento del CEM. No se incluyen filas individuales ni textos narrativos. El mismo motor calcula tarjetas, tablas, interpretaciones y PDF.
+**Porcentajes:** se diferencian los calculados sobre la selección y sobre respuestas registradas. Los vacíos no se convierten en No.
+**Estado:** implementada y validada localmente. Guía de uso en `pagina2/README.md`. Reemplaza DEC-007.
+
+### Versión anterior
 
 - [x] Lectura selectiva y etiquetado del SPSS.
 - [x] Reparación de mojibake.
@@ -318,6 +343,7 @@ Rama principal: main
 - [x] Retiro de la versión v1 y sus recursos exclusivos.
 - [x] Diseño adaptable y modo oscuro.
 - [x] Iconos SVG empaquetados.
+- [x] Informe técnico para sustentar la automatización y publicación institucional.
 - [ ] Manifiesto reproducible de dependencias.
 - [ ] Pruebas automatizadas.
 - [ ] Automatización de actualización/publicación.
@@ -327,10 +353,13 @@ Rama principal: main
 
 ```text
 Último trabajo realizado:
-Actualización completa del dashboard al corte enero-agosto de 2026: fuente, payload, seis Excel y período visible (2026-09-18).
+Creación del informe técnico sobre ventajas, automatización y requisitos de publicación mediante SFTP o FTP y WordPress (2026-09-18).
 
 Actualmente funcionando:
 La raíz abre directamente el dashboard único en `pagina/index_v2.html`; funcionan seis pestañas, mapas, históricos, modales y seis Excel.
+
+Documentación disponible:
+`docs/Informe_tecnico_dashboard_CEM.docx` contiene el diagnóstico del proceso manual, ventajas, requerimientos, flujo operativo, controles, riesgos y plan de implementación.
 
 Actualmente en desarrollo:
 No hay una tarea de código activa identificada.
@@ -500,7 +529,7 @@ No modificar manualmente salvo necesidad comprobada:
 - `HISTORICO_ESTATICO`: requiere fuente oficial confirmada.
 - `.gitignore`: protege fuentes, secretos y archivos locales.
 
-No cambiar claves de datos, pestañas, Excel u orden de scripts sin actualizar consumidores. No reintroducir una segunda versión sin reemplazar DEC-007.
+No cambiar claves de datos, pestañas, Excel u orden de scripts sin actualizar consumidores. La segunda versión autorizada se rige por DEC-009, que reemplaza DEC-007.
 
 ## 20. Pendientes
 
@@ -533,8 +562,17 @@ No cambiar claves de datos, pestañas, Excel u orden de scripts sin actualizar c
 
 ## 22. Historial de cambios relevantes
 
+### 2026-09-19
+
+- Se implementó `pagina2` como dashboard estático independiente con 390 indicadores, siluetas, filtros combinados, catálogo y PDF según la selección.
+- Se creó el generador `build_pagina2_data.py`, el diccionario de las 577 variables y el informe de validación de agregados.
+- Se recuperaron nombres de variables con codificación dañada, incluidos subactos y factores antes omitidos, mediante normalización comprobada sin colisiones.
+- Se verificaron las preguntas condicionadas de frecuencia, denuncias anteriores, estudios, ocupación y gestación, sin registros fuera de condición ni respuestas faltantes dentro de sus universos comprobados.
+- Se añadieron pruebas de motor y navegador; los reportes se revisaron mediante extracción de texto y renderizado PDF. La versión anterior y la redirección raíz se conservaron.
+
 ### 2026-09-18
 
+- Se creó `docs/Informe_tecnico_dashboard_CEM.docx` para sustentar la automatización y publicación del dashboard mediante SFTP o FTP y WordPress.
 - Se actualizó la fuente activa a `BD_Registro_casos_agosto_2026_SDP.sav` y el período visible a enero-agosto de 2026.
 - Se regeneraron `casos_data.js` y los seis informes Excel; el nuevo total es 120 168 casos.
 - Se validaron 20 286 hombres, 99 882 mujeres, 33 381 casos de alcohol/drogas, 108 LGBTI, 2 040 extranjeras y 2 878 gestantes.
