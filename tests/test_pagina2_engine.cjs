@@ -12,7 +12,9 @@ const engine = require('../pagina2/js/engine.js');
 const all = { population: 'total', months: data.months.map(m => m.id), departments: data.departments.map((_, i) => i) };
 for (const [population, expected] of Object.entries(audit.totals)) {
   const result = engine.aggregate(data, { ...all, population });
+  const ageSex = engine.ageSex(data, { ...all, population });
   assert.equal(result.total, expected);
+  assert.equal(ageSex.flatMap(group => group.values).reduce((sum, item) => sum + item.count, 0), expected, `${population}/ageSex`);
   for (const field of data.fields) {
     assert.equal(engine.distribution(field, result).reduce((n, r) => n + r.count, 0), expected, `${population}/${field.id}`);
     const text = engine.interpret(field, result);
@@ -21,7 +23,9 @@ for (const [population, expected] of Object.entries(audit.totals)) {
 }
 for (const check of audit.filter_checks) {
   const result = engine.aggregate(data, check);
+  const ageSex = engine.ageSex(data, check);
   assert.equal(result.total, check.total);
+  assert.equal(ageSex.flatMap(group => group.values).reduce((sum, item) => sum + item.count, 0), check.total);
   assert.equal(result.monthly.reduce((a, b) => a + b, 0), result.total);
   assert.equal(result.territorial.reduce((a, b) => a + b, 0), result.total);
 }

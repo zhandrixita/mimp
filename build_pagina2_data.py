@@ -130,11 +130,21 @@ def main(source):
     group_count = len(months) * len(depts)
     masks = population_masks(df)
     cubes = {}
+    age_sex_cubes = {}
     totals = {}
+    age_values, sex_values = [1.0, 2.0, 3.0], [0.0, 1.0]
+    age_codes = pd.Categorical(df.EDAD_GRANDE, categories=age_values).codes.astype(np.int32)
+    sex_codes = pd.Categorical(df.SEXO_VICTIMA, categories=sex_values).codes.astype(np.int32)
+    if (age_codes < 0).any() or (sex_codes < 0).any():
+        raise ValueError("EDAD_GRANDE o SEXO_VICTIMA contiene categorías no contempladas")
+    age_sex_codes = age_codes * len(sex_values) + sex_codes
     for pop, mask in masks.items():
         ns = np.bincount(group_codes[mask], minlength=group_count)
         totals[pop] = int(mask.sum())
         cubes[pop] = [[g // len(depts), g % len(depts), int(n), []] for g, n in enumerate(ns)]
+        cross = np.bincount(group_codes[mask] * 6 + age_sex_codes[mask], minlength=group_count * 6).reshape(group_count, 6)
+        assert np.array_equal(cross.sum(axis=1), ns), f"Cruce edad × sexo: {pop}"
+        age_sex_cubes[pop] = [[int(g // len(depts)), int(g % len(depts)), cross[g].astype(int).tolist()] for g in np.flatnonzero(ns)]
     fields, audit, encoded = [], [], []
     offset = 0
     for i, raw in enumerate(meta.column_names):
@@ -230,6 +240,8 @@ def main(source):
             "populations": [{"id": a, "title": b} for a, b in POPULATIONS],
             "months": [{"id": i, "title": MONTHS[int(m[-2:])-1] + " " + m[:4]} for i, m in enumerate(months)],
             "departments": depts, "fields": fields, "vectorSize": offset, "cubes": cubes,
+            "ageSex": {"ageLabels": ["0 a 17 años", "18 a 59 años", "60 a más años"],
+                       "sexLabels": ["Mujer", "Hombre"], "cubes": age_sex_cubes},
             "annual": annual, "audit": {"relationships": relationships, "variables": audit}}
     (OUT / "data.js").write_text("window.DASH_DATA=" + json.dumps(data, ensure_ascii=True, separators=(",", ":")) + ";\n", encoding="ascii")
     with (OUT / "diccionario_variables.csv").open("w", encoding="utf-8-sig", newline="") as fh:

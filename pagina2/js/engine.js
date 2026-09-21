@@ -19,6 +19,15 @@
   function distribution(field, result) {
     return field.labels.map((label, i) => ({ label, count: result.vector[field.offset + i], missing: i === field.missingIndex, index: i }));
   }
+  function ageSex(data, filters) {
+    const months = new Set(filters.months), departments = new Set(filters.departments);
+    const values = Array(data.ageSex.ageLabels.length * data.ageSex.sexLabels.length).fill(0);
+    for (const [month, department, counts] of data.ageSex.cubes[filters.population]) {
+      if (!months.has(month) || !departments.has(department)) continue;
+      counts.forEach((count, index) => { values[index] += count; });
+    }
+    return data.ageSex.ageLabels.map((label, ageIndex) => ({ label, values: data.ageSex.sexLabels.map((sex, sexIndex) => ({ label: sex, count: values[ageIndex * data.ageSex.sexLabels.length + sexIndex] })) }));
+  }
   function interpret(field, result) {
     if (!result.total) return "No se registran casos para esta combinación de filtros. No corresponde calcular porcentajes.";
     const rows = distribution(field, result), missing = rows[field.missingIndex].count;
@@ -40,7 +49,7 @@
     const departments = filters.departments.length === data.departments.length ? "Todos los departamentos de atención" : filters.departments.map(i => data.departments[i]).join(", ");
     return { population, months, departments };
   }
-  const api = { aggregate, distribution, interpret, filterDescription, fmt, pct };
+  const api = { aggregate, distribution, ageSex, interpret, filterDescription, fmt, pct };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.DashEngine = api;
 })(typeof window !== "undefined" ? window : globalThis);
