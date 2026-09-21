@@ -255,11 +255,19 @@
     const riskChart = `<div class="risk-vertical vertical-bars">${risk.map((row, i) => `<div class="vertical-bar-item"><div class="vertical-value"><strong>${E.fmt(row.count)}</strong><span>${E.pct(row.count, result.total)}</span></div><div class="vertical-track"><span style="height:${row.count * 100 / riskMax}%;background:${norm(row.label).includes("severo") ? colors[2] : colors[i]}"></span></div><div class="vertical-label">${esc(row.label)}</div></div>`).join("")}</div>`;
     const ranked = D.departments.map((label, i) => ({ label, count: result.territorial[i] })).filter(item => item.count > 0).sort((a, b) => b.count - a.count);
     $("dashboard").innerHTML = `<div class="overview-grid"><article class="panel map-panel">${panelHeading("Distribución territorial", "Departamento donde se ubica el CEM", '<div class="segment"><button id="map-view" class="selected">Mapa</button><button id="rank-view">Ranking</button></div>')}<div class="map-wrap"><div id="map-chart" class="map-chart" role="img" aria-label="Mapa de casos por departamento"></div><div id="map-legend" class="map-legend" aria-label="Intervalos de casos"></div></div><div id="rank-list" class="panel-body" hidden>${ranked.map(r => bar(r, result.total, ranked[0].count)).join("")}</div><p class="map-caption" id="map-instruction">Selecciona un departamento en el mapa para filtrar.</p><div class="panel-footer"><span>Cantidad de casos, no tasas poblacionales</span>${fieldButton("DPTO_UBI_CEM", "Ver tabla ↗")}</div></article>${ageMarkup()}<div class="two-panels"><article class="panel">${panelHeading("Tipo de violencia", "Distribución de los casos registrados")}<div class="donut-wrap"><div id="violence-chart" class="donut-chart" role="img" aria-label="Distribución por tipo de violencia"></div><div class="legend" id="violence-legend"></div></div><div class="panel-footer"><span>Base: ${E.fmt(result.total)} casos</span>${fieldButton("TIPO_VIOLENCIA", "Detalle ↗")}</div></article><article class="panel">${panelHeading("Nivel de riesgo", "Valoración registrada en la atención")}<div class="risk-list">${risk.map((r, i) => bar(r, result.total, result.total, norm(r.label).includes("severo") ? colors[2] : colors[i])).join("")}</div><div class="panel-footer"><span>Porcentaje sobre la selección</span>${fieldButton("NIVEL_DE_RIESGO_VICTIMA", "Detalle ↗")}</div></article></div></div><article class="panel wide-panel">${panelHeading("Evolución de los casos atendidos", "Serie completa del periodo · El mes filtrado aparece destacado", '<span class="panel-tag">' + esc(D.meta.period.split(" ").slice(-1)[0]) + '</span>')}<div id="trend-chart" class="trend-chart" role="img" aria-label="Casos por mes de ingreso"></div><div class="insight">${esc(monthlyInsight())}</div></article>`;
+    $("dashboard").querySelector(".map-wrap").insertAdjacentHTML("beforeend", `<button type="button" id="map-reset" class="map-reset-button" aria-label="Restablecer filtro territorial" title="Mostrar todos los departamentos" ${filters.departments.length === D.departments.length ? "hidden" : ""}>↺ Restablecer</button>`);
     $("dashboard").querySelector(".risk-list").outerHTML = riskChart;
     $("trend-chart").closest(".wide-panel").insertAdjacentHTML("beforebegin", panoramaExtras());
     renderMap(); renderViolence(); renderTrend("trend-chart");
     $("rank-view").onclick = () => mapMode(false);
     $("map-view").onclick = () => mapMode(true);
+    if ($("map-reset")) $("map-reset").onclick = resetMapDepartment;
+  }
+  function resetMapDepartment() {
+    filters.departments = D.departments.map((_, i) => i);
+    syncDraft();
+    $("filter-hint").textContent = "Filtro territorial restablecido desde el mapa.";
+    refresh();
   }
   function panoramaExtras() {
     const civil = sortedRows(byId.get("ESTADO_CIVIL_VICTIMA"));
@@ -287,6 +295,7 @@
   function mapMode(showMap) {
     document.querySelector(".map-wrap").hidden = !showMap; $("rank-list").hidden = showMap;
     $("map-instruction").hidden = !showMap;
+    if ($("map-reset")) $("map-reset").hidden = !showMap || filters.departments.length === D.departments.length;
     $("rank-view").classList.toggle("selected", !showMap); $("map-view").classList.toggle("selected", showMap);
     if (showMap) charts.forEach(c => c.resize());
   }
@@ -313,24 +322,46 @@
     const geo = window.GEODATA_DEPT;
     const featureNames = geo.features.map(f => f.properties.nombdep);
     echarts.registerMap("peru-pagina2", geo);
+    // Keep the national territorial scale stable when a department is selected.
+    // The dashboard values remain filtered, but the selected region preserves
+    // the same thermal color it had before the map click.
+    const territorialContext = E.aggregate(D, { ...filters, departments: D.departments.map((_, i) => i) });
+    const contextMapData = D.departments.map((name, i) => ({ name: featureNames.find(n => norm(n) === norm(name)) || name, value: territorialContext.territorial[i] })).filter(item => item.value > 0);
     const mapData = D.departments.map((name, i) => ({ name: featureNames.find(n => norm(n) === norm(name)) || name, value: result.territorial[i], percent: E.pct(result.territorial[i], result.total) })).filter(item => item.value > 0);
-    const pieces = mapPieces(mapData.map(item => item.value));
+    const pieces = mapPieces(contextMapData.map(item => item.value));
     const thermalColor = value => pieces.find(piece => value >= piece.min && value <= piece.max)?.color || "#edf2f1";
     const intenseShades = ["#3f9f68", "#82c36d", "#e8cd48", "#e6864f", "#d94f4b"];
+    const hoverShades = ["#218c50", "#69b84e", "#ddb916", "#d96a2f", "#c72f32"];
     const intenseThermalColor = value => {
       const pieceIndex = pieces.findIndex(piece => value >= piece.min && value <= piece.max);
       if (pieceIndex < 0) return "#b85f4f";
       const shadeIndex = pieces.length === 1 ? 4 : Math.round(pieceIndex * 4 / (pieces.length - 1));
       return intenseShades[shadeIndex];
     };
-    const coloredMapData = mapData.map(item => ({ ...item, itemStyle: { areaColor: thermalColor(item.value) } }));
-    const topNames = new Set([...mapData].sort((a, b) => b.value - a.value).slice(0, 3).map(item => item.name));
+    const hoverThermalColor = value => {
+      const pieceIndex = pieces.findIndex(piece => value >= piece.min && value <= piece.max);
+      if (pieceIndex < 0) return "#b84444";
+      const shadeIndex = pieces.length === 1 ? 4 : Math.round(pieceIndex * 4 / (pieces.length - 1));
+      return hoverShades[shadeIndex];
+    };
+    const rankedMap = [...contextMapData].sort((a, b) => b.value - a.value), territorialAverage = contextMapData.reduce((sum, item) => sum + item.value, 0) / Math.max(contextMapData.length, 1), territorialMax = rankedMap[0]?.value || 1;
+    const coloredMapData = mapData.map(item => {
+      const pieceIndex = pieces.findIndex(candidate => item.value >= candidate.min && item.value <= candidate.max), piece = pieces[pieceIndex];
+      return { ...item, rank: rankedMap.findIndex(candidate => candidate.name === item.name) + 1, departmentsWithCases: contextMapData.length, interval: piece?.label || "Sin intervalo", quintileIndex: pieceIndex, average: territorialAverage, maximum: territorialMax, itemStyle: { areaColor: thermalColor(item.value) }, emphasis: { itemStyle: { areaColor: hoverThermalColor(item.value), borderColor: "#fff", borderWidth: 2.6, shadowColor: hoverThermalColor(item.value) + "88", shadowBlur: 12 } } };
+    });
+    const topNames = new Set(rankedMap.slice(0, 3).map(item => item.name));
     $("map-legend").innerHTML = `<strong>Casos</strong>${pieces.map(piece => `<span><i style="background:${piece.color}"></i>${esc(piece.label)}</span>`).join("")}`;
     const map = chart("map-chart", {
-      tooltip: { trigger: "item", formatter: p => p.data && p.value > 0 ? `${esc(p.name)}<br><strong>${E.fmt(p.value)}</strong> casos` : "" },
+      tooltip: { trigger: "item", confine: true, backgroundColor: "rgba(255,255,255,.97)", borderColor: theme.mid, borderWidth: 1, padding: [8, 9], textStyle: { color: "#24464a", fontSize: 9 }, extraCssText: "box-shadow:0 6px 20px rgba(16,52,55,.16);border-radius:7px;", formatter: p => {
+        if (!p.data || p.value <= 0) return "";
+        const difference = p.value - p.data.average, relation = difference >= 0 ? `${E.pct(difference, p.data.average)} por encima` : `${E.pct(Math.abs(difference), p.data.average)} por debajo`;
+        const departmentWidth = Math.max(3, p.value * 100 / p.data.maximum), averageWidth = Math.max(3, p.data.average * 100 / p.data.maximum);
+        const thermalScale = pieces.map((piece, index) => `<i style="display:block;flex:1;height:${index === p.data.quintileIndex ? 7 : 4}px;border:${index === p.data.quintileIndex ? "1px solid #294a47" : "0"};border-radius:2px;background:${piece.color};opacity:${index === p.data.quintileIndex ? 1 : .5}"></i>`).join("");
+        return `<div style="min-width:190px;font-size:9px;line-height:1.35"><strong style="font-size:9px">${esc(p.name)}</strong><div style="margin:4px 0;border-top:1px solid #e3ece9"></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Casos atendidos</span><b>${E.fmt(p.value)}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>% de la selección</span><b>${p.data.percent}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Posición territorial</span><b>${p.data.rank} de ${p.data.departmentsWithCases}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Intervalo</span><b>${esc(p.data.interval)}</b></div><div class="map-tooltip-mini" style="margin-top:6px;padding-top:5px;border-top:1px solid #e3ece9"><b style="display:block;margin-bottom:4px;font-size:9px">Comparación visual</b><div style="display:grid;grid-template-columns:58px 1fr 31px;align-items:center;gap:3px;font-size:9px"><span>Depto.</span><i style="display:block;height:5px;border-radius:4px;background:#edf2f1;overflow:hidden"><i style="display:block;width:${departmentWidth}%;height:100%;background:${thermalColor(p.value)}"></i></i><b style="text-align:right">${E.fmt(p.value)}</b><span>Promedio</span><i style="display:block;height:5px;border-radius:4px;background:#edf2f1;overflow:hidden"><i style="display:block;width:${averageWidth}%;height:100%;background:#8ca5a2"></i></i><b style="text-align:right">${E.fmt(Math.round(p.data.average))}</b></div><div style="display:flex;align-items:center;gap:2px;height:9px;margin-top:5px">${thermalScale}</div><small style="display:block;text-align:center;color:#718789;font-size:9px">Nivel ${p.data.quintileIndex + 1} de ${pieces.length}</small></div><div style="margin-top:4px;padding-top:4px;border-top:1px solid #e3ece9;color:#617b7d;font-size:9px">Promedio: ${relation}</div><small style="display:block;margin-top:3px;color:#84989a;font-size:9px">Ubicación del CEM</small></div>`;
+      } },
       animationDurationUpdate: 1000,
       visualMap: { type: "piecewise", pieces, show: false, seriesIndex: [] },
-      series: [{ type: "map", map: "peru-pagina2", nameProperty: "nombdep", roam: false, layoutCenter: ["54%", "50%"], layoutSize: "101%", data: coloredMapData, label: { show: true, color: "#183d3b", fontSize: 7, lineHeight: 9, fontWeight: 600, textBorderColor: "#fff", textBorderWidth: 3, formatter: p => p.data && p.value > 0 ? `${p.name.toUpperCase()}\n${p.data.percent}` : "" }, labelLayout: { hideOverlap: false }, itemStyle: { borderColor: "#f8fffd", borderWidth: 1.8, areaColor: "#edf2f1", shadowColor: "#284a4660", shadowBlur: 1 }, emphasis: { label: { show: true, fontSize: 8, color: "#102f2d" }, itemStyle: { borderColor: "#f8fffd", borderWidth: 2.2 } }, select: { disabled: true } }]
+      series: [{ type: "map", map: "peru-pagina2", nameProperty: "nombdep", roam: false, layoutCenter: ["54%", "50%"], layoutSize: "101%", data: coloredMapData, label: { show: true, color: "#183d3b", fontSize: 7, lineHeight: 9, fontWeight: 600, textBorderColor: "#fff", textBorderWidth: 3, formatter: p => p.data && p.value > 0 ? `${p.name.toUpperCase()}\n${p.data.percent}` : "" }, labelLayout: { hideOverlap: false }, itemStyle: { borderColor: "#f8fffd", borderWidth: 1.8, areaColor: "#edf2f1", shadowColor: "#284a4660", shadowBlur: 1 }, emphasis: { focus: "self", label: { show: true, fontSize: 8, color: "#102f2d" }, itemStyle: { borderColor: "#f8fffd", borderWidth: 2.2 } }, select: { disabled: true } }]
     });
     const topIndexes = coloredMapData.map((item, index) => topNames.has(item.name) ? index : -1).filter(index => index >= 0);
     map.__pulseRegions = topIndexes;

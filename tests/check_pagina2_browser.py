@@ -57,8 +57,8 @@ def main():
         assert page.locator("#detail-dialog tbody tr").count() == 6
         assert page.locator("#detail-dialog th[data-sort-table]").count() == 5
         page.keyboard.press("Escape")
-        page.locator("#population-buttons").evaluate("el => { el.scrollLeft = 0; el.dispatchEvent(new WheelEvent('wheel', {deltaY: 180, bubbles: true, cancelable: true})); }")
-        page.wait_for_timeout(250)
+        page.locator("#population-buttons").evaluate("el => { el.scrollLeft = 0; el.scrollBy({left:180, behavior:'instant'}); }")
+        page.wait_for_timeout(600)
         assert page.locator("#population-buttons").evaluate("el => el.scrollWidth <= el.clientWidth || el.scrollLeft > 0")
         base_theme = page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--viz-primary').trim()")
         assert base_theme == "#147d77"
@@ -132,6 +132,12 @@ def main():
         assert page.locator(".relationship-toggle").inner_text() == "Agrupar"
         page.locator(".relationship-toggle").click()
         assert page.locator(".relationship-panel .relationship-group").count() == 3
+        page.locator(".relationship-panel .panel-expand").click()
+        assert page.locator(".relationship-panel.fullscreen-panel").count() == 1
+        assert page.locator(".relationship-panel .relationship-groups").evaluate("el => el.getBoundingClientRect().width") > 1100
+        assert page.locator(".relationship-panel .relationship-groups").evaluate("el => el.getBoundingClientRect().height") >= 620
+        assert page.locator(".relationship-panel .relationship-detail").first.evaluate("el => getComputedStyle(el).gridTemplateColumns.split(' ').length") == 4
+        page.keyboard.press("Escape")
         assert page.locator(".modalities-panel .bar-row").count() == 4
         modality_percentages = page.locator(".modalities-panel .bar-label em").all_inner_texts()
         assert abs(sum(float(value.replace("%", "").replace(",", ".")) for value in modality_percentages) - 100) < 0.01
@@ -166,15 +172,28 @@ def main():
         assert page.evaluate("echarts.getInstanceByDom(document.getElementById('map-chart')).__topIntenseColors.every(color => ['#3f9f68','#82c36d','#e8cd48','#e6864f','#d94f4b'].includes(color))")
         assert page.evaluate("['#c87470cc','#d94f4b'].includes([...echarts.getInstanceByDom(document.getElementById('map-chart')).getOption().series[0].data].sort((a,b)=>b.value-a.value)[0].itemStyle.areaColor)")
         assert page.evaluate("echarts.getInstanceByDom(document.getElementById('map-chart')).getOption().visualMap[0].seriesIndex.length") == 0
+        assert page.evaluate("echarts.getInstanceByDom(document.getElementById('map-chart')).getOption().series[0].data.filter(x => x.value > 0).every(x => ['#218c50','#69b84e','#ddb916','#d96a2f','#c72f32'].includes(x.emphasis.itemStyle.areaColor))")
+        map_tooltip = page.evaluate("""() => { const chart = echarts.getInstanceByDom(document.getElementById('map-chart')); const option = chart.getOption(); const item = option.series[0].data.filter(x => x.value > 0)[0]; return option.tooltip[0].formatter({name:item.name,value:item.value,data:item}); }""")
+        assert "Casos atendidos" in map_tooltip and "Posici" in map_tooltip and "territorial" in map_tooltip and "Intervalo" in map_tooltip and "Promedio" in map_tooltip
+        assert "map-tooltip-mini" in map_tooltip and "Comparaci" in map_tooltip and "Nivel" in map_tooltip
+        assert "font-size:7px" not in map_tooltip and "font-size:8px" not in map_tooltip and "font-size:11px" not in map_tooltip
         assert page.locator("#map-legend span").count() == 5
         assert "casos" in page.locator("#map-legend span").first.inner_text().lower()
         assert page.locator("#map-top").count() == 0
         map_department = page.evaluate("echarts.getInstanceByDom(document.getElementById('map-chart')).getOption().series[0].data[0].name")
+        map_department_color = page.evaluate("name => echarts.getInstanceByDom(document.getElementById('map-chart')).getOption().series[0].data.find(item => item.name === name).itemStyle.areaColor", map_department)
         page.evaluate("name => echarts.getInstanceByDom(document.getElementById('map-chart')).trigger('click', {name})", map_department)
         assert len(page.evaluate("Dashboard.getState().filters.departments")) == 1
         selected_map = page.evaluate("echarts.getInstanceByDom(document.getElementById('map-chart')).getOption()")
         assert len([item for item in selected_map["series"][0]["data"] if item.get("value", 0) > 0]) == 1
-        assert selected_map["visualMap"][0]["pieces"][0]["color"] == "#c87470cc"
+        assert [piece["color"] for piece in selected_map["visualMap"][0]["pieces"]] == initial_map_colors
+        selected_item = next(item for item in selected_map["series"][0]["data"] if item.get("value", 0) > 0)
+        assert selected_item["itemStyle"]["areaColor"] == map_department_color
+        assert page.locator("#map-reset").is_visible()
+        page.click("#map-reset")
+        assert len(page.evaluate("Dashboard.getState().filters.departments")) == 25
+        assert page.locator("#map-reset").is_hidden()
+        assert "restablecido" in page.locator("#filter-hint").inner_text().lower()
         apply(page, "total", [7], list(range(25)))
         page.click("#departments-picker summary")
         page.fill("#dept-search", "lima")
