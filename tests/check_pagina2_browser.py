@@ -94,6 +94,23 @@ def main():
         assert page.evaluate("echarts.getInstanceByDom(document.getElementById('map-chart')).getOption().series[0].data.filter(x=>x.value>0).length") == 25
         assert page.locator(".risk-vertical .vertical-bar-item").count() == 3
         assert page.locator(".kpi-value[data-count]").count() == 4
+        assert page.locator(".kpi.kpi-gradient").count() == 4
+        kpi_gradients = page.locator(".kpi.kpi-gradient").evaluate_all("els => els.map(el => getComputedStyle(el).backgroundImage)")
+        assert all("linear-gradient" in gradient and "50%" in gradient for gradient in kpi_gradients)
+        assert len(set(kpi_gradients)) == 4
+        assert page.locator(".kpi.kpi-gradient .kpi-value").evaluate_all("els => els.every(el => getComputedStyle(el).backgroundColor === 'rgba(0, 0, 0, 0)')")
+        assert page.locator("#dashboard [data-stat-tooltip]").count() >= 10
+        page.locator(".risk-vertical .vertical-bar-item").first.hover()
+        assert page.locator("#stat-tooltip").is_visible()
+        stat_text = page.locator("#stat-tooltip").inner_text()
+        assert "Casos" in stat_text and "Porcentaje" in stat_text and "Base:" in stat_text
+        assert page.locator("#stat-tooltip .related-mini").count() == 1
+        assert page.locator("#stat-tooltip .related-mini > span").count() >= 2
+        violence_tooltip = page.evaluate("""() => { const chart = echarts.getInstanceByDom(document.getElementById('violence-chart')); const option = chart.getOption(); const item = option.series[0].data[0]; return option.tooltip[0].formatter({name:item.name,value:item.value,color:option.color[0]}); }""")
+        assert "related-mini" in violence_tooltip and "Niveles de riesgo" in violence_tooltip and "Base:" in violence_tooltip
+        trend_tooltip = page.evaluate("""() => { const chart = echarts.getInstanceByDom(document.getElementById('trend-chart')); const option = chart.getOption(); return option.tooltip[0].formatter([{dataIndex:0,value:option.series[0].data[0].value}]); }""")
+        assert "related-mini" in trend_tooltip and "Tipos de violencia durante el mes" in trend_tooltip
+        page.mouse.move(1, 1)
         assert page.locator(".panorama-extra-grid .panorama-extra").count() == 3
         assert page.locator("#dashboard .panel-expand").count() >= 7
         map_width = page.locator(".map-panel").evaluate("el => el.getBoundingClientRect().width")
@@ -175,7 +192,8 @@ def main():
         assert page.evaluate("echarts.getInstanceByDom(document.getElementById('map-chart')).getOption().series[0].data.filter(x => x.value > 0).every(x => ['#218c50','#69b84e','#ddb916','#d96a2f','#c72f32'].includes(x.emphasis.itemStyle.areaColor))")
         map_tooltip = page.evaluate("""() => { const chart = echarts.getInstanceByDom(document.getElementById('map-chart')); const option = chart.getOption(); const item = option.series[0].data.filter(x => x.value > 0)[0]; return option.tooltip[0].formatter({name:item.name,value:item.value,data:item}); }""")
         assert "Casos atendidos" in map_tooltip and "Posici" in map_tooltip and "territorial" in map_tooltip and "Intervalo" in map_tooltip and "Promedio" in map_tooltip
-        assert "map-tooltip-mini" in map_tooltip and "Comparaci" in map_tooltip and "Nivel" in map_tooltip
+        assert "map-tooltip-mini" in map_tooltip and "Comparaci" in map_tooltip and "Promedio territorial" in map_tooltip
+        assert ">Depto.<" not in map_tooltip and "Nivel " not in map_tooltip
         assert "font-size:7px" not in map_tooltip and "font-size:8px" not in map_tooltip and "font-size:11px" not in map_tooltip
         assert page.locator("#map-legend span").count() == 5
         assert "casos" in page.locator("#map-legend span").first.inner_text().lower()

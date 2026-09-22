@@ -81,6 +81,36 @@
     try { localStorage.setItem("cem-theme-mode", selected); } catch (_) {}
     setTimeout(() => charts.forEach(chart => chart.resize()), 50);
   }
+  function statTooltip() {
+    let tooltip = $("stat-tooltip");
+    if (!tooltip) {
+      document.body.insertAdjacentHTML("beforeend", '<div id="stat-tooltip" class="stat-tooltip" role="tooltip" hidden></div>');
+      tooltip = $("stat-tooltip");
+    }
+    return tooltip;
+  }
+  function positionStatTooltip(event) {
+    const tooltip = $("stat-tooltip"); if (!tooltip || tooltip.hidden) return;
+    const gap = 12, rect = tooltip.getBoundingClientRect();
+    let left = event.clientX + gap, top = event.clientY + gap;
+    if (left + rect.width > innerWidth - 8) left = event.clientX - rect.width - gap;
+    if (top + rect.height > innerHeight - 8) top = event.clientY - rect.height - gap;
+    tooltip.style.left = `${Math.max(8, left)}px`; tooltip.style.top = `${Math.max(8, top)}px`;
+  }
+  function showStatTooltip(target, event) {
+    const tooltip = statTooltip(), d = target.dataset;
+    let related = null; try { related = d.statRelated ? JSON.parse(d.statRelated) : null; } catch (_) {}
+    tooltip.innerHTML = `<strong>${esc(d.statLabel)}</strong><div><span>Casos</span><b>${esc(d.statCount)}</b></div><div><span>${esc(d.statNote)}</span><b>${esc(d.statShare)}</b></div>${relatedMiniHTML(related)}<small>Base: ${esc(d.statBase)} casos</small>`;
+    tooltip.hidden = false; target.setAttribute("aria-describedby", "stat-tooltip");
+    if (event) positionStatTooltip(event); else {
+      const rect = target.getBoundingClientRect();
+      positionStatTooltip({ clientX: rect.left + rect.width / 2, clientY: rect.top + Math.min(rect.height, 30) });
+    }
+  }
+  function hideStatTooltip(target) {
+    const tooltip = $("stat-tooltip"); if (tooltip) tooltip.hidden = true;
+    if (target) target.removeAttribute("aria-describedby");
+  }
   function count(id, labelOrIndex) {
     const f = byId.get(id); if (!f) return 0;
     const i = typeof labelOrIndex === "number" ? labelOrIndex : f.labels.findIndex(s => norm(s).includes(norm(labelOrIndex)));
@@ -100,7 +130,7 @@
       });
       return value;
     };
-    instance.setOption(scaleOption({ animation: motion, animationDuration: 750, animationDurationUpdate: 450, animationEasing: "cubicOut", animationEasingUpdate: "cubicOut", textStyle: { fontFamily: '"Segoe UI", Arial, sans-serif', fontSize: 12 }, ...option }));
+    instance.setOption(scaleOption({ animation: motion, animationDuration: 750, animationDurationUpdate: 450, animationEasing: "cubicOut", animationEasingUpdate: "cubicOut", textStyle: { fontFamily: '"Segoe UI", Arial, sans-serif', fontSize: 12 }, ...option, tooltip: option.tooltip ? { confine: true, ...option.tooltip } : option.tooltip }));
     charts.push(instance); return instance;
   }
   function disposeCharts() { if (mapPulseTimer) { clearInterval(mapPulseTimer); mapPulseTimer = null; } charts.forEach(c => c.dispose()); charts = []; }
@@ -131,8 +161,22 @@
     setTimeout(() => charts.forEach(chart => chart.resize()), 180);
   }
   function panelHeading(title, sub, action = "") { return `<div class="panel-heading"><div><h2>${esc(title)}</h2><p>${esc(sub)}</p></div>${action}</div>`; }
-  function bar(row, base, max, color = colors[0]) {
-    return `<div class="bar-row"><div class="bar-label"><span>${esc(row.label)}</span><strong>${E.fmt(row.count)} <em>${row.percentLabel || E.pct(row.count, base)}</em></strong></div><div class="bar-track"><div class="bar-fill" style="width:${max ? row.count * 100 / max : 0}%;background:${color}"></div></div></div>`;
+  function relatedStats(id, source = result, title = "Distribución relacionada") {
+    const field = byId.get(id); if (!field || !source) return null;
+    const items = E.distribution(field, source).filter(row => !row.missing && row.count).sort((a, b) => b.count - a.count).slice(0, 4);
+    return { title, items: items.map(row => ({ label: row.label, count: row.count, share: source.total ? row.count * 100 / source.total : 0 })) };
+  }
+  function relatedMiniHTML(related) {
+    if (!related?.items?.length) return "";
+    const max = Math.max(...related.items.map(item => item.count), 1);
+    return `<div class="related-mini"><b>${esc(related.title)}</b>${related.items.map((item, i) => `<span><em>${esc(item.label)}</em><i><i style="width:${item.count * 100 / max}%;background:${colors[i % colors.length]}"></i></i><strong>${Number(item.share).toLocaleString("es-PE", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%</strong></span>`).join("")}</div>`;
+  }
+  function statAttrs(label, count, base, share = E.pct(count, base), note = "Porcentaje de la selección", related = null) {
+    return `tabindex="0" data-stat-tooltip data-stat-label="${esc(label)}" data-stat-count="${esc(E.fmt(count))}" data-stat-share="${esc(share)}" data-stat-base="${esc(E.fmt(base))}" data-stat-note="${esc(note)}"${related ? ` data-stat-related="${esc(JSON.stringify(related))}"` : ""}`;
+  }
+  function bar(row, base, max, color = colors[0], related = null) {
+    const share = row.percentLabel || E.pct(row.count, base), note = row.percentLabel ? "Participación entre las modalidades mostradas" : "Porcentaje de la selección";
+    return `<div class="bar-row" ${statAttrs(row.label, row.count, base, share, note, related)}><div class="bar-label"><span>${esc(row.label)}</span><strong>${E.fmt(row.count)} <em>${share}</em></strong></div><div class="bar-track"><div class="bar-fill" style="width:${max ? row.count * 100 / max : 0}%;background:${color}"></div></div></div>`;
   }
   function exactShareLabels(rows) {
     const total = rows.reduce((sum, row) => sum + row.count, 0);
@@ -152,11 +196,11 @@
     const labels = exactShareLabels(rows);
     return rows.map((row, index) => ({ ...row, percentLabel: labels[index] }));
   }
-  function verticalDistribution(distribution, base) {
+  function verticalDistribution(distribution, base, related = null) {
     const relational = distribution.some(row => ["pareja", "familiar", "sin vinculo", "otro vinculo"].some(value => norm(row.label).includes(value)));
     const max = Math.max(...distribution.map(row => row.count), 1);
     if (relational) return `<div class="relational-list" tabindex="0" aria-label="Distribución por vínculo relacional">${distribution.map((row, i) => bar(row, base, max, colors[i % colors.length])).join("")}</div>`;
-    return `<div class="vertical-bars">${distribution.map((row, i) => `<div class="vertical-bar-item"><div class="vertical-value"><strong>${E.fmt(row.count)}</strong><span>${E.pct(row.count, base)}</span></div><div class="vertical-track"><span style="height:${row.count * 100 / max}%;background:${colors[i % colors.length]}"></span></div><div class="vertical-label">${esc(row.label)}</div></div>`).join("")}</div>`;
+    return `<div class="vertical-bars">${distribution.map((row, i) => `<div class="vertical-bar-item" ${statAttrs(row.label, row.count, base, E.pct(row.count, base), "Porcentaje de la selección", related)}><div class="vertical-value"><strong>${E.fmt(row.count)}</strong><span>${E.pct(row.count, base)}</span></div><div class="vertical-track"><span style="height:${row.count * 100 / max}%;background:${colors[i % colors.length]}"></span></div><div class="vertical-label">${esc(row.label)}</div></div>`).join("")}</div>`;
   }
   function rows(id) { return E.distribution(byId.get(id), result); }
   function sortedRows(f) { return E.distribution(f, result).filter(r => !r.missing && r.count).sort((a, b) => b.count - a.count); }
@@ -218,10 +262,10 @@
     const children = count("EDAD_GRANDE", "0 a 17");
     const deptN = result.territorial.filter(n => n > 0).length;
     const kpis = [
-      ["Casos atendidos", result.total, `${E.pct(result.total, D.meta.rows)} del corte nacional`, "featured", "↗"],
-      ["Niñas, niños y adolescentes", children, `${E.pct(children, result.total)} de los casos seleccionados`, "", "♙"],
-      ["Riesgo severo", severe, `${E.pct(severe, result.total)} de los casos seleccionados`, "", "◇"],
-      ["Departamentos con casos", deptN, `${filters.departments.length} departamentos seleccionados`, "", "⌖"]
+      ["Casos atendidos", result.total, `${E.pct(result.total, D.meta.rows)} del corte nacional`, "featured kpi-gradient kpi-teal", "↗"],
+      ["Niñas, niños y adolescentes", children, `${E.pct(children, result.total)} de los casos seleccionados`, "kpi-gradient kpi-blue", "♙"],
+      ["Riesgo severo", severe, `${E.pct(severe, result.total)} de los casos seleccionados`, "kpi-gradient kpi-rose", "◇"],
+      ["Departamentos con casos", deptN, `${filters.departments.length} departamentos seleccionados`, "kpi-gradient kpi-violet", "⌖"]
     ];
     $("kpis").innerHTML = kpis.map(([label, value, note, cls, icon]) => `<article class="kpi ${cls}"><p class="kpi-label">${label}</p><span class="kpi-decoration" aria-hidden="true">${icon}</span><div class="kpi-value" data-count="${value}">${E.fmt(value)}</div><p class="kpi-note">${note}</p></article>`).join("");
     animateCounts();
@@ -246,13 +290,13 @@
     const keys = [["nina", "nino"], ["nina2", "nino2"], ["nina3", "nino3"]];
     return `<article class="panel age-panel">${panelHeading("Las personas detrás de las cifras", "Grupos de edad diferenciados por sexo registrado", '<span class="panel-tag">CICLO DE VIDA</span>')}<div class="age-grid age-sex-grid">${age.map((group, i) => {
       const total = group.values.reduce((sum, item) => sum + item.count, 0), silhouettes = keys[i] || keys[2];
-      return `<div class="age-card age-sex-card"><div class="age-band"><span class="age-band-icon" aria-hidden="true">${window.ICONS_SVG[silhouettes[0]] || ""}</span><span>${esc(group.label)}</span></div><div class="age-group-total"><strong>${E.fmt(total)}</strong><div><span class="age-pct">${E.pct(total, result.total)}</span><small>del total</small></div></div><div class="age-sex-pairs">${group.values.map((item, sexIndex) => { const share = total ? item.count * 100 / total : 0; return `<div class="age-sex-person ${item.count ? "" : "is-zero"} ${filters.population === (sexIndex ? "hombres" : "mujeres") ? "is-selected" : ""}" title="${esc(group.label)} · ${esc(item.label)}: ${E.fmt(item.count)} casos (${E.pct(item.count, total)})"><div class="age-sex-silhouette" aria-hidden="true">${window.ICONS_SVG[silhouettes[sexIndex]] || ""}</div><div class="age-sex-data"><span>${esc(item.label)}</span><b>${E.fmt(item.count)}</b><em>${E.pct(item.count, total)}</em></div><i class="age-sex-progress" aria-hidden="true"><span style="width:${share}%"></span></i></div>`; }).join("")}</div></div>`;
+      return `<div class="age-card age-sex-card"><div class="age-band"><span class="age-band-icon" aria-hidden="true">${window.ICONS_SVG[silhouettes[0]] || ""}</span><span>${esc(group.label)}</span></div><div class="age-group-total"><strong>${E.fmt(total)}</strong><div><span class="age-pct">${E.pct(total, result.total)}</span><small>del total</small></div></div><div class="age-sex-pairs">${group.values.map((item, sexIndex) => { const share = total ? item.count * 100 / total : 0; return `<div class="age-sex-person ${item.count ? "" : "is-zero"} ${filters.population === (sexIndex ? "hombres" : "mujeres") ? "is-selected" : ""}" ${statAttrs(`${group.label} · ${item.label}`, item.count, total, E.pct(item.count, total), "Porcentaje dentro del grupo de edad", relatedStats("NIVEL_DE_RIESGO_VICTIMA", result, "Niveles de riesgo en la selección"))}><div class="age-sex-silhouette" aria-hidden="true">${window.ICONS_SVG[silhouettes[sexIndex]] || ""}</div><div class="age-sex-data"><span>${esc(item.label)}</span><b>${E.fmt(item.count)}</b><em>${E.pct(item.count, total)}</em></div><i class="age-sex-progress" aria-hidden="true"><span style="width:${share}%"></span></i></div>`; }).join("")}</div></div>`;
     }).join("")}</div><div class="panel-footer"><span>Sexo registrado · % dentro de cada edad</span><button class="text-link" data-age-sex-detail>Tabla y análisis ↗</button></div></article>`;
   }
   function overview() {
     const risk = rows("NIVEL_DE_RIESGO_VICTIMA").filter(r => !r.missing);
     const riskMax = Math.max(...risk.map(row => row.count), 1);
-    const riskChart = `<div class="risk-vertical vertical-bars">${risk.map((row, i) => `<div class="vertical-bar-item"><div class="vertical-value"><strong>${E.fmt(row.count)}</strong><span>${E.pct(row.count, result.total)}</span></div><div class="vertical-track"><span style="height:${row.count * 100 / riskMax}%;background:${norm(row.label).includes("severo") ? colors[2] : colors[i]}"></span></div><div class="vertical-label">${esc(row.label)}</div></div>`).join("")}</div>`;
+    const riskChart = `<div class="risk-vertical vertical-bars">${risk.map((row, i) => `<div class="vertical-bar-item" ${statAttrs(row.label, row.count, result.total, E.pct(row.count, result.total), "Porcentaje de la selección", relatedStats("TIPO_VIOLENCIA", result, "Tipos de violencia en la selección"))}><div class="vertical-value"><strong>${E.fmt(row.count)}</strong><span>${E.pct(row.count, result.total)}</span></div><div class="vertical-track"><span style="height:${row.count * 100 / riskMax}%;background:${norm(row.label).includes("severo") ? colors[2] : colors[i]}"></span></div><div class="vertical-label">${esc(row.label)}</div></div>`).join("")}</div>`;
     const ranked = D.departments.map((label, i) => ({ label, count: result.territorial[i] })).filter(item => item.count > 0).sort((a, b) => b.count - a.count);
     $("dashboard").innerHTML = `<div class="overview-grid"><article class="panel map-panel">${panelHeading("Distribución territorial", "Departamento donde se ubica el CEM", '<div class="segment"><button id="map-view" class="selected">Mapa</button><button id="rank-view">Ranking</button></div>')}<div class="map-wrap"><div id="map-chart" class="map-chart" role="img" aria-label="Mapa de casos por departamento"></div><div id="map-legend" class="map-legend" aria-label="Intervalos de casos"></div></div><div id="rank-list" class="panel-body" hidden>${ranked.map(r => bar(r, result.total, ranked[0].count)).join("")}</div><p class="map-caption" id="map-instruction">Selecciona un departamento en el mapa para filtrar.</p><div class="panel-footer"><span>Cantidad de casos, no tasas poblacionales</span>${fieldButton("DPTO_UBI_CEM", "Ver tabla ↗")}</div></article>${ageMarkup()}<div class="two-panels"><article class="panel">${panelHeading("Tipo de violencia", "Distribución de los casos registrados")}<div class="donut-wrap"><div id="violence-chart" class="donut-chart" role="img" aria-label="Distribución por tipo de violencia"></div><div class="legend" id="violence-legend"></div></div><div class="panel-footer"><span>Base: ${E.fmt(result.total)} casos</span>${fieldButton("TIPO_VIOLENCIA", "Detalle ↗")}</div></article><article class="panel">${panelHeading("Nivel de riesgo", "Valoración registrada en la atención")}<div class="risk-list">${risk.map((r, i) => bar(r, result.total, result.total, norm(r.label).includes("severo") ? colors[2] : colors[i])).join("")}</div><div class="panel-footer"><span>Porcentaje sobre la selección</span>${fieldButton("NIVEL_DE_RIESGO_VICTIMA", "Detalle ↗")}</div></article></div></div><article class="panel wide-panel">${panelHeading("Evolución de los casos atendidos", "Serie completa del periodo · El mes filtrado aparece destacado", '<span class="panel-tag">' + esc(D.meta.period.split(" ").slice(-1)[0]) + '</span>')}<div id="trend-chart" class="trend-chart" role="img" aria-label="Casos por mes de ingreso"></div><div class="insight">${esc(monthlyInsight())}</div></article>`;
     $("dashboard").querySelector(".map-wrap").insertAdjacentHTML("beforeend", `<button type="button" id="map-reset" class="map-reset-button" aria-label="Restablecer filtro territorial" title="Mostrar todos los departamentos" ${filters.departments.length === D.departments.length ? "hidden" : ""}>↺ Restablecer</button>`);
@@ -275,11 +319,11 @@
     const sexual = sexualModalities();
     const sexualTotal = sexual.reduce((sum, row) => sum + row.count, 0);
     const sexualMax = Math.max(...sexual.map(row => row.count), 1);
-    return `<section class="panorama-extra-grid" aria-label="Indicadores complementarios"><article class="panel panorama-extra">${panelHeading("Estado civil de la persona usuaria", "Distribución de los casos seleccionados")}<div class="panel-body">${verticalDistribution(civil, result.total)}</div><div class="panel-footer"><span>% de la selección</span>${fieldButton("ESTADO_CIVIL_VICTIMA", "Tabla y análisis ↗")}</div></article><article class="panel panorama-extra relationship-panel">${panelHeading("Vínculo con la presunta persona agresora", "Pareja, familiar u otro vínculo")}<div class="panel-body">${relationshipDistribution(links)}</div><div class="panel-footer"><span>% de la selección</span>${fieldButton("VINCULO_GRUPAL", "Tabla y análisis ↗")}</div></article><article class="panel panorama-extra modalities-panel">${panelHeading("Modalidades de violencia sexual", "Composición de las modalidades mostradas · total 100%")}<div class="panel-body modality-list">${sexual.map((row, i) => bar(row, sexualTotal, sexualMax, colors[i % colors.length])).join("")}</div><div class="panel-footer"><span>Participación entre modalidades</span><div class="panel-footer-actions"><button class="text-link" data-modalities-detail>Tabla y análisis ↗</button><button class="text-link" data-section="violencia">Ver sección ↗</button></div></div></article></section>`;
+    return `<section class="panorama-extra-grid" aria-label="Indicadores complementarios"><article class="panel panorama-extra">${panelHeading("Estado civil de la persona usuaria", "Distribución de los casos seleccionados")}<div class="panel-body">${verticalDistribution(civil, result.total, relatedStats("EDAD_GRANDE", result, "Grupos de edad en la selección"))}</div><div class="panel-footer"><span>% de la selección</span>${fieldButton("ESTADO_CIVIL_VICTIMA", "Tabla y análisis ↗")}</div></article><article class="panel panorama-extra relationship-panel">${panelHeading("Vínculo con la presunta persona agresora", "Pareja, familiar u otro vínculo")}<div class="panel-body">${relationshipDistribution(links)}</div><div class="panel-footer"><span>% de la selección</span>${fieldButton("VINCULO_GRUPAL", "Tabla y análisis ↗")}</div></article><article class="panel panorama-extra modalities-panel">${panelHeading("Modalidades de violencia sexual", "Composición de las modalidades mostradas · total 100%")}<div class="panel-body modality-list">${sexual.map((row, i) => bar(row, sexualTotal, sexualMax, colors[i % colors.length], relatedStats("NIVEL_DE_RIESGO_VICTIMA", result, "Niveles de riesgo en la selección"))).join("")}</div><div class="panel-footer"><span>Participación entre modalidades</span><div class="panel-footer-actions"><button class="text-link" data-modalities-detail>Tabla y análisis ↗</button><button class="text-link" data-section="violencia">Ver sección ↗</button></div></div></article></section>`;
   }
   function relationshipDistribution(rows) {
     const toggle = `<div class="relationship-toolbar"><span>${relationshipGrouped ? "Resumen por grupos con detalle visible" : "Todos los descriptores individuales"}</span><button type="button" class="relationship-toggle" data-toggle-relationship aria-pressed="${relationshipGrouped ? "true" : "false"}">${relationshipGrouped ? "Desagrupar" : "Agrupar"}</button></div>`;
-    if (!relationshipGrouped) return toggle + verticalDistribution(rows, result.total);
+    if (!relationshipGrouped) return toggle + verticalDistribution(rows, result.total, relatedStats("NIVEL_DE_RIESGO_VICTIMA", result, "Niveles de riesgo en la selección"));
     const definitions = [
       { label: "Pareja o expareja", indexes: new Set([0,1,2,3,4,5,6,7,8,9]) },
       { label: "Familiar", indexes: new Set([10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30]) },
@@ -290,7 +334,7 @@
       return { ...group, detail, count: detail.reduce((sum, row) => sum + row.count, 0) };
     }).filter(group => group.count > 0);
     const max = Math.max(...groups.map(group => group.count), 1);
-    return toggle + `<div class="relationship-groups" aria-label="Vínculos agrupados con detalle">${groups.map((group, i) => `<section class="relationship-group"><div class="relationship-summary">${bar(group, result.total, max, colors[i % colors.length])}</div><div class="relationship-detail" aria-label="Detalle de ${esc(group.label)}">${group.detail.map(row => `<span><b>${esc(row.label)}</b><em>${E.fmt(row.count)} · ${E.pct(row.count, result.total)}</em></span>`).join("")}</div></section>`).join("")}</div>`;
+    return toggle + `<div class="relationship-groups" aria-label="Vínculos agrupados con detalle">${groups.map((group, i) => `<section class="relationship-group"><div class="relationship-summary">${bar(group, result.total, max, colors[i % colors.length], relatedStats("NIVEL_DE_RIESGO_VICTIMA", result, "Niveles de riesgo en la selección"))}</div><div class="relationship-detail" aria-label="Detalle de ${esc(group.label)}">${group.detail.map(row => `<span><b>${esc(row.label)}</b><em>${E.fmt(row.count)} · ${E.pct(row.count, result.total)}</em></span>`).join("")}</div></section>`).join("")}</div>`;
   }
   function mapMode(showMap) {
     document.querySelector(".map-wrap").hidden = !showMap; $("rank-list").hidden = showMap;
@@ -356,8 +400,10 @@
         if (!p.data || p.value <= 0) return "";
         const difference = p.value - p.data.average, relation = difference >= 0 ? `${E.pct(difference, p.data.average)} por encima` : `${E.pct(Math.abs(difference), p.data.average)} por debajo`;
         const departmentWidth = Math.max(3, p.value * 100 / p.data.maximum), averageWidth = Math.max(3, p.data.average * 100 / p.data.maximum);
-        const thermalScale = pieces.map((piece, index) => `<i style="display:block;flex:1;height:${index === p.data.quintileIndex ? 7 : 4}px;border:${index === p.data.quintileIndex ? "1px solid #294a47" : "0"};border-radius:2px;background:${piece.color};opacity:${index === p.data.quintileIndex ? 1 : .5}"></i>`).join("");
-        return `<div style="min-width:190px;font-size:9px;line-height:1.35"><strong style="font-size:9px">${esc(p.name)}</strong><div style="margin:4px 0;border-top:1px solid #e3ece9"></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Casos atendidos</span><b>${E.fmt(p.value)}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>% de la selección</span><b>${p.data.percent}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Posición territorial</span><b>${p.data.rank} de ${p.data.departmentsWithCases}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Intervalo</span><b>${esc(p.data.interval)}</b></div><div class="map-tooltip-mini" style="margin-top:6px;padding-top:5px;border-top:1px solid #e3ece9"><b style="display:block;margin-bottom:4px;font-size:9px">Comparación visual</b><div style="display:grid;grid-template-columns:58px 1fr 31px;align-items:center;gap:3px;font-size:9px"><span>Depto.</span><i style="display:block;height:5px;border-radius:4px;background:#edf2f1;overflow:hidden"><i style="display:block;width:${departmentWidth}%;height:100%;background:${thermalColor(p.value)}"></i></i><b style="text-align:right">${E.fmt(p.value)}</b><span>Promedio</span><i style="display:block;height:5px;border-radius:4px;background:#edf2f1;overflow:hidden"><i style="display:block;width:${averageWidth}%;height:100%;background:#8ca5a2"></i></i><b style="text-align:right">${E.fmt(Math.round(p.data.average))}</b></div><div style="display:flex;align-items:center;gap:2px;height:9px;margin-top:5px">${thermalScale}</div><small style="display:block;text-align:center;color:#718789;font-size:9px">Nivel ${p.data.quintileIndex + 1} de ${pieces.length}</small></div><div style="margin-top:4px;padding-top:4px;border-top:1px solid #e3ece9;color:#617b7d;font-size:9px">Promedio: ${relation}</div><small style="display:block;margin-top:3px;color:#84989a;font-size:9px">Ubicación del CEM</small></div>`;
+        const departmentIndex = D.departments.findIndex(name => norm(name) === norm(p.name));
+        const departmentResult = E.aggregate(D, { population: filters.population, months: filters.months, departments: departmentIndex >= 0 ? [departmentIndex] : filters.departments });
+        const departmentRelated = relatedStats("TIPO_VIOLENCIA", departmentResult, "Tipos de violencia del departamento");
+        return `<div style="min-width:190px;font-size:9px;line-height:1.35"><strong style="font-size:9px">${esc(p.name)}</strong><div style="margin:4px 0;border-top:1px solid #e3ece9"></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Casos atendidos</span><b>${E.fmt(p.value)}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>% de la selección</span><b>${p.data.percent}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Posición territorial</span><b>${p.data.rank} de ${p.data.departmentsWithCases}</b></div><div style="display:flex;justify-content:space-between;gap:14px"><span>Intervalo</span><b>${esc(p.data.interval)}</b></div><div class="map-tooltip-mini" style="margin-top:6px;padding-top:5px;border-top:1px solid #e3ece9"><b style="display:block;margin-bottom:5px;font-size:9px">Comparación con el promedio</b><div style="position:relative;height:6px;border-radius:4px;background:#edf2f1"><i style="display:block;width:${departmentWidth}%;height:100%;border-radius:4px;background:${thermalColor(p.value)}"></i><i title="Promedio territorial" style="position:absolute;left:${averageWidth}%;top:-2px;width:2px;height:10px;background:#496b69;transform:translateX(-1px)"></i></div><div style="display:flex;justify-content:space-between;gap:12px;margin-top:4px"><span>Promedio territorial</span><b>${E.fmt(Math.round(p.data.average))}</b></div><span style="display:block;color:#617b7d">${relation}</span></div>${relatedMiniHTML(departmentRelated)}<small style="display:block;margin-top:4px;padding-top:4px;border-top:1px solid #e3ece9;color:#84989a;font-size:9px">Ubicación del CEM</small></div>`;
       } },
       animationDurationUpdate: 1000,
       visualMap: { type: "piecewise", pieces, show: false, seriesIndex: [] },
@@ -387,7 +433,7 @@
   function renderViolence() {
     const data = rows("TIPO_VIOLENCIA").filter(r => !r.missing);
     $("violence-legend").innerHTML = data.map((r, i) => `<div class="legend-row"><i style="background:${colors[i]}"></i><span>${esc(r.label)}</span><strong>${E.pct(r.count, result.total)}</strong></div>`).join("");
-    chart("violence-chart", { color: colors, tooltip: { trigger: "item", formatter: p => `${esc(p.name)}: ${E.fmt(p.value)} (${E.pct(p.value, result.total)})` },
+    chart("violence-chart", { color: colors, tooltip: { trigger: "item", formatter: p => `<strong>${esc(p.name)}</strong><br>Casos: <b>${E.fmt(p.value)}</b><br>Porcentaje de la selección: <b>${E.pct(p.value, result.total)}</b>${relatedMiniHTML(relatedStats("NIVEL_DE_RIESGO_VICTIMA", result, "Niveles de riesgo en la selección"))}<span style="color:#718789">Base: ${E.fmt(result.total)} casos</span>` },
       graphic: [{ type: "text", left: "center", top: "42%", style: { text: E.fmt(result.total), fill: "#23494a", fontSize: 20, fontWeight: 700 } }, { type: "text", left: "center", top: "57%", style: { text: "CASOS", fill: "#91a3a4", fontSize: 8 } }],
       series: [{ type: "pie", radius: ["66%", "88%"], center: ["50%", "50%"], label: { show: false }, emphasis: { scale: false }, itemStyle: { borderWidth: 3, borderColor: "white", borderRadius: 3 }, data: data.map(r => ({ name: r.label, value: r.count })) }]
     });
@@ -404,7 +450,7 @@
     const history = E.aggregate(D, { population: filters.population, months: allMonths, departments: filters.departments });
     const selected = new Set(filters.months);
     const points = D.months.map((month, i) => ({ value: history.monthly[i], symbolSize: selected.has(i) ? 11 : 5, itemStyle: { color: selected.has(i) ? theme.accent : theme.primary, borderColor: selected.has(i) ? "#fff" : theme.primary, borderWidth: selected.has(i) ? 3 : 0 }, label: { show: selected.has(i), position: "top", distance: 7, color: theme.deep, fontSize: 9, fontWeight: 700, formatter: p => E.fmt(p.value) } }));
-    chart(host, { tooltip: { trigger: "axis", valueFormatter: n => E.fmt(n) + " casos" }, grid: { left: 55, right: 30, top: 42, bottom: 35 },
+    chart(host, { tooltip: { trigger: "axis", formatter: params => { const p = params[0], index = p?.dataIndex ?? 0, value = Number(p?.value || 0), monthResult = E.aggregate(D, { population: filters.population, months: [D.months[index].id], departments: filters.departments }); return `<strong>${esc(D.months[index].title)}</strong><br>Casos atendidos: <b>${E.fmt(value)}</b><br>Porcentaje del historial: <b>${E.pct(value, history.total)}</b>${relatedMiniHTML(relatedStats("TIPO_VIOLENCIA", monthResult, "Tipos de violencia durante el mes"))}<span style="color:#718789">${selected.has(index) ? "Mes incluido en el filtro" : "Mes de referencia histórica"}</span>`; } }, grid: { left: 55, right: 30, top: 42, bottom: 35 },
       xAxis: { type: "category", data: D.months.map(month => month.title.split(" ")[0].slice(0, 3)), axisTick: { show: false }, axisLine: { lineStyle: { color: "#e5eeeb" } }, axisLabel: { color: "#8c9d9f", fontSize: 10, formatter: (value, index) => selected.has(index) ? `{selected|${value}}` : value, rich: { selected: { color: theme.accent, fontWeight: 700 } } } },
       yAxis: { type: "value", axisLabel: { color: "#8c9d9f", fontSize: 9 }, splitLine: { lineStyle: { color: "#edf2f1", type: "dashed" } } },
       series: [{ type: "line", data: points, connectNulls: false, smooth: false, symbol: "circle", lineStyle: { color: colors[0], width: 2.5 }, areaStyle: { color: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: theme.mid + "88" }, { offset: 1, color: "#ffffff00" }] } } }]
@@ -578,6 +624,11 @@
     document.body.classList.remove("menu-open"); refresh(false); window.scrollTo({ top: 0, behavior: "instant" });
   }
   function bind() {
+    document.addEventListener("pointerover", event => { const target = event.target.closest("[data-stat-tooltip]"); if (target) showStatTooltip(target, event); });
+    document.addEventListener("pointermove", event => { if (event.target.closest("[data-stat-tooltip]")) positionStatTooltip(event); });
+    document.addEventListener("pointerout", event => { const target = event.target.closest("[data-stat-tooltip]"); if (target && !target.contains(event.relatedTarget)) hideStatTooltip(target); });
+    document.addEventListener("focusin", event => { const target = event.target.closest("[data-stat-tooltip]"); if (target) showStatTooltip(target); });
+    document.addEventListener("focusout", event => { const target = event.target.closest("[data-stat-tooltip]"); if (target) hideStatTooltip(target); });
     $("population-buttons").addEventListener("wheel", event => {
       const nav = event.currentTarget;
       if (nav.scrollWidth <= nav.clientWidth) return;

@@ -3,7 +3,7 @@
 > Documento de contexto para agentes de IA.
 > Debe mantenerse actualizado conforme evoluciona el proyecto.
 >
-> Última verificación contra el repositorio: 2026-09-19.
+> Última verificación contra el repositorio: 2026-09-21.
 
 ## 1. Resumen del proyecto
 
@@ -362,10 +362,10 @@ Documentación disponible:
 `docs/Informe_tecnico_dashboard_CEM.docx` contiene el diagnóstico del proceso manual, ventajas, requerimientos, flujo operativo, controles, riesgos y plan de implementación.
 
 Actualmente en desarrollo:
-No hay una tarea de código activa identificada.
+Cambios locales sin commitear en `pagina2` (no reflejados aún en el historial): tooltips contextuales (`data-stat-tooltip`) en barras, KPIs y el mapa con distribución relacionada (`related-mini`); estilo `kpi-gradient` para las cuatro tarjetas KPI; tooltips de ECharts (dona de violencia, mapa, tendencia mensual) enriquecidos con la misma distribución relacionada. Se corrigió además que los tooltips nativos de ECharts se recortaban al acercarse a un borde del gráfico (por ejemplo la dona de "Tipo de violencia"): el helper `chart()` en `pagina2/js/app.js` ahora aplica `confine: true` por defecto a todo `tooltip` que no lo defina explícitamente. `tests/check_pagina2_browser.py` ya se actualizó para cubrir estas piezas, pero no se ha ejecutado ni commiteado en esta sesión.
 
 Último archivo modificado:
-brain.md
+pagina2/js/app.js (sin commitear)
 
 Problema actual:
 Las dependencias siguen sin manifiesto reproducible; `vtracer` no está instalado en el entorno auditado, aunque no es necesario para ejecutar el ETL del dashboard.
@@ -561,6 +561,12 @@ No cambiar claves de datos, pestañas, Excel u orden de scripts sin actualizar c
 6. Instalar `vtracer` solo cuando sea necesario regenerar iconos.
 
 ## 22. Historial de cambios relevantes
+
+### 2026-09-21 (sin commitear)
+
+- Se agregaron tooltips contextuales (`data-stat-tooltip`) en barras, KPIs y el mapa de `pagina2`, con una mini distribución relacionada (`related-mini`) y estilo `kpi-gradient` en las cuatro tarjetas KPI.
+- Se corrigió que los tooltips nativos de ECharts (dona de violencia, tendencia mensual, histórico anual) se recortaran al acercarse a un borde: el helper `chart()` en `pagina2/js/app.js` ahora aplica `confine: true` por defecto salvo que el tooltip ya lo defina.
+- `tests/check_pagina2_browser.py` se actualizó para cubrir tooltips y estilos, pero no se ejecutó en esta sesión (pendiente de validación manual del usuario).
 
 ### 2026-09-19
 
