@@ -407,7 +407,7 @@
       } },
       animationDurationUpdate: 1000,
       visualMap: { type: "piecewise", pieces, show: false, seriesIndex: [] },
-      series: [{ type: "map", map: "peru-pagina2", nameProperty: "nombdep", roam: false, layoutCenter: ["54%", "50%"], layoutSize: "101%", data: coloredMapData, label: { show: true, color: "#183d3b", fontSize: 7, lineHeight: 9, fontWeight: 600, textBorderColor: "#fff", textBorderWidth: 3, formatter: p => p.data && p.value > 0 ? `${p.name.toUpperCase()}\n${p.data.percent}` : "" }, labelLayout: { hideOverlap: false }, itemStyle: { borderColor: "#f8fffd", borderWidth: 1.8, areaColor: "#edf2f1", shadowColor: "#284a4660", shadowBlur: 1 }, emphasis: { focus: "self", label: { show: true, fontSize: 8, color: "#102f2d" }, itemStyle: { borderColor: "#f8fffd", borderWidth: 2.2 } }, select: { disabled: true } }]
+      series: [{ type: "map", map: "peru-pagina2", nameProperty: "nombdep", roam: false, aspectScale: 1, layoutCenter: ["54%", "50%"], layoutSize: "101%", data: coloredMapData, label: { show: true, color: "#183d3b", fontSize: 7, lineHeight: 9, fontWeight: 600, textBorderColor: "#fff", textBorderWidth: 3, formatter: p => p.data && p.value > 0 ? `${p.name.toUpperCase()}\n${p.data.percent}` : "" }, labelLayout: { hideOverlap: false }, itemStyle: { borderColor: "#f8fffd", borderWidth: 1.8, areaColor: "#edf2f1", shadowColor: "#284a4660", shadowBlur: 1 }, emphasis: { focus: "self", label: { show: true, fontSize: 8, color: "#102f2d" }, itemStyle: { borderColor: "#f8fffd", borderWidth: 2.2 } }, select: { disabled: true } }]
     });
     const topIndexes = coloredMapData.map((item, index) => topNames.has(item.name) ? index : -1).filter(index => index >= 0);
     map.__pulseRegions = topIndexes;
@@ -416,7 +416,7 @@
       let highlighted = false;
       const pulse = () => {
         if (map.isDisposed()) return; highlighted = !highlighted;
-        map.setOption({ series: [{ data: coloredMapData.map(item => ({ ...item, itemStyle: { areaColor: topNames.has(item.name) && highlighted ? intenseThermalColor(item.value) : thermalColor(item.value), borderColor: "#f8fffd", borderWidth: 1.8, shadowColor: "#284a4628", shadowBlur: 1 } })) }] });
+        map.setOption({ series: [{ data: coloredMapData.map(item => { const isTop = topNames.has(item.name) && highlighted; return { ...item, itemStyle: { areaColor: topNames.has(item.name) && highlighted ? intenseThermalColor(item.value) : thermalColor(item.value), borderColor: isTop ? "#fff" : "#f8fffd", borderWidth: isTop ? 3.2 : 1.8, shadowColor: isTop ? intenseThermalColor(item.value) + "b0" : "#284a4628", shadowBlur: isTop ? 16 : 1 } }; }) }] });
       };
       pulse(); mapPulseTimer = setInterval(pulse, 1800);
     }
